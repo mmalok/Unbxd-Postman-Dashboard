@@ -3,6 +3,7 @@ import json
 from flask import Flask
 from flask import request
 from flask import render_template
+from response_handler import *
 from services import *
 from data_handler import *
 import os
@@ -208,10 +209,41 @@ def add_popular():
                 handler=data_handler()
                 handler_data=str(handler.add_popular_product(message,field,condition))
                 #print handler_data
-                api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                products=api.popularproduct.update(data=handler_data)
-                print products
-                return '%s' % products
+                handler_true_data=str(handler.all_popular_product(message))
+                print handler_true_data
+                '''
+                print handler_true_data
+                multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                resp=str(multiple_true_check.popularproduct.all(data=handler_true_data))
+                print resp
+                res_handler=response_handler()
+                times_true=res_handler.true_check(resp)
+                print type(times_true)'''
+                if (condition=='false'):
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=api.popularproduct.update(data=handler_data)
+                    print products
+                    res_popular=response_handler()
+                    final_message=str(res_popular.addPopular(products))
+                    return '%s' % final_message
+                else:
+                    multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    resp=str(multiple_true_check.popularproduct.all(data=handler_true_data))
+                    print "resp"
+                    print resp
+                    res_handler=response_handler()
+                    times_true=res_handler.true_check(resp)
+                    print times_true
+                    if(times_true<=0):
+                        api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                        products=api.popularproduct.update(data=handler_data)
+                        print products
+                        res_popular=response_handler()
+                        final_message=str(res_popular.addPopular(products))
+                        return '%s' % final_message
+                    else:
+                        final_message="true already present->change the condition"
+                        return '%s' % final_message
             else:
                 return render_template("dashboard.html")
         else:
@@ -244,12 +276,15 @@ def delete_popular():
             #print message,field
             if message!="":
                 handler=data_handler()
-                handler_data=str(handler.delete_popular_product(message,field))
+                handler_data=(handler.delete_popular_product(message,field))
                 #print handler_data
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                products=api.popularproduct.delete(data=handler_data)
+                products=str(api.popularproduct.delete(data=handler_data))
+                print products
                 #print products
-                return '%s' % products
+                res_popular=response_handler()
+                final_message=str(res_popular.delPopular(products))
+                return '%s' % final_message
             else:
                 return render_template("dashboard.html")
         else:
@@ -493,13 +528,15 @@ def get_popular_product():
     try:
         if request.method=='POST':
             message=request.form['command']
-            #print message
+            print message
             if message!="":
                 handler=data_handler()
                 handler_data=str(handler.all_popular_product(message))
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=str(api.popularproduct.all(data=handler_data))
                 print products
+
+
                 response_text_json=json.loads(products)
                 #print str(asd['popularProductFields'][0])
                 #print(len(response_text_json['popularProductFields']))
