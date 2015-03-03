@@ -369,7 +369,7 @@
                     <div class="row no-print">
                         <div class="col-xs-12">
                              <form class='pull-right'>
-                                <select name="command"  id="customDropdown">
+                                <select name="command"  id="command">
                                     <option value="insert" name="insert">select company name</option>
                                     <option value="11888" name="insert">dummy_company</option>
                                     <option value="insert" name="insert">Insert</option>
@@ -381,12 +381,12 @@
                                     <option value="retrieve" name="retrieve">Retrieve</option>
                                 </select>
                             </form>
-                            <h3>enter suggestions</h3>
-                            <div class="input_fields_wrap">
-                            <form id="text"><input type="text" name="mytext1" id='mytext1' onclick=myFunc(this.id)></form>
-                        </div>
-                        <form>
-                        <select name="condition"  id="conditions">
+                            <form>
+                                <h3>enter popular_product</h3>
+                            <input type="text" id="field" name="fields"></input>
+
+                            
+                            <select name="condition"  id="conditions">
                                     <option value="false" name="false">false</option>
                                     <option value="true" name="true">true</option>
                                     </select>
@@ -395,7 +395,6 @@
                             
                         </div>
 
-                        
                     </div>
                     
                 </section>
@@ -407,26 +406,10 @@
 
         </div><!-- ./wrapper -->
         <script>
-        $(document).ready(function() {
-    var max_fields= 10; //maximum input boxes allowed
-    var wrapper= $(".input_fields_wrap"); //Fields wrapper
-    var add_button= $(".add_field_button"); //Add button ID
-    var x = 0; //initlal text box count
-    
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault();
-        id=$(this).attr("id");
-        x=Number(id.substring(6,id.length));
-        textid='mytext'+x;
-        //alert(textid)
-        //$("#"+textid).remove();
-        $(this).parent('div').remove();
-    })
-    $("#send").click(function(e) {
+        $("#send").click(function(e) {
         $.ajax(
-        {type:"POST",url:"/add_popular",data:$("form").serializeArray(),success:function(response)
+        {type:"POST",url:"/add_popular",data:$("form").serialize(),success:function(response)
             { 
-            
                 var indent="<br/>"
                 $('#content').html("");
                 for(i=0;i<response.length;i++)
@@ -442,35 +425,60 @@
                         indent=indent.substring(0,indent.length-20)
                         $('#content').append(indent);
                     }
-                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]")
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
                     {
                         $('#content').append(indent);
                     }
                     
                     $('#content').append(response.charAt(i));
                 }
+
+            $('#field').val("");
             }
         });
     });
- 
-});
-    </script>
-    <script >
-    function myFunc(id)
- {
-    x=Number(id.substring(6,id.length))+1;
-    newid='mytext'+x
-    if($("#"+newid).length)
-    {
-        
-    }
-    else
-    {
-        $("#text").append('<div><br/><br/><input type="text"  id="'+newid +'" name="'+newid +'" onclick=myFunc(this.id) ></input><a href="#" class="remove_field" id="remove'+x+'">Remove</a></div>');
-    }
- }
-
 </script>
+<script type="text/javascript">
+     $(function() {
+        $('#command').change(function(e) {
+        $.ajax(
+            {type:"POST",url:"/get_popular_product",data:$("form").serialize(),success:function(response)
+                { 
+                     $('#content').html("");
+                    var indent="<br/>"
+                    //$('#content').append("fields condition");
+                    $('#content').append(indent);
+                    for(i=0;i<response.length;i++)
+                    {
+                        if(response.charAt(i-1)==" " )
+                        {
+                        
+                            $('#content').append(indent);
+                            
+                        }
+                        else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                        {
+                            indent=indent.substring(0,indent.length-20)
+                            $('#content').append(indent);
+                        }
+                        else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                        {
+                            $('#content').append(indent);
+                        }
+                    
+                        $('#content').append(response.charAt(i));
+                    }
+
+            //$('#field').val("");
+                }
+            });
+
+
+                    //alert($(this).val())
+                        })
+                })
+
+    </script>
          <script src="all_unbxd_suggestion_files/jquery.js"></script>
         <script src="all_unbxd_suggestion_files/bootstrap.js" type="text/javascript"></script>
         <!-- AdminLTE App -->

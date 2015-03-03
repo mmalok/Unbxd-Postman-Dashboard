@@ -1,3 +1,4 @@
+from settings import *
 class Mapping(dict):
     """
     Mapping
@@ -49,6 +50,7 @@ class ApiResource(Mapping):
 
 
 
+
 class CreateableApiResource(ApiResource):
     @classmethod
     def create(cls, connection=None, **params):
@@ -62,33 +64,30 @@ class ListableApiResource(ApiResource):
     @classmethod
     def all(cls, connection=None, **params):
         local_resource=cls.resource_name
-        if cls.resource_name=="PopularProductField.do":
-            cls.resource_name="PopularProductFields.do"
-        cls.resource_name="getAll"+cls.resource_name
-        request = cls._make_request('get', cls.resource_name, connection, params=params)
+        setting=settings()
+        cls.resource_name=str(setting.all(cls.resource_name))
+        response = cls._make_request('get', cls.resource_name, connection, params=params)
         cls.resource_name=local_resource
-        return request
+        return response
 
 class UpdateableApiResource(ApiResource):
     @classmethod
-    def update(self, connection=None, **params):
-        local_resource=self.resource_name
-        if self.resource_name=="InFields.do":
-            self.resource_name="InFieldData.do"
-        self.resource_name="add"+self.resource_name
-        response = self._make_request('put', self.resource_name,connection, params=params)
-        self.resource_name=local_resource
+    def update(cls, connection=None, **params):
+        local_resource=cls.resource_name
+        setting=settings()
+        cls.resource_name=str(setting.update(cls.resource_name))
+        response = cls._make_request('put', cls.resource_name,connection, params=params)
+        cls.resource_name=local_resource
         return response
 
 
 
 class DeleteableApiResource(ApiResource):
     @classmethod
-    def delete(self, connection=None, **params):
-        local_resource=self.resource_name
-        if self.resource_name=="InFields.do":
-            self.resource_name="InFieldData.do"
-        self.resource_name="delete"+self.resource_name
-        response = self._make_request('delete', self.resource_name,connection, params=params)
-        self.resource_name=local_resource
+    def delete(cls, connection=None, **params):
+        local_resource=cls.resource_name
+        setting=settings()
+        cls.resource_name=str(setting.delete(cls.resource_name))
+        response = cls._make_request('delete', cls.resource_name,connection, params=params)
+        cls.resource_name=local_resource
         return response

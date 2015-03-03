@@ -56,7 +56,8 @@ class Connection(object):
         resp = getattr(self, method)(url,params)
         # mess with content
         return resp.text
-
+        #############
+        
     # CRUD methods
 
     def get(self, url,params={}):

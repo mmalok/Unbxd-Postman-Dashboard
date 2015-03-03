@@ -1,0 +1,23 @@
+requirements:
+->api 
+	->from site name to site id
+
+
+issues:
+->sendautosuggestdata
+	->site name and site id required
+->productsearchablefield
+	->hosted on localhost
+->url is not proper
+	->hardcoded few 
+->addUnbxdSuggestion
+	->it works same with different websites
+		->http://beta.feed.unbxdapi.com/autosuggest/addUnbxdSuggestion.do
+		->"what i'm using"
+			->http://feed.unbxdapi.com/autosuggest/addUnbxdSuggestion.do
+
+->404 error in terminal
+	->by hosting it will get resolved
+
+
+	

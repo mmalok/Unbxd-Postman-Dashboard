@@ -381,15 +381,15 @@
                                     <option value="retrieve" name="retrieve">Retrieve</option>
                                 </select>
                             </form>
-                            <h3>enter suggestions</h3>
-                            <div class="input_fields_wrap">
-                            <form id="text"><input type="text" name="mytext1" id='mytext1' onclick=myFunc(this.id)></form>
-                        </div>
+                            <form>
+                                <h3>enter InField</h3>
+                            <input type="text" id="field" name="fields"></input>
+
+                            </form>
                             <center><button class="btn btn-success " id="send"><i class="fa fa-credit-card"></i> Send</button></center>
                             
                         </div>
 
-                        
                     </div>
                     
                 </section>
@@ -401,26 +401,10 @@
 
         </div><!-- ./wrapper -->
         <script>
-        $(document).ready(function() {
-    var max_fields= 10; //maximum input boxes allowed
-    var wrapper= $(".input_fields_wrap"); //Fields wrapper
-    var add_button= $(".add_field_button"); //Add button ID
-    var x = 0; //initlal text box count
-    
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault();
-        id=$(this).attr("id");
-        x=Number(id.substring(6,id.length));
-        textid='mytext'+x;
-        //alert(textid)
-        //$("#"+textid).remove();
-        $(this).parent('div').remove();
-    })
-    $("#send").click(function(e) {
+        $("#send").click(function(e) {
         $.ajax(
-        {type:"POST",url:"/add_in_field",data:$("form").serializeArray(),success:function(response)
+        {type:"POST",url:"/add_in_field",data:$("form").serialize(),success:function(response)
             { 
-            
                 var indent="<br/>"
                 $('#content').html("");
                 for(i=0;i<response.length;i++)
@@ -436,35 +420,18 @@
                         indent=indent.substring(0,indent.length-20)
                         $('#content').append(indent);
                     }
-                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]")
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
                     {
                         $('#content').append(indent);
                     }
                     
                     $('#content').append(response.charAt(i));
                 }
+                $('#field').val("");
             }
         });
     });
- 
-});
     </script>
-    <script >
-    function myFunc(id)
- {
-    x=Number(id.substring(6,id.length))+1;
-    newid='mytext'+x
-    if($("#"+newid).length)
-    {
-        
-    }
-    else
-    {
-        $("#text").append('<div><br/><br/><input type="text"  id="'+newid +'" name="'+newid +'" onclick=myFunc(this.id) ></input><a href="#" class="remove_field" id="remove'+x+'">Remove</a></div>');
-    }
- }
-
-</script>
          <script src="all_unbxd_suggestion_files/jquery.js"></script>
         <script src="all_unbxd_suggestion_files/bootstrap.js" type="text/javascript"></script>
         <!-- AdminLTE App -->

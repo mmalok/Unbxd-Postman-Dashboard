@@ -1,4 +1,5 @@
 import unbxd.api 
+import json
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -90,15 +91,19 @@ def add_suggestion_data():
             message=str(data_dict["command"])
             values=[]
             for val in keylist:
-                if(val[0:6]=="mytext"):
+                if(val[0:6]=="alltxt"):
                     values.append(int(val[6:]))
             values=sorted(values)
-            string=""
+            #string=""
+            input_text_list=[]
             for param in values:
-                #print param
-                #print str(data_dict["mytext"+str(param)])
-                string=string+str(data_dict["mytext"+str(param)])+"_"
-            field=string[:-2]
+                input_text_list.append(str(data_dict["alltxt"+str(param)]))
+            string=""
+            for items in input_text_list:
+                if items!="":
+                    string=string+str(items)+"_"
+            field=string[:-1]
+            print field
             if message!="":
                 handler=data_handler()
                 handler_data=str(handler.add_unbxd_suggestion(message,field))
@@ -168,14 +173,18 @@ def add_popular_product():
 def add_popular():
     try:
         if request.method=='POST':
+            print "1"
             data_dict=request.form.to_dict()
-            #print mydict
+            print data_dict
             keylist = data_dict.keys()
             message=str(data_dict["command"])
-            condition=str(data_dict['condition'])
+            field=str(data_dict['fields'])
+            condition=str(request.form['condition'])
+            print field,message,condition
+            '''
             values=[]
             for val in keylist:
-                if(val[0:6]=="mytext"):
+                if(val[0:6]=="alltxt"):
                     values.append(int(val[6:]))
             values=sorted(values)
             #print values
@@ -185,14 +194,23 @@ def add_popular():
                 #print str(mydict["mytext"+str(param)])
                 string=string+str(data_dict["mytext"+str(param)])+"_"
             field=string[:-2]
-            #print field,message,condition
+            input_text_list=[]
+            for param in values:
+                input_text_list.append(str(data_dict["alltxt"+str(param)]))
+            string=""
+            for items in input_text_list:
+                if items!="":
+                    string=string+str(items)+"_"
+            field=string[:-1]
+            print field
+            #print field,message,condition'''
             if message!="":
                 handler=data_handler()
                 handler_data=str(handler.add_popular_product(message,field,condition))
                 #print handler_data
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=api.popularproduct.update(data=handler_data)
-                #print products
+                print products
                 return '%s' % products
             else:
                 return render_template("dashboard.html")
@@ -259,11 +277,13 @@ def add_in_field():
         if request.method=='POST':
             data_dict=request.form.to_dict()
             #print mydict
-            keylist = data_dict.keys()
+            field=str(request.form['fields'])
+            #keylist = data_dict.keys()
             message=str(data_dict["command"])
+            '''
             values=[]
             for val in keylist:
-                if(val[0:6]=="mytext"):
+                if(val[0:6]=="alltxt"):
                     values.append(int(val[6:]))
             values=sorted(values)
             #print values
@@ -271,9 +291,19 @@ def add_in_field():
             for param in values:
                 #print param
                 #print str(mydict["mytext"+str(param)])
-                string=string+str(data_dict["mytext"+str(param)])+"_"
+                string=string+str(data_dict["alltxt"+str(param)])+"_"
             field=string[:-2]
             #print field
+            
+            input_text_list=[]
+            for param in values:
+                input_text_list.append(str(data_dict["alltxt"+str(param)]))
+            string=""
+            for items in input_text_list:
+                if items!="":
+                    string=string+str(items)+"_"
+            field=string[:-1]
+            print field'''
             if message!="":
                 handler=data_handler()
                 handler_data=str(handler.add_in_field(message,field))
@@ -468,8 +498,23 @@ def get_popular_product():
                 handler=data_handler()
                 handler_data=str(handler.all_popular_product(message))
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                products=api.popularproduct.all(data=handler_data)
-                return '%s' % products
+                products=str(api.popularproduct.all(data=handler_data))
+                print products
+                response_text_json=json.loads(products)
+                #print str(asd['popularProductFields'][0])
+                #print(len(response_text_json['popularProductFields']))
+                if (type(response_text_json['popularProductFields']) is list):
+                    response_text=''
+                    for val in response_text_json['popularProductFields']:
+                        field_name=str(val['fieldName'])
+                        condition=str(val['required'])
+                        response_text=response_text+(field_name+"--->"+condition+" ")
+                        #print response_text
+
+                    #print response_text
+                    return '%s' % response_text
+                else:                  
+                    return '%s' % response_text_json['errors'][0]['message']
             else:
                 return render_template("dashboard.html")
         else:
