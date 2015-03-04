@@ -346,20 +346,17 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Invoice
-                        <small>#007612</small>
+                        Delete popular product
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">Examples</a></li>
-                        <li class="active">Blank page</li>
                     </ol>
                 </section>
 
                 <div class="pad margin no-print">
                     <div class="alert alert-info" style="margin-bottom: 0!important;">
                         <i class="fa fa-info"></i>
-                        <b>Note:</b> This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
+                        <b>Note:</b><b><font color="red">SerializationError-->></font></b>Something wrong with <b><font color="red">site-name</font></b> or <b><font color="red">site-id</font></b>
                     </div>
                 </div>
 
@@ -396,14 +393,19 @@
                 <!-- /.content -->
                 <div id="content"  style="font-size:20px;color:blue;height:40px; padding-left: 5em;" >
                 </div>
+                <form class='pull-right'>
+                    <h3><b><font color="blue">all popular product field with condition</font></b></h3>
+                    <center><div id="semi" name="semi" style="font-size:20px;color:red;height:40px;padding-right: 15em;text-align:left;"></div></center>
+                </form>
             </div><!-- /.right-side -->
+
             </aside>
 
         </div><!-- ./wrapper -->
         <script>
         $("#send").click(function(e) {
         $.ajax(
-        {type:"POST",url:"/delete_popular",data:$("form").serialize(),success:function(response)
+        {type:"POST",url:"/delete_popular",data:$("form").serialize(),,success:function(response)
             { 
                 var indent="<br/>"
                 $('#content').html("");
@@ -437,31 +439,39 @@
         $('#command').change(function(e) {
         $.ajax(
             {type:"POST",url:"/get_popular_product",data:$("form").serialize(),success:function(response)
-                { 
-                     $('#content').html("");
+                {
+                 var a=response.split(" ")
+                    alert(a[0])
+                    alert(response)
+                    $('#semi').html("");
                     var indent="<br/>"
                     //$('#content').append("fields condition");
-                    $('#content').append(indent);
+                    $('#semi').append(indent);
+                    var id=0
                     for(i=0;i<response.length;i++)
                     {
                         if(response.charAt(i-1)==" " )
                         {
-                        
-                            $('#content').append(indent);
+                            $('#semi').append('<div id=button'+id+'><input  type="button" style="background-color: transparent;border: 0px solid black;" value="'+a[id]+'" id="button'+id+'" name="button'+id+'" onclick=myFunc(this.value,this.id)></br></input></div>')
+                            id=id+1;
+                           // $('#semi').append(indent);
+
                             
                         }
                         else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
                         {
                             indent=indent.substring(0,indent.length-20)
-                            $('#content').append(indent);
+                            //$('#semi').append(indent);
                         }
                         else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
                         {
-                            $('#content').append(indent);
+                            //$('#semi').append(indent);
                         }
                     
-                        $('#content').append(response.charAt(i));
+                       // $('#semi').append(response.charAt(i));
+
                     }
+                    $('#semi').append('<input type="button" style="background-color: transparent;border: 0px solid black;" value="'+a[id]+'" id="button'+id+'" name="button'+id+'" onclick=myFunc(this.value)></input>')
 
             //$('#field').val("");
                 }
@@ -473,6 +483,57 @@
                 })
 
     </script>
+    <script >
+    function myFunc(val,id)
+ {
+    alert(id)
+    alert(val)
+    //alert(id.val())
+    //alert(response)
+    $.ajax(
+        {type:"POST",url:"/delete_popular",data:$("form").serialize() +"&data="+val+"",success:function(response)
+            { 
+                
+                $("div#"+id+"").remove();
+                var indent="<br/>"
+                $('#content').html("");
+                for(i=0;i<response.length;i++)
+                {
+                    if(response.charAt(i)=="[" || response.charAt(i)=="{" )
+                    {
+                        
+                        $('#content').append(indent);
+                        indent=indent+"&nbsp&nbsp&nbsp&nbsp"
+                    }
+                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                    {
+                        indent=indent.substring(0,indent.length-20)
+                        $('#content').append(indent);
+                    }
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                    {
+                        $('#content').append(indent);
+                    }
+                    
+                    $('#content').append(response.charAt(i));
+                }
+
+            }
+        });
+ /*
+    x=Number(id.substring(6,id.length))+1;
+    newid='alltxt'+x
+    if($("#"+newid).length)
+    {
+        
+    }
+    else
+    {
+        
+    }*/
+ }
+
+</script>
 
 
          <script src="all_unbxd_suggestion_files/jquery.js"></script>

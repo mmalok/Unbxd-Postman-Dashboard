@@ -32,3 +32,23 @@ class response_handler:
 			return (response_text_json['status'])
 		else:
 			return response_text_json['errors'][0]['message']
+	def addSuggestion(self,message):
+		print("addSuggestion")
+	 	response_text_json=json.loads(message)
+		#print str(asd['popularProductFields'][0])
+		#print(len(response_text_json['popularProductFields']))
+		if (str(response_text_json['status'])== 'Success'):
+			print response_text_json['status']
+			return (response_text_json['status'])
+		else:
+			return response_text_json['errors'][0]['message']
+	def delSuggestion(self,message):
+		print "delSuggestion"
+		response_text_json=json.loads(message)
+		#print str(asd['popularProductFields'][0])
+		#print(len(response_text_json['popularProductFields']))
+		if (str(response_text_json['status'])== 'Success'):
+			print response_text_json['status']
+			return (response_text_json['status'])
+		else:
+			return response_text_json['errors'][0]['message']

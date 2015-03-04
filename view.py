@@ -30,7 +30,26 @@ def all_unbxd_suggestion():
                 handler_data=str(handler.all_unbxd_suggestion(message))
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=api.unbxdsuggestion.all(data=handler_data)
-                return '%s' % products
+                response_text_json=json.loads(products)
+                #print str(asd['popularProductFields'][0])
+                #print(len(response_text_json['popularProductFields']))
+                if (type(response_text_json['keywordSuggestions']) is list):
+                    response_text=''
+                    fld_name=''
+                    for val in response_text_json['keywordSuggestions']:
+                        print val
+                        field_name=(val['fields'])
+                        for values in field_name:
+                            fld_name=fld_name+'>'+str(values)
+                        print type(field_name)
+                        fields=str(val['name'])
+                        response_text=response_text+(fields+"--->"+fld_name+" ")
+                        fld_name=''
+                        print response_text
+                    return '%s' % response_text
+                else:
+                    #print response_text
+                    return '%s' % response_text_json['errors'][0]['message']
             else:
                 return render_template("dashboard.html")
         else:
@@ -62,7 +81,23 @@ def get_all_infield_data():
                 handler_data=str(handler.get_all_infield(message))
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=api.infield.all(data=handler_data)
-                return '%s' % products
+                response_text_json=json.loads(products)
+                #print str(asd['popularProductFields'][0])
+                #print(len(response_text_json['popularProductFields']))
+                if (type(response_text_json['inFields']) is list):
+                    response_text='INFIELDS '
+                    if (len(response_text_json['inFields']) > 0 ):
+                        for val in response_text_json['inFields']:
+                            print val
+                            fields=str(val)
+                            response_text=response_text+(fields+" ")
+                        print response_text
+                        return '%s' % response_text
+                    else:
+                        response_text="infield_list_is_empty *_*"
+                        return '%s' % response_text
+                else:
+                    return '%s' % response_text_json['errors'][0]['message']
             else:
                 return render_template("dashboard.html")
         else:
@@ -111,8 +146,11 @@ def add_suggestion_data():
                 #print handler_data
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=api.unbxdsuggestion.update(data=handler_data)
+                res_popular=response_handler()
+                final_message=str(res_popular.addSuggestion(products))
+                #return '%s' % final_message
                 #print products
-                return '%s' % products
+                return '%s' % final_message
             else:
                 return render_template("dashboard.html")
         else:
@@ -149,8 +187,11 @@ def delete_suggestion_data():
                 #print handler_data
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=api.unbxdsuggestion.delete(data=handler_data)
+                res_popular=response_handler()
+                final_message=str(res_popular.delSuggestion(products))
+                return '%s' % final_message
                 #print products
-                return '%s' % products
+                return '%s' % final_message
             else:
                 return render_template("dashboard.html")
         else:
@@ -270,10 +311,18 @@ def delete_popular():
         if request.method=='POST':
             #print ("2")
             data_dict=request.form.to_dict()
-            #print mydict
+            print "++++++++++"
+            print(request)
+            print data_dict
+            print "++++++++++"
+            flds=str(request.form['data'])
+            flds=flds.split("--->")
+            print flds
             message=str(request.form['command'])
             field=str(request.form['fields'])
             #print message,field
+            if(field==""):
+                field=flds[0]
             if message!="":
                 handler=data_handler()
                 handler_data=(handler.delete_popular_product(message,field))
@@ -345,6 +394,7 @@ def add_in_field():
                 #print handler_data
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=api.infield.update(data=handler_data)
+
                 #print products
                 return '%s' % products
             else:
