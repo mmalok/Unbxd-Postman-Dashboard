@@ -13,7 +13,22 @@ app = Flask(__name__)
 @app.route('/')
 def my_form():
     if request.method=='GET':
-        return render_template("dashboard.html")
+        return render_template("login.html")
+@app.route('/login_data', methods=['POST','get'])
+def login_data():
+        print"login"
+        if request.method=='POST':
+            data_dict=request.form.to_dict()
+            print data_dict
+            user_name=str(request.form['login'])
+            password=str(request.form['password'])
+            print user_name,password
+            email_check=login_handler().email()
+            #service_obj=services()
+            #temp=service_obj.insert(user_name,password)
+            print email_check 
+            return '%s' % email_check
+        return render_template("dashboard.html") 
 #------------------------------------------------------------->
 #--------------------------all unbxd suggestion--------------->       
 @app.route('/all_unbxd')
@@ -315,18 +330,22 @@ def delete_popular():
             print(request)
             print data_dict
             print "++++++++++"
-            flds=str(request.form['data'])
-            flds=flds.split("--->")
-            print flds
             message=str(request.form['command'])
             field=str(request.form['fields'])
-            #print message,field
+            print message,field
             if(field==""):
-                field=flds[0]
+                try:
+                    flds=str(request.form['data'])
+                    print flds
+                    flds=flds.split("--->")
+                    print flds
+                    field=flds[0]
+                except:
+                    print "send is pressed with empty value"
             if message!="":
                 handler=data_handler()
                 handler_data=(handler.delete_popular_product(message,field))
-                #print handler_data
+                print handler_data
                 api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                 products=str(api.popularproduct.delete(data=handler_data))
                 print products
@@ -627,4 +646,10 @@ def all_unbxd_suggestion_files(path):
 @app.route('/get_all_infield_files/<path:path>')
 def get_all_infield_files(path):
     return app.send_static_file(os.path.join('get_all_infield_files', path))
+@app.route('/css/<path:path>')
+def css(path):
+    return app.send_static_file(os.path.join('css', path))
+@app.route('/scss/<path:path>')
+def scss(path):
+    return app.send_static_file(os.path.join('scss', path))
 #------------------------------------------------------------->

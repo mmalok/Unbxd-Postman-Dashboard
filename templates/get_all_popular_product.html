@@ -18,6 +18,13 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        <style>
+            h2 {
+    text-shadow: 0px 1px 1px #4d4d4d;
+    color: #222;
+    font: 30px 'LeagueGothicRegular';
+}
+        </style>     
     </head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <body style="min-height: 929px;" class="skin-blue  pace-done"><div class="pace  pace-inactive"><div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
@@ -431,14 +438,16 @@
                 { 
                      $('#content').html("");
                     var indent="<br/>"
+                    var string=""
                     //$('#content').append("fields condition");
                     $('#content').append(indent);
                     for(i=0;i<response.length;i++)
                     {
                         if(response.charAt(i-1)==" " )
                         {
-                        
-                            $('#content').append(indent);
+                            $('#content').append("<h2>"+string+"</h2>");
+                            //$('#content').append(indent);
+                            string=""
                             
                         }
                         else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
@@ -450,9 +459,11 @@
                         {
                             $('#content').append(indent);
                         }
-                    
-                        $('#content').append(response.charAt(i));
+                        string=string+response.charAt(i)
+                        //$('#content').append('<h2>'+response.charAt(i)+'</h2>');
                     }
+                    $('#content').append("<h2>"+string+"</h2>");
+                    //alert(string)
 
             //$('#field').val("");
                 }
