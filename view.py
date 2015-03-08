@@ -11,7 +11,7 @@ import os
 app = Flask(__name__)
 
 @app.route('/')
-def my_form():
+def start():
     if "mail" in session:
         return redirect(url_for('dashboard'))
     elif request.method=='GET':

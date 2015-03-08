@@ -5,7 +5,7 @@ from config import Database
 #data = SqliteDatabase('database.db')
 mysql = pw.MySQLDatabase(Database["Name"], host=Database["Host"], \
         user=Database["User"], passwd=Database["Password"],threadlocals=True)
-print mysql
+#print mysql
 
 
 def mysql_connect():
