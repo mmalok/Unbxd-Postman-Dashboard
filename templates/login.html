@@ -30,7 +30,7 @@
     }
     else
     {
-      alert("all okay")
+      //alert("all okay")
       /*
       $.ajax(
             {type:"POST",url:"/validate_mail",data:$("form").serialize(),success:function(response)
@@ -85,7 +85,7 @@ function send_data() {
     // No focus = Changes the background color of input to red
     if((!(document.getElementById("email").value)) && (!((document.getElementById("password").value)))) 
     {
-      alert("kuch to baaki hai");
+      //alert("kuch to baaki hai");
       //document.getElementById("send").disabled = false;
     }
     else
@@ -95,7 +95,7 @@ function send_data() {
                 {
                  if(response==="valid")
                  {
-                  alert("sab sahi hai")
+                  //alert("sab sahi hai")
                   window.open("/all_unbxd","_self");
                  }
                  else

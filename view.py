@@ -27,27 +27,32 @@ def dashboard():
 def signin_data():
     if "mail" in session:
         return redirect(url_for('dashboard'))
-        print"login"
+        #print"login"
     elif request.method=='POST':
         data_dict=request.form.to_dict()
-        print data_dict
+        #print data_dict
         user_name=str(request.form['mail'])
         password=str(request.form['password'])
-        print user_name,password
+        #print user_name,password
         #email_check=login_handler().email()
         service_obj=services()
-        temp=service_obj.insert(user_name,password)
+        sign_done=service_obj.insert(user_name,password)
         #print email_check
         session['mail'] = request.form['mail']
-        print session['mail'] 
-        return '%s' % temp
+        #Sprint session['mail'] 
+        return '%s' % sign_done
     return render_template("dashboard.html") 
 #------------------------------------------------------------->
 #--------------------------all unbxd suggestion--------------->       
 @app.route('/all_unbxd')
 def all_unbxd():
-    if request.method=='GET':
-        return render_template("all_unbxd_suggestion.html")
+    if "mail" in session:
+        #return redirect(url_for('dashboard'))
+        #print"login"
+        if request.method=='GET':
+            return render_template("all_unbxd_suggestion.html")
+    else:
+        return redirect(url_for("login"))
 @app.route('/all_unbxd_suggestion', methods=['POST','get'])
 def all_unbxd_suggestion():
     if "mail" in session:
@@ -66,15 +71,15 @@ def all_unbxd_suggestion():
                         response_text=''
                         fld_name=''
                         for val in response_text_json['keywordSuggestions']:
-                            print val
+                            #print val
                             field_name=(val['fields'])
                             for values in field_name:
                                 fld_name=fld_name+'>'+str(values)
-                            print type(field_name)
-                            fields=str(val['name'])
-                            response_text=response_text+(fields+"--->"+fld_name+" ")
+                            #print type(field_name)
+                            flds=str(val['name'])
+                            response_text=response_text+(flds+"--->"+fld_name+" ")
                             fld_name=''
-                            print response_text
+                            #print response_text
                         return '%s' % response_text
                     else:
                         #print response_text
@@ -120,10 +125,10 @@ def get_all_infield_data():
                         response_text='INFIELDS '
                         if (len(response_text_json['inFields']) > 0 ):
                             for val in response_text_json['inFields']:
-                                print val
+                                #print val
                                 fields=str(val)
                                 response_text=response_text+(fields+" ")
-                            print response_text
+                            #print response_text
                             return '%s' % response_text
                         else:
                             response_text="infield_list_is_empty *_*"
@@ -174,7 +179,7 @@ def add_suggestion_data():
                     if items!="":
                         string=string+str(items)+"_"
                 field=string[:-1]
-                print field
+                #print field
                 if message!="":
                     handler=data_handler()
                     handler_data=str(handler.add_unbxd_suggestion(message,field))
@@ -211,16 +216,20 @@ def delete_unbxd_suggestion():
         return redirect(url_for("login"))
 @app.route('/delete_suggestion_data', methods=['POST','get'])
 def delete_suggestion_data():
-    print("1")
+    #print("1")
     if "mail" in session:
         try:
             if request.method=='POST':
-                #print ("2")
+                print ("2")
                 data_dict=request.form.to_dict()
-                #print mydict
+                print data_dict
                 message=str(request.form['command'])
-                field=str(request.form['fields'])
-                #print message,field
+                print message
+                field=str(request.form['data'])
+                print field
+                field=field.split('--->')
+                field=field[0]
+                print message,field
                 if message!="":
                     handler=data_handler()
                     handler_data=str(handler.delete_unbxd_suggestion(message,field))
@@ -235,10 +244,10 @@ def delete_suggestion_data():
                 else:
                     return render_template("dashboard.html")
             else:
-                render_template("dashboard.html")
+                return render_template("dashboard.html")
                
         except:
-            render_template("dashboard.html")
+            return render_template("dashboard.html")
     else:
         return redirect(url_for("login"))        
 
@@ -260,14 +269,14 @@ def add_popular():
     if "mail" in session:
         try:
             if request.method=='POST':
-                print "1"
+                #print "1"
                 data_dict=request.form.to_dict()
-                print data_dict
+                #print data_dict
                 keylist = data_dict.keys()
                 message=str(data_dict["command"])
                 field=str(data_dict['fields'])
                 condition=str(request.form['condition'])
-                print field,message,condition
+                #print field,message,condition
                 '''
                 values=[]
                 for val in keylist:
@@ -296,7 +305,7 @@ def add_popular():
                     handler_data=str(handler.add_popular_product(message,field,condition))
                     #print handler_data
                     handler_true_data=str(handler.all_popular_product(message))
-                    print handler_true_data
+                    #print handler_true_data
                     '''
                     print handler_true_data
                     multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
@@ -308,22 +317,22 @@ def add_popular():
                     if (condition=='false'):
                         api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                         products=api.popularproduct.update(data=handler_data)
-                        print products
+                        #print products
                         res_popular=response_handler()
                         final_message=str(res_popular.addPopular(products))
                         return '%s' % final_message
                     else:
                         multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                         resp=str(multiple_true_check.popularproduct.all(data=handler_true_data))
-                        print "resp"
-                        print resp
+                        #print "resp"
+                        #print resp
                         res_handler=response_handler()
                         times_true=res_handler.true_check(resp)
-                        print times_true
+                        #print times_true
                         if(times_true<=0):
                             api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                             products=api.popularproduct.update(data=handler_data)
-                            print products
+                            #print products
                             res_popular=response_handler()
                             final_message=str(res_popular.addPopular(products))
                             return '%s' % final_message
@@ -333,10 +342,10 @@ def add_popular():
                 else:
                     return render_template("dashboard.html")
             else:
-                render_template("dashboard.html")
+                return render_template("dashboard.html")
                
         except:
-            render_template("dashboard.html")
+            return render_template("dashboard.html")
     else:
         return redirect(url_for('login')) 
     
@@ -361,19 +370,28 @@ def delete_popular():
             if request.method=='POST':
                 #print ("2")
                 data_dict=request.form.to_dict()
+                
                 print "++++++++++"
                 print(request)
                 print data_dict
                 print "++++++++++"
+                
                 message=str(request.form['command'])
-                field=str(request.form['fields'])
+                print message
+                try:
+                    field=str(request.form['fields'])
+                except:
+                    field=""
+                print message
+                print field
+
                 print message,field
                 if(field==""):
                     try:
                         flds=str(request.form['data'])
-                        print flds
+                        #print flds
                         flds=flds.split("--->")
-                        print flds
+                        #print flds
                         field=flds[0]
                     except:
                         print "send is pressed with empty value"
@@ -383,7 +401,7 @@ def delete_popular():
                     print handler_data
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=str(api.popularproduct.delete(data=handler_data))
-                    print products
+                    #print products
                     #print products
                     res_popular=response_handler()
                     final_message=str(res_popular.delPopular(products))
@@ -391,10 +409,10 @@ def delete_popular():
                 else:
                     return render_template("dashboard.html")
             else:
-                render_template("dashboard.html")
+                return render_template("dashboard.html")
                
         except:
-            render_template("dashboard.html")
+            return render_template("dashboard.html")
         
 
         #data_object = DAO.DataDAO()
@@ -481,7 +499,7 @@ def delete_infield():
         return redirect(url_for('login'))
 @app.route('/delete_in_field', methods=['POST','get'])
 def delete_in_field():
-    if "mail" in session:
+    if "mail" in session:                                       
         try:
             if request.method=='POST':
                # print ("2")
@@ -666,7 +684,7 @@ def get_popular_product():
                     handler_data=str(handler.all_popular_product(message))
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=str(api.popularproduct.all(data=handler_data))
-                    print products
+                    #print products
 
 
                     response_text_json=json.loads(products)
@@ -687,10 +705,10 @@ def get_popular_product():
                 else:
                     return render_template("dashboard.html")
             else:
-                render_template("dashboard.html")
+                return render_template("dashboard.html")
                
         except:
-            render_template("dashboard.html")
+            return render_template("dashboard.html")
     else:
         return redirect(url_for('login'))
 
@@ -705,14 +723,14 @@ def validate_mail():
         return redirect(url_for('dashboard'))
     else:        
         try:
-            print("validate_mail")
+            #print("validate_mail")
             if request.method=='POST':
                 data_dict=request.form.to_dict()
                 email=str(request.form['mail'])
                 service_obj=services()
                 temp=service_obj.check(email)
-                print temp 
-                print data_dict
+                #print temp 
+                #print data_dict
                 return '%s' % temp
             else:
                 render_template("dashboard.html")
@@ -731,22 +749,22 @@ def login():
 @app.route('/login_data', methods=['POST','get'])
 def login_data():
     if "mail" in session:
-        print"login"
+        #print"login"
         return redirect(url_for("dashboard"))
     if request.method=='POST':
         data_dict=request.form.to_dict()
-        print data_dict
+        #print data_dict
         user_name=str(request.form['mail'])
         password=str(request.form['password'])
-        print user_name,password
+        #print user_name,password
         #email_check=login_handler().email()
         service_obj=services()
         temp=service_obj.validate_user(user_name,password)
         #print email_check 
         if(str(temp)=='valid'):
             session['mail'] = request.form['mail']
-            print session['mail']
-            print "session mein stor ho gaya"
+            #print session['mail']
+            #print "session mein stor ho gaya"
         return '%s' % temp
         #return render_template("dashboard.html")
     else:

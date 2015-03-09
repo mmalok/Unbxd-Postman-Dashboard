@@ -16,7 +16,7 @@
     </script>
     <script>
     function blurFunction() {
-      alert("in blur")
+      //alert("in blur")
     // No focus = Changes the background color of input to red
     var email_valid=document.getElementById("email").value;
     var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
@@ -37,13 +37,13 @@
                 {
                  if((response)==="already present")
                  {
-                  alert("in response")
+                  //alert("in response")
                   //$('#email').html("alok");
                   $('#email').val("");
                   $('#email').attr('placeholder', "email already present");
                   //alert("a")
                   //var email_data=document.getElementById("email").value
-                  alert("email already present")
+                  //alert("email already present")
                   //var resp_number=email_data.localeCompare("email already present")
                   //if(resp_number==0)
                   //{
@@ -54,7 +54,7 @@
                   {
                     //document.getElementById("password").disabled = false;
                     document.getElementById("email").style.backgroundColor = "yellow"
-                    alert("b")
+                    //alert("b")
                   }
                  }
                 
@@ -86,11 +86,11 @@
 function send_data() {
     // No focus = Changes the background color of input to red
     blurFunction()
-    alert(document.getElementById("email").value)
-    alert(document.getElementById("password").value)
+    //alert(document.getElementById("email").value)
+    //alert(document.getElementById("password").value)
     if((!(document.getElementById("email").value)) || (!((document.getElementById("password").value)))) 
     {
-      alert("kuch to baaki hai");
+      //alert("kuch to baaki hai");
       //document.getElementById("send").disabled = false;
     }
     else
@@ -103,7 +103,7 @@ function send_data() {
                 }
             });
         
-      alert("sab sahi hai")
+      //alert("sab sahi hai")
      window.open("/all_unbxd","_self");
     }
   }

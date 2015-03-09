@@ -5,7 +5,7 @@ class store_dao:
 		all_data=[]
 		#print password
 		commit=loginData.insert(username=username,Password=password)
-		commmit.execute()
+		commit.execute()
 		'''for record in data.select():
 			msg=str(record.msg)
 			all_data.append(msg)'''

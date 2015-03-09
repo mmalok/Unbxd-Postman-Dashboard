@@ -26,9 +26,40 @@
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
         <![endif]-->
+        <style>
+                        .button {
+              cursor: pointer;
+              color: #ffffff;
+              font-size: 14px;
+              font-weight: bold;
+              text-shadow: 1px 1px 1px #005175;
+              -webkit-box-shadow: #07536d 0px -3px 0px 0px inset;
+              box-shadow: #07536d 0px -3px 0px 0px inset;
+              padding-top: 7px;
+              padding-right: 15px;
+              padding-bottom: 10px;
+              padding-left: 14px;
+              border-radius: 5px;
+              border: 0px solid #435058;
+              background: #0f9bce;
+              -webkit-transition: background 300ms ease;
+              transition: background 300ms ease;
+              outline: none;
+              position: relative;
+            }
+            .button:hover {
+              background: #0e88b4;
+            }
+            .button:active {
+              top: 1px;
+            }    
+
+        </style>
     <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
-    <body style="min-height: 1767px;" class="skin-blue wysihtml5-supported  pace-done"><div class="pace  pace-inactive"><div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <body style="min-height: 1767px;" class="skin-blue wysihtml5-supported  pace-done" onload="load_data()"><div class="pace  pace-inactive"><div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
   <div class="pace-progress-inner"></div>
 </div>
 <div class="pace-activity"></div></div>
@@ -48,7 +79,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-right">
-                    
+                    <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -113,7 +144,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="active">
-                            <a href="/dashboard>
+                            <a href="/dashboard">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -160,114 +191,181 @@
                 <section class="content-header">
                     <h1>
                         Dashboard
-                        <small>Control panel</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
-                    </ol>
+                    
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
+                <section class="content invoice">
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-xs-12">
+                             <form class='pull-right'>
+                                <select name="command"  id="command">
+                                    <option value="insert" name="insert">select company name</option>
+                                    <option value="11888" name="insert">dummy_company</option>
+                                    <option value="insert" name="insert">Insert</option>
+                                    <option value="insert" name="insert">Insert</option>
+                                    <option value="insert" name="insert">Insert</option>
+                                    <option value="insert" name="insert">Insert</option>
+                                    <option value="insert" name="insert">Insert</option>
+                                    <option value="insert" name="insert">Insert</option>
+                                    <option value="retrieve" name="retrieve">Retrieve</option>
+                                </select>
+                            </form>
+                            
+                            
+                        </div>
+
+                    </div>
+                    
+                </section>
 
                     <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-3 col-xs-6">
+                    <div class="row" >
+                        <div class="col-lg-4 col-xs-7">
                             <!-- small box -->
                             <div class="small-box bg-aqua">
                                 <div class="inner">
-                                    <h3>
-                                        150
-                                    </h3>
-                                    <p>
-                                        New Orders
-                                    </p>
+                                    <CENTER><h3>
+                                        ALL UNBXD SUGGESTION
+                                    </h3></CENTER>
+                                    <div id="aus" name="aus">
+                                    
+                                    </div>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-bag"></i>
+                                    
                                 </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
+                                
+                                
                             </div>
                         </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
+                        <div class="col-lg-4 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-green">
                                 <div class="inner">
-                                    <h3>
-                                        53<sup style="font-size: 20px">%</sup>
+                                    <center><h3>
+                                        INFIELD
                                     </h3>
-                                    <p>
-                                        Bounce Rate
-                                    </p>
+                                    </center>
+                                    <div id="inf" name="inf">
+                                        
+                                    </div>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
+                                    
                                 </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
+                                
                             </div>
                         </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
+                        <div class="col-lg-4 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-yellow">
                                 <div class="inner">
-                                    <h3>
-                                        44
+                                    <center><h3>
+                                        POPULAR PRODUCT
                                     </h3>
-                                    <p>
-                                        User Registrations
-                                    </p>
+                                    </center>
+                                    <div id="pp" name="pp">
+                                        
+                                    </div>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    
                                 </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
+                                
                             </div>
                         </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-red">
-                                <div class="inner">
-                                    <h3>
-                                        65
-                                    </h3>
-                                    <p>
-                                        Unique Visitors
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
+
+                        
                     </div><!-- /.row -->
+                    <script type="text/javascript">
+        $('#command').change(function(e) {
+            //alert("a")
+            load_data()
+        });
 
-                    <!-- Main row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-7 connectedSortable ui-sortable">
+     </script>
+         <script >
+    function delFunc(val,id)
+ {
+    //alert(id)
+    //alert(val)
+    //alert(id.val())
+    //alert(response)
+    $.ajax(
+        {type:"POST",url:"/delete_suggestion_data",data:$("form").serialize() +"&data="+val+"",success:function(response)
+            { 
+                
+                $("div#"+id+"").remove();
+                var indent="<br/>"
+                $('#content').html("");
+                for(i=0;i<response.length;i++)
+                {
+                    if(response.charAt(i)=="[" || response.charAt(i)=="{" )
+                    {
+                        
+                        $('#content').append(indent);
+                        indent=indent+"&nbsp&nbsp&nbsp&nbsp"
+                    }
+                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                    {
+                        indent=indent.substring(0,indent.length-20)
+                        $('#content').append(indent);
+                    }
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                    {
+                        $('#content').append(indent);
+                    }
+                    
+                    $('#content').append(response.charAt(i));
+                }
 
+            }
+        });
+}
+function delFuncpopular(val,id)
+ {
+    //alert(id)
+    //alert(val)
+    //alert(id.val())
+    //alert(response)
+    $.ajax(
+        {type:"POST",url:"/delete_popular",data:$("form").serialize() +"&data="+val+"",success:function(response)
+            { 
+                
+                $("div#"+id+"").remove();
+                var indent="<br/>"
+                $('#content').html("");
+                for(i=0;i<response.length;i++)
+                {
+                    if(response.charAt(i)=="[" || response.charAt(i)=="{" )
+                    {
+                        
+                        $('#content').append(indent);
+                        indent=indent+"&nbsp&nbsp&nbsp&nbsp"
+                    }
+                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                    {
+                        indent=indent.substring(0,indent.length-20)
+                        $('#content').append(indent);
+                    }
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                    {
+                        $('#content').append(indent);
+                    }
+                    
+                    $('#content').append(response.charAt(i));
+                }
 
-                            <!-- Custom tabs (Charts with tabs)-->
-                            <div style="cursor: move;" class="nav-tabs-custom">
-                                <!-- Tabs within a box -->
-                                <ul class="nav nav-tabs pull-right ui-sortable-handle">
-                                    <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                                    <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                                    <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-                                </ul>
-                                <div class="tab-content no-padding">
-                                    <!-- Morris chart - Sales -->
-                                    <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"><svg style="overflow: hidden; position: relative; top: -0.633331px;" xmlns="http://www.w3.org/2000/svg" width="907" version="1.1" height="300"><desc>Created with Raphaël 2.1.0</desc><defs></defs><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="260" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">0</tspan></text><path stroke-width="0.5" d="M69,260H882" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="201.25" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">7,500</tspan></text><path stroke-width="0.5" d="M69,201.25H882" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="142.5" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">15,000</tspan></text><path stroke-width="0.5" d="M69,142.5H882" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="83.75" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">22,500</tspan></text><path stroke-width="0.5" d="M69,83.75H882" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="25.00000000000003" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4.000000000000028">30,000</tspan></text><path stroke-width="0.5" d="M69,25.00000000000003H882" stroke="#aaaaaa" fill="none" style=""></path><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="272.5" x="732.8347509113" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2013</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="272.5" x="371.2818955042527" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2012</tspan></text><path fill-opacity="1" d="M69,218.23266666666666C91.72053462940461,218.74183333333332,137.16160388821385,221.7860625,159.88213851761844,220.26933333333335C182.60267314702307,218.75260416666669,228.0437424058323,208.35534699453552,250.76427703523692,206.09883333333335C273.2378493317132,203.86684699453554,318.18499392466583,204.11993750000002,340.65856622114217,202.31533333333334C363.1321385176185,200.51072916666666,408.07928311057105,194.192947859745,430.5528554070474,191.662C453.273390036452,189.10323952641167,498.71445929526124,181.84977083333334,521.4349939246658,181.9565C544.1555285540704,182.06322916666667,589.5965978128797,203.4213315118397,612.3171324422843,192.51583333333332C634.7907047387606,181.72887317850638,679.7378493317133,101.61791988950276,702.2114216281896,95.18666666666667C724.4380315917375,88.82608655616943,768.8912515188335,134.67133653846153,791.1178614823815,141.3485C813.8383961117861,148.17404487179488,859.2794653705954,147.23525,882,149.1975L882,260L69,260Z" stroke="none" fill="#74a5c1" style="fill-opacity: 1;"></path><path stroke-width="3" d="M69,218.23266666666666C91.72053462940461,218.74183333333332,137.16160388821385,221.7860625,159.88213851761844,220.26933333333335C182.60267314702307,218.75260416666669,228.0437424058323,208.35534699453552,250.76427703523692,206.09883333333335C273.2378493317132,203.86684699453554,318.18499392466583,204.11993750000002,340.65856622114217,202.31533333333334C363.1321385176185,200.51072916666666,408.07928311057105,194.192947859745,430.5528554070474,191.662C453.273390036452,189.10323952641167,498.71445929526124,181.84977083333334,521.4349939246658,181.9565C544.1555285540704,182.06322916666667,589.5965978128797,203.4213315118397,612.3171324422843,192.51583333333332C634.7907047387606,181.72887317850638,679.7378493317133,101.61791988950276,702.2114216281896,95.18666666666667C724.4380315917375,88.82608655616943,768.8912515188335,134.67133653846153,791.1178614823815,141.3485C813.8383961117861,148.17404487179488,859.2794653705954,147.23525,882,149.1975" stroke="#3c8dbc" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="218.23266666666666" cx="69"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="220.26933333333335" cx="159.88213851761844"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="206.09883333333335" cx="250.76427703523692"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="202.31533333333334" cx="340.65856622114217"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="191.662" cx="430.5528554070474"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="181.9565" cx="521.4349939246658"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="192.51583333333332" cx="612.3171324422843"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="95.18666666666667" cx="702.2114216281896"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="141.3485" cx="791.1178614823815"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#3c8dbc" r="4" cy="149.1975" cx="882"></circle><path fill-opacity="1" d="M69,239.11633333333333C91.72053462940461,238.897,137.16160388821385,240.43820833333334,159.88213851761844,238.239C182.60267314702307,236.03979166666667,228.0437424058323,222.49635428051002,250.76427703523692,221.52266666666668C273.2378493317132,220.55956261384335,318.18499392466583,232.3502916666667,340.65856622114217,230.49183333333335C363.1321385176185,228.633375,408.07928311057105,208.50817190346083,430.5528554070474,206.655C453.273390036452,204.7814635701275,498.71445929526124,213.63645833333334,521.4349939246658,215.585C544.1555285540704,217.53354166666668,589.5965978128797,231.50074954462661,612.3171324422843,222.24333333333334C634.7907047387606,213.08654121129328,679.7378493317133,147.70467656537753,702.2114216281896,141.92816666666667C724.4380315917375,136.21513489871086,768.8912515188335,169.85397847985348,791.1178614823815,176.28516666666667C813.8383961117861,182.85927014652015,859.2794653705954,189.53329166666668,882,193.94933333333336L882,260L69,260Z" stroke="none" fill="#eaf2f5" style="fill-opacity: 1;"></path><path stroke-width="3" d="M69,239.11633333333333C91.72053462940461,238.897,137.16160388821385,240.43820833333334,159.88213851761844,238.239C182.60267314702307,236.03979166666667,228.0437424058323,222.49635428051002,250.76427703523692,221.52266666666668C273.2378493317132,220.55956261384335,318.18499392466583,232.3502916666667,340.65856622114217,230.49183333333335C363.1321385176185,228.633375,408.07928311057105,208.50817190346083,430.5528554070474,206.655C453.273390036452,204.7814635701275,498.71445929526124,213.63645833333334,521.4349939246658,215.585C544.1555285540704,217.53354166666668,589.5965978128797,231.50074954462661,612.3171324422843,222.24333333333334C634.7907047387606,213.08654121129328,679.7378493317133,147.70467656537753,702.2114216281896,141.92816666666667C724.4380315917375,136.21513489871086,768.8912515188335,169.85397847985348,791.1178614823815,176.28516666666667C813.8383961117861,182.85927014652015,859.2794653705954,189.53329166666668,882,193.94933333333336" stroke="#a0d0e0" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="239.11633333333333" cx="69"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="238.239" cx="159.88213851761844"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="221.52266666666668" cx="250.76427703523692"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="230.49183333333335" cx="340.65856622114217"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="206.655" cx="430.5528554070474"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="215.585" cx="521.4349939246658"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="222.24333333333334" cx="612.3171324422843"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="141.92816666666667" cx="702.2114216281896"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="176.28516666666667" cx="791.1178614823815"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#a0d0e0" r="4" cy="193.94933333333336" cx="882"></circle></svg><div style="left: 204.264px; top: 125px; display: none;" class="morris-hover morris-default-style"><div class="morris-hover-row-label">2011 Q3</div>
+            }
+        });
+}
+
+</script>
+
         <script src="dashboard_files/jquery.js"></script>
         <script src="dashboard_files/bootstrap.js" type="text/javascript"></script>
         <script src="dashboard_files/jquery-ui.js" type="text/javascript"></script>
@@ -298,5 +396,124 @@
 
         <!-- AdminLTE for demo purposes -->
         <script src="dashboard_files/demo.js" type="text/javascript"></script>
+        <script>
+        function load_data() {
+            $.ajax(
+            {type:"POST",url:"/get_popular_product",data:$("form").serialize(),success:function(response)
+                { 
+                    var response_split=response.split(" ")
+                    //alert(response_split)
+                     $('#pp').html("");
+                    var indent="<br/>"
+                    //$('#content').append("fields condition");
+                    //$('#pp').append(indent);
+                    var id=0;
+                    for(i=0;i<response_split.length-1;i++)
+                    {
+                        if(response.charAt(i-1)==" " )
+                        {
+                        
+                            //$('#pp').append(indent);
+                            $('#pp').append('<div id=button'+id+'><input  type="button"  class="button" value="'+response_split[id]+'" id="button'+id+'" name="button'+id+'" onclick=delFuncpopular(this.value,this.id)></br></br></input></div>');
+                            id=id+1;
+                            
+                        }
+                        else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                        {
+                            indent=indent.substring(0,indent.length-20)
+                            $('#pp').append(indent);
+                        }
+                        else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                        {
+                            $('#pp').append(indent);
+                        }
+                    
+                        $('#pp').append('<div id=button'+id+'><input  type="button"  class="button" value="'+response_split[id]+'" id="button'+id+'" name="button'+id+'" onclick=delFuncpopular(this.value,this.id)></br></br></input></div>');
+                        id=id+1;
+                    }
+                    if(id==0)
+                    {
+                         $('#pp').append("<b>Serialization Error</b>");
+                        
+                    }
+
+            //$('#field').val("");
+                }
+            });
+        //all_in_ifield
+        $.ajax(
+        {type:"POST",url:"/get_all_infield_data",data:$("form").serialize(),success:function(response)
+            { 
+                //alert(response)
+                var response_split=response.split(" ")
+                var indent="<br/>"
+                $('#inf').html("");
+                for(i=0;i<response.length;i++)
+                {
+                    if(response.charAt(i)=="[" || response.charAt(i)=="{" )
+                    {
+                        
+                        $('#inf').append(indent);
+                        //indent=indent+"&nbsp&nbsp&nbsp&nbsp"
+                    }
+                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                    {
+                        indent=indent.substring(0,indent.length-20)
+                        $('#inf').append(indent);
+                    }
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                    {
+                        $('#inf').append(indent);
+                    }
+                    
+                    $('#inf').append("<b>"+response.charAt(i)+"</b>");
+                }
+
+            }
+        });
+        //all_unbxd_suggestion
+        $.ajax(
+        {type:"POST",url:"/all_unbxd_suggestion",data:$("form").serialize(),success:function(response)
+            { 
+                var response_split=response.split(" ")
+                //alert(response_split[0])
+                var indent="<br/>"
+                //alert(response)
+                $('#aus').html("");
+                var id=0;
+                for(i=0;i<response.length;i++)
+                {
+                    if(response.charAt(i)==" " )
+                    {
+                        
+                        $('#aus').append('<div id=button'+id+'><input  type="button"  class="button" value="'+response_split[id]+'" id="button'+id+'" name="button'+id+'" onclick=delFunc(this.value,this.id)></br></br></input></div>');
+                            id=id+1;
+                            //alert(id)
+                        //indent=indent+"&nbsp&nbsp&nbsp&nbsp"
+                    }
+                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                    {
+                        indent=indent.substring(0,indent.length-20)
+                        $('#aus').append(indent);
+                    }
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]")
+                    {
+                        $('#aus').append(indent);
+                    }
+                    
+
+                    //$('#aus').append("<b>"+response.charAt(i)+"</b>");
+                }
+                if(id==0)
+                    {
+                     $('#aus').append("<b>Serialization Error</b>");   
+                    }
+
+            }
+        });
+
+        }
+        </script>
+    
 
     </div></body></html>
