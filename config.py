@@ -5,3 +5,10 @@ Database ={
     "User" : "root",
     "Password" : "alok"
 }
+readonly_database={
+	"Host" : "54.151.204.236",
+    "Port" : "",
+    "Name" : "cloud_search",
+    "User" : "readonlyuser",
+    "Password" : "unbxd!2#"
+}

@@ -12,3 +12,8 @@ class services:
 		#print("services-->validate_user")
 		store_dao_object = store_dao()
 		return store_dao_object.validate_user(email,password)
+
+	def read_data(self,msg):
+		print "services"
+		store_dao_object=store_dao()
+		return store_dao_object.get_readonly_data(msg)

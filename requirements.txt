@@ -5,7 +5,7 @@ requirements:
 
 issues:
 ->sendautosuggestdata
-	->site name and site id required
+	->site name and site id require
 ->productsearchablefield
 	->hosted on localhost
 ->url is not proper
@@ -19,5 +19,9 @@ issues:
 ->404 error in terminal
 	->by hosting it will get resolved
 
+->multiple 'true' in addpopularproduct
+	->api accepting multiple true statement
+->on delete
+	->nothing is there still it returns success statement
 
 	

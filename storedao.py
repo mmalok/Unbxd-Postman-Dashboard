@@ -1,4 +1,4 @@
-from dao.model import loginData
+from dao.model import *
 class store_dao:	
 	def store_user(self,username,password):
 		#print "2"
@@ -25,4 +25,13 @@ class store_dao:
 				if(password==(str(record.Password))):
 					return "valid"
 		return "invalid"
-                
+     
+	def get_readonly_data(self,msg):
+		print "storedao"
+		data=""
+		for record in site_request.select():
+			site_id=str(record.site_id)
+			site_name=str(record.site_name)
+			data=data+site_id+"_"+site_name+" "
+			#data.append(final_data)
+		return data

@@ -49,6 +49,21 @@
         </style>
     </head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dropdown.js"></script>
+    <script type="text/javascript">
+            
+            $( function() {
+                
+                $( '#command' ).dropdown( {
+                    gutter : 5,
+                    stack : false,
+                    slidingIn : 100
+                } );
+
+            });
+
+        </script>
+
     <body style="min-height: 929px;" class="skin-blue  pace-done"><div class="pace  pace-inactive"><div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
   <div class="pace-progress-inner"></div>
 </div>
@@ -167,6 +182,9 @@
                                 </li>
                                 <li><a style="margin-left: 10px;" href="view_popular_searchable_field"><i class="fa fa-angle-double-right"></i> View popular product searchable field </a>
                                 </li>
+                                <li><a style="margin-left: 10px;" href="unbxd_suggestion"><i class="fa fa-angle-double-right"></i> unbxd_suggestion </a></li>
+                                <li><a style="margin-left: 10px;" href="popular_product"><i class="fa fa-angle-double-right"></i>popular product</a></li>
+                                <li><a style="margin-left: 10px;" href="in_field"><i class="fa fa-angle-double-right"></i>inField</a></li>
                                 
                                 <li><a style="margin-left: 10px;" href="send_autosuggest_data"><i class="fa fa-angle-double-right"></i> Send AutosuggestData</a>
                                 </li>
@@ -197,6 +215,7 @@
                 <!-- Main content -->
                 <section class="content invoice">
                     <!-- this row will not appear when printing -->
+                    <div class="fleft">
                     <div class="row no-print">
                         <div class="col-xs-12">
                              <form class='pull-right'>
@@ -222,7 +241,7 @@
                         </div>
 
                     </div>
-                    
+                 </div>   
                 </section>
                 <!-- /.content -->
                 <div id="content"  style="font-size:20px;color:blue;height:40px; padding-left: 5em;" >

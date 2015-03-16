@@ -33,3 +33,4 @@ class data_handler:
 	def delete_popular_product(self,message,fields):
 		json_data='{"siteDetail": {"siteId":'+message+',"iSiteName":null,"siteName":null,"subscribers":null,"userId":null},"popularProductField": {"fieldName": "'+fields+'"}}'
 		return json_data
+	

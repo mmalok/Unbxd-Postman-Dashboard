@@ -4,6 +4,7 @@ from flask import Flask,session, redirect, url_for, escape
 from flask import request
 from flask import render_template
 from response_handler import *
+from exception_handler import *
 from services import *
 from data_handler import *
 import os
@@ -44,13 +45,13 @@ def signin_data():
     return render_template("dashboard.html") 
 #------------------------------------------------------------->
 #--------------------------all unbxd suggestion--------------->       
-@app.route('/all_unbxd')
-def all_unbxd():
+@app.route('/unbxd_suggestion')
+def unbxd_sugestion():
     if "mail" in session:
         #return redirect(url_for('dashboard'))
         #print"login"
         if request.method=='GET':
-            return render_template("all_unbxd_suggestion.html")
+            return render_template("unbxd_suggestion.html")
     else:
         return redirect(url_for("login"))
 @app.route('/all_unbxd_suggestion', methods=['POST','get'])
@@ -59,12 +60,14 @@ def all_unbxd_suggestion():
         try:
             if request.method=='POST':
                 message=request.form['command']
+                print message
                 if message!="":
                     handler=data_handler()
                     handler_data=str(handler.all_unbxd_suggestion(message))
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.unbxdsuggestion.all(data=handler_data)
                     response_text_json=json.loads(products)
+                    print response_text_json
                     #print str(asd['popularProductFields'][0])
                     #print(len(response_text_json['popularProductFields']))
                     if (type(response_text_json['keywordSuggestions']) is list):
@@ -89,8 +92,9 @@ def all_unbxd_suggestion():
             else:
                 render_template("dashboard.html")
                
-        except:
-            render_template("dashboard.html")
+        except Exception as e:
+            print e
+            return '%s' % e
         
 
         #data_object = DAO.DataDAO()
@@ -122,13 +126,13 @@ def get_all_infield_data():
                     #print str(asd['popularProductFields'][0])
                     #print(len(response_text_json['popularProductFields']))
                     if (type(response_text_json['inFields']) is list):
-                        response_text='INFIELDS '
+                        response_text=''
                         if (len(response_text_json['inFields']) > 0 ):
                             for val in response_text_json['inFields']:
                                 #print val
                                 fields=str(val)
                                 response_text=response_text+(fields+" ")
-                            #print response_text
+                            print response_text
                             return '%s' % response_text
                         else:
                             response_text="infield_list_is_empty *_*"
@@ -224,25 +228,30 @@ def delete_suggestion_data():
                 data_dict=request.form.to_dict()
                 print data_dict
                 message=str(request.form['command'])
-                print message
+                print messagedele
                 field=str(request.form['data'])
-                print field
+                
+                '''
                 field=field.split('--->')
                 field=field[0]
+                '''
                 print message,field
+                
                 if message!="":
                     handler=data_handler()
                     handler_data=str(handler.delete_unbxd_suggestion(message,field))
                     #print handler_data
-                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                    products=api.unbxdsuggestion.delete(data=handler_data)
-                    res_popular=response_handler()
-                    final_message=str(res_popular.delSuggestion(products))
-                    return '%s' % final_message
+                    #api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    #products=api.unbxdsuggestion.delete(data=handler_data)
+                    #res_popular=response_handler()
+                    #final_message=str(res_popular.delSuggestion(products))
+                    return '%s' % "final_message"
                     #print products
-                    return '%s' % final_message
+                    
+
                 else:
                     return render_template("dashboard.html")
+                
             else:
                 return render_template("dashboard.html")
                
@@ -531,11 +540,11 @@ def delete_in_field():
     #return render_template("dashboard.html")
 #------------------------------------------------------------>
 #-----------------add popular searchable -------------------->
-@app.route('/add_popular_searchable_field')
-def add_popular_searchable_field():
+@app.route('/popular_product')
+def popular_product():
     if "mail" in session:
         if request.method=='GET':
-            return render_template("add_popular_product_searchable_field.html")
+            return render_template("popular_product.html")
     else:
         return redirect(url_for('login'))
 '''
@@ -597,11 +606,11 @@ def add_suggestion_data():
 '''
 #------------------------------------------------------------>
 #-----------------view popular searchable ------------------->
-@app.route('/view_popular_searchable_field')
-def view_popular_searchable_field():
+@app.route('/in_field')
+def in_field():
     if "mail" in session:
         if request.method=='GET':
-            return render_template("view_popular_product_searchable_field.html")
+            return render_template("infield.html")
     else:
         return redirect(url_for('login'))
 '''
@@ -769,6 +778,90 @@ def login_data():
         #return render_template("dashboard.html")
     else:
         return redirect(url_for("login"))
+#------------------------------------------------------------->
+#---------------------get popular data------------------------>        
+@app.route('/get_popular_input_data', methods=['POST','get'])
+def get_popular_input_data():
+    if "mail" in session:                                       
+        try:
+            if request.method=='POST':
+               # print ("2")
+                data_dict=request.form.to_dict()
+                print "get popular input data"
+                print data_dict
+                #return data_dict
+                '''
+                message=str(request.form['command'])
+
+                field=str(request.form['fields'])
+                #print message,field
+                if message!="":
+                    handler=data_handler()
+                    handler_data=str(handler.delete_in_field(message,field))
+                    #print handler_data
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=api.infield.delete(data=handler_data)
+                    #print products
+                    return '%s' % products
+                
+                else:
+                    return render_template("dashboard.html")
+                '''
+            else:
+                return render_template("dashboard.html")
+               
+        except:
+            return render_template("dashboard.html")
+    else:        
+        return redirect(url_for('login'))
+    #data_object = DAO.DataDAO()
+    #data_object.save_message(processed_text)
+
+    #return render_template("dashboard.html")
+#------------------------------------------------------------>  
+#-------------------------read_only_data--------------------->
+@app.route('/read_only_data', methods=['POST','get'])
+def read_only_data():
+    if "mail" in session:                                       
+        try:
+            if request.method=='POST':
+               # print ("2")
+                data_dict=request.form.to_dict()
+                print "get popular input data"
+                print data_dict
+                a=services()
+                print "1"
+                data=a.read_data("alok")
+                print "2"
+                return '%s' % data
+                '''
+                message=str(request.form['command'])
+
+                field=str(request.form['fields'])
+                #print message,field
+                if message!="":
+                    handler=data_handler()
+                    handler_data=str(handler.delete_in_field(message,field))
+                    #print handler_data
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=api.infield.delete(data=handler_data)
+                    #print products
+                    return '%s' % products
+                
+                else:
+                    return render_template("dashboard.html")
+                '''
+            else:
+                return render_template("dashboard.html")
+               
+        except Exception as e:
+            return '%s' % e
+    else:        
+        return redirect(url_for('login'))
+    #data_object = DAO.DataDAO()
+    #data_object.save_message(processed_text)
+
+    #return render_template("dashboard.html")      
 #------------------------------------------------------------>
 #-----------------------------log out------------------------>
 @app.route('/logout', methods=['POST','get'])
@@ -777,6 +870,28 @@ def logout():
     return redirect(url_for('login'))
 
 #------------------------------------------------------------>
+#----------------------get index files----------------------->
+@app.route('/get_index_fields', methods=['POST','get'])
+def get_index_fields():
+    if "mail" in session:                                       
+        try:
+            if request.method=='POST':
+               # print ("2")
+                data_dict=request.form.to_dict()
+                #print mydict
+                message=str(request.form['command'])
+                exception_obj=exception_handler()
+                handler_data=str(exception_obj.get_index_field(message))
+                json_data=json.loads(handler_data)
+                string=""
+                for item in json_data:
+                    string=string+item['fieldName']+" "
+                #print string
+                return '%s' % string
+        except Exception as e:
+            print e
+            return '%s' % "select_company"
+#----------------------------------------------------------->                
 #-----------------------------ststics file------------------->
 
 
@@ -795,4 +910,7 @@ def css(path):
 @app.route('/scss/<path:path>')
 def scss(path):
     return app.send_static_file(os.path.join('scss', path))
+@app.route('/js/<path:path>')
+def js(path):
+    return app.send_static_file(os.path.join('js', path))
 #------------------------------------------------------------->
