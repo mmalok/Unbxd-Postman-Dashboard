@@ -9,12 +9,14 @@ class data_handler:
 		json_data='{"siteDetail":{"siteId":'+message+',"iSiteName":null,"siteName":null,"subscribers":null,"userId":0}}'
 		return json_data
 	def add_unbxd_suggestion(self,message,fields):
-		splited_data=fields.split("_")
+		splited_data=fields.split("*")
+		fields=fields.replace("*","_")
+		print fields
 		field=""
 		for value in splited_data:
 			field=field+'"'+value+'",'
 		field=field[:-1]
-		#print field
+		print field
 		json_data='{"siteDetail": {"siteId":'+message+',"iSiteName":null,"siteName":null,"subscribers":null,"userId":0},"keywordSuggestion": {"name": "'+fields+'","fields": ['+field+']}}'
 		#print json_data
 		return json_data
@@ -33,4 +35,4 @@ class data_handler:
 	def delete_popular_product(self,message,fields):
 		json_data='{"siteDetail": {"siteId":'+message+',"iSiteName":null,"siteName":null,"subscribers":null,"userId":null},"popularProductField": {"fieldName": "'+fields+'"}}'
 		return json_data
-	
+

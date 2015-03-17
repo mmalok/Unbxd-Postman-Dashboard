@@ -21,7 +21,7 @@ def start():
 def dashboard():
     if "mail" in session:
         if request.method=='GET':
-            return render_template("dashboard.html")
+            return render_template("unbxd_suggestion.html")
     else:
         return redirect(url_for("login"))
 @app.route('/signin_data', methods=['POST','get'])
@@ -48,8 +48,8 @@ def signin_data():
 @app.route('/unbxd_suggestion')
 def unbxd_sugestion():
     if "mail" in session:
-        #return redirect(url_for('dashboard'))
-        #print"login"
+        return redirect(url_for('dashboard'))
+        print"login"
         if request.method=='GET':
             return render_template("unbxd_suggestion.html")
     else:
@@ -166,28 +166,19 @@ def add_suggestion_data():
     if "mail" in session:
         try:
             if request.method=='POST':
+                print "add suggestion"
                 data_dict=request.form.to_dict()
                 keylist = data_dict.keys()
+                print keylist
                 message=str(data_dict["command"])
-                values=[]
-                for val in keylist:
-                    if(val[0:6]=="alltxt"):
-                        values.append(int(val[6:]))
-                values=sorted(values)
-                #string=""
-                input_text_list=[]
-                for param in values:
-                    input_text_list.append(str(data_dict["alltxt"+str(param)]))
-                string=""
-                for items in input_text_list:
-                    if items!="":
-                        string=string+str(items)+"_"
-                field=string[:-1]
-                #print field
+                data=str(data_dict["data"])
+                print message,data
+                data=str(data[1:])
                 if message!="":
                     handler=data_handler()
-                    handler_data=str(handler.add_unbxd_suggestion(message,field))
-                    #print handler_data
+                    handler_data=str(handler.add_unbxd_suggestion(message,data))
+                    print handler_data
+                    
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.unbxdsuggestion.update(data=handler_data)
                     res_popular=response_handler()
@@ -195,13 +186,16 @@ def add_suggestion_data():
                     #return '%s' % final_message
                     #print products
                     return '%s' % final_message
+                    
                 else:
                     return render_template("dashboard.html")
+                '''
             else:
-                render_template("dashboard.html")
+                return render_template("dashboard.html")
                
-        except:
-            render_template("dashboard.html")
+        except Exception as e:
+            print e
+            return '%s' % "error"
     else:
         return redirect(url_for("login"))
 
@@ -752,7 +746,7 @@ def validate_mail():
 @app.route('/login')
 def login():
     if "mail" in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('display_suggestion'))
     elif request.method=='GET':
         return render_template("login.html")
 @app.route('/login_data', methods=['POST','get'])
@@ -871,6 +865,92 @@ def logout():
 
 #------------------------------------------------------------>
 #----------------------get index files----------------------->
+@app.route('/display_suggestion', methods=['POST','get'])
+def display_suggestion():
+    if "mail" in session:
+        # z=str(request.form['command'])
+        z = str(request.args.get('command'))
+        print "company id=>"+z
+        handler=data_handler()
+        handler_data=str(handler.all_unbxd_suggestion(z))
+        api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+        products=api.unbxdsuggestion.all(data=handler_data)
+        response_text_json=json.loads(products)
+        print response_text_json
+        #print str(asd['popularProductFields'][0])
+        #print(len(response_text_json['popularProductFields']))
+        if (type(response_text_json['keywordSuggestions']) is list):
+            response_text=''
+            fld_name=''
+            outerlist=[]
+            innerlist=[]
+            for val in response_text_json['keywordSuggestions']:
+                #print val
+                field_name=(val['fields'])
+                #print field_name
+                for values in field_name:
+                    #print values
+                    fld_name=fld_name+str(values)+','
+                    #print type(field_name)
+                flds=str(val['name'])
+                innerlist.append(flds)
+                innerlist.append(fld_name[0:-1])
+                outerlist.append(innerlist)
+                innerlist=[]
+                fld_name=''
+                            #print response_text
+        #if request.method=='GET':
+            print outerlist
+            return render_template("box/table.html",response=outerlist)
+
+    else:
+        redirect(url_for('login'))
+#------------------------------------------------------------------------->
+#------------------------------------------------------------------------->
+@app.route('/display_popular', methods=['POST','get'])
+def display_popular():
+    if "mail" in session:
+        # z=str(request.form['command'])
+        z = str(request.args.get('command'))
+        print "company id=>"+z
+        handler=data_handler()
+        handler_data=str(handler.all_popular_product(z))
+        api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+        products=api.unbxdsuggestion.all(data=handler_data)
+        response_text_json=json.loads(products)
+        print response_text_json
+        #print str(asd['popularProductFields'][0])
+        #print(len(response_text_json['popularProductFields']))
+        if (type(response_text_json['keywordSuggestions']) is list):
+            response_text=''
+            fld_name=''
+            outerlist=[]
+            innerlist=[]
+            for val in response_text_json['keywordSuggestions']:
+                #print val
+                field_name=(val['fields'])
+                #print field_name
+                for values in field_name:
+                    #print values
+                    fld_name=fld_name+str(values)+','
+                    #print type(field_name)
+                flds=str(val['name'])
+                innerlist.append(flds)
+                innerlist.append(fld_name[0:-1])
+                outerlist.append(innerlist)
+                innerlist=[]
+                fld_name=''
+                            #print response_text
+        #if request.method=='GET':
+            print outerlist
+            return render_template("box/table.html",response=outerlist)
+
+    else:
+        redirect(url_for('login'))
+#------------------------------------------------------------------------->
+#------------------------------------------------------------------------->
+    
+    
 @app.route('/get_index_fields', methods=['POST','get'])
 def get_index_fields():
     if "mail" in session:                                       
@@ -887,7 +967,8 @@ def get_index_fields():
                 for item in json_data:
                     string=string+item['fieldName']+" "
                 #print string
-                return '%s' % string
+                #return '%s' % string
+                return render_template('/box/table.html',response=string)
         except Exception as e:
             print e
             return '%s' % "select_company"
