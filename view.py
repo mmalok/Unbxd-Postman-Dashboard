@@ -55,8 +55,11 @@ def dashboard():
                     session.pop('mail', None)
                     return redirect(url_for('login'))
                 return res.read()
-            print (res.read())
-            return render_template("box/profile.html")
+            print "$$$$$"
+            response_text=str(res.read())
+            parse_response_text=json.loads(response_text)
+
+            return render_template("box/profile.html",response=parse_response_text)
     else:
         return redirect(url_for("login"))
 @app.route('/signin_data', methods=['POST','get'])
