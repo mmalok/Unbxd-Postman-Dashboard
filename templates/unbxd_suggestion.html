@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html style="min-height: 1767px;"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <title>AdminLTE | Dashboard</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link href="dashboard_files/bootstrap.css" rel="stylesheet" type="text/css">
+        <link href="dashboard_files/font-awesome.css" rel="stylesheet" type="text/css">
+        <!-- Ionicons -->
+        <link href="dashboard_files/ionicons.css" rel="stylesheet" type="text/css">
+        <!-- Morris chart -->
+        <link href="dashboard_files/morris.css" rel="stylesheet" type="text/css">
+        <!-- jvectormap -->
+        <link href="dashboard_files/jquery-jvectormap-1.css" rel="stylesheet" type="text/css">
+        <!-- Date Picker -->
+        <link href="dashboard_files/datepicker3.css" rel="stylesheet" type="text/css">
+        <!-- Daterange picker -->
+        <link href="dashboard_files/daterangepicker-bs3.css" rel="stylesheet" type="text/css">
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link href="dashboard_files/bootstrap3-wysihtml5.css" rel="stylesheet" type="text/css">
+        <!-- Theme style -->
+        <link href="dashboard_files/AdminLTE.css" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+        <![endif]-->
+        
+        <style>
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+
+
+div.table-title {
+   display: block;
+  max-width: 600px;
+  padding:5px;
+  width: 50%;
+}
+
+
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 5px;
+  margin: auto;
+  max-width: 1000px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+ 
+th {
+  
+  
+  border-right: 1px solid #C1C3D1;
+  border-left: 1px solid #C1C3D1;
+  font-size:23px;
+  font-weight: 100;
+  padding:15px;
+  text-align:right;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-left: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  text-align:right;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+ 
+
+ 
+td {
+  
+  padding:10px;
+  text-align:right;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:20px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: left;
+}
+
+th.text-right {
+  text-align: left;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: left;
+}
+
+td.text-right {
+  text-align: left;
+}
+
+        </style>
+        <style>
+        #command option{
+            font-size: 20px;
+ width:400px;
+    height:40px;
+}
+
+        </style>
+        
+        <style>
+        #field_command option{
+            font-size: 20px;
+            width:400px;
+            height:40px;
+        
+         }
+
+        </style>
+
+
+
+
+    <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<body style="min-height: 1767px;" class="skin-blue wysihtml5-supported  pace-done" onload="a()">
+<div class="pace  pace-inactive">
+    <div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity">
+    </div>
+</div>
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+            <a href="/dashboard" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                AutoSUGGEST
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        {%block profile%}{%endblock%}
+                        <!-- User Account: style can be found in dropdown.less -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div style="min-height: 679px;" class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside style="min-height: 1767px;" class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="dashboard_files/avatar3.png" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>Hello, UNBXD</p>
+
+                            
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="active">
+                            <a href="/dashboard">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder"></i> <span>Postmanapi</span>
+                                <i class="fa pull-right fa-angle-left"></i>
+                            </a>
+                            <ul style="display: none;" class="treeview-menu">
+                                
+                                
+                                <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Popular_Product"><i class="fa fa-angle-double-right"></i>Popular Product</li>
+                                <li style="margin-left: 30px;" onclick="Metric(this.id)" id="In_Field"><i class="fa fa-angle-double-right"></i>In Field</li>
+                                <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Suggestion"><i class="fa fa-angle-double-right"></i>Suggestion</li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Dashboard
+                    </h1>
+                    
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                <section class="content invoice">
+                    <!-- this row will not appear when printing -->
+                    <div class="row no-print">
+                        <div class="col-xs-12 ">
+                             <form class='pull-right'>
+                                <select name="command"  id="command" onchange="Company_Changed()">
+                                    <option value="insert" name="insert">select company name</option>
+                                    <option value="11888" name="11888">dummy company</option>
+                                </select>
+                            </form>
+                            
+                            
+                        </div>
+
+                    </div>
+                    
+                </section>
+                
+
+
+                    <!-- Small boxes (Stat box) -->
+                    <h1>
+                         <div id="cur_param">{%block paramName%}{%endblock%}</div>
+                    </h1>
+
+                <!-- Small boxes (Stat box) -->
+                    <div class="row" >
+                        <div class="col-lg-7 col-xs-7">
+                            <!-- small box -->
+                            <div class="small-box ">
+                                <div class="inner">
+                                   
+                                    <div id="aus2" name="aus2">
+                                        <input type="button" id="tohide" name="tohide" class="pull-right" value="Add unbxd suggestion" style="background-color:transparent; color:black; font-size:200%; border:none; " onclick=unhide()><center><button onclick="unhide()" class="pull-right" style="background-color:transparent;border:none;"><img src="/dashboard_files/circle_plus.png" class="pull-right" height="40x"></center></button></input>
+                                       
+                                    </div>
+                                <div class="icon"></div>
+                                    
+                             </div>
+                        </div>
+                    </div><!-- ./col -->
+                    </div>
+
+
+                    <!-- ./hide col -->
+
+                    <div class="row" id="hide" value="hide" style="display :none;" >
+                        <div class="col-lg-8 col-xs-7">
+                            <!-- small box -->
+                            <div >
+                                <div class="inner">
+                                   
+                                        <div id="aus2" name="aus2">
+                                        </br>
+                                        </br>
+                                        </br>
+                                        <center>
+                                        <select name="field_command"  id="field_command">
+                                            <option value="insert" name="insert">select field name</option>
+                                        </select>
+                                        </center>
+                                        </br>
+                                        </br>
+                                        </br>
+                                        <form>
+                                        <div id="test_field" name="test_field">
+                                            
+                                        </div>
+                                        </form>
+                                        <center><input type="button" value="!Add suggestion" id="value_send" name="value_send" style="background-color:transparent; color:black; font-size:200%;" onclick="add_suggestion()" ></input></center>
+                                            
+                                        </div>
+                                    <div class="icon"></div>
+                                </div>
+                            </div><!-- ./col -->
+                        </div>
+                    
+                    </div>    
+
+                        
+
+                        
+                    <!-- ./hide col -->                
+                    
+                    <!-- /.row -->
+                <div class="col-lg-8">
+                <div class="box">
+                    <div class="box-header">
+                        <h2 class="box-title">Unbxd suggestion</h2>
+                    </div><!-- /.box-header -->
+                    <div class="row" >
+                        <div class="col-lg-12 ">
+                            <!-- small box -->
+                            <div class="small-box">
+                                <div class="inner">
+                                    <div id="autosuggestion" name="autosuggestion">
+                                        {% block content %}
+                                        {% endblock %}
+                                    </div>
+                                </div>
+                            <div class="icon">
+                                    
+                        </div>
+                                
+                                
+                    </div>
+                </div>
+                </div>
+              
+                    
+
+                    <!--script type="text/javascript">
+                        $('#command').change(function(e) {
+                        //alert("a")
+                        $("#test_field").html('')
+                        data=""
+                        
+                        var hide_unhide=document.getElementById("hide").style.display
+                        if(hide_unhide==="block")
+                        {    
+                            $("#field_command").empty()
+                            unhide()
+                        }
+                        });
+
+                     </script-->
+
+    <script >
+    function delFunc(id)
+    {
+    //alert(id)
+        var val=$("#id"+id+"").text();
+    //alert(val)
+        $.ajax(
+        {async:false,type:"POST",url:"/delete_suggestion_data",data:$("form").serialize() +"&data="+val+"",success:function(response)
+            { 
+                
+                $("div#button"+id+"").remove();
+                var indent="<br/>"
+                $('#content').html("");
+                for(i=0;i<response.length;i++)
+                {
+                    if(response.charAt(i)=="[" || response.charAt(i)=="{" )
+                    {
+                        
+                        $('#content').append(indent);
+                        indent=indent+"&nbsp&nbsp&nbsp&nbsp"
+                    }
+                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
+                    {
+                        indent=indent.substring(0,indent.length-20)
+                        $('#content').append(indent);
+                    }
+                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
+                    {
+                        $('#content').append(indent);
+                    }
+                    
+                    $('#content').append(response.charAt(i));
+                }
+
+            }
+        });
+    }
+
+
+    function Company_Changed() {
+            var x = document.getElementById("command").value;
+         // $.post("/display_suggestion", params={'command':x} );
+                 //window.open('/get_index_fields',_self)'"'
+            metric = $( "#cur_param" ).text();
+            window.location = window.location.origin + '/display_suggestion' + '?command='+x+'&metric='+metric
+    }
+    function popular_product()
+    {
+        window.location = window.location.origin + '/get_all_infield'+ '?data=Popular Products'
+    
+           // $.post("/get_all_infield",{data:"Popular Products"});
+            //window.location = window.location.origin + '/display_popular'
+    }
+    function Metric(clicked_id)
+    {
+        window.location = window.location.origin + '/metric_type'+ '?data='+clicked_id
+    
+           // $.post("/get_all_infield",{data:"Popular Products"});
+            //window.location = window.location.origin + '/display_popular'
+    }
+    function infield()
+    {
+            $.post("/get_all_infield",{data:"In Field"});
+    }
+    function a(){
+    $.ajax(
+        {type:"POST",url:"/read_only_data",data:$("form").serialize(),success:function(response)
+            {
+                response_split=response.split(" ")
+                for(var i=0;i<response_split.length;i++)
+                {  
+                    response_split_value=response_split[i].split("_")  
+                    $("#command").append('<option value="'+response_split_value[0]+'" name="'+response_split_value[0]+'">'+response_split_value[1]+'</option>');
+                }
+               
+                
+            }
+           });  
+    }
+    function unhide()
+    {
+       if(document.getElementById("hide").style.display==="block")
+       {
+            document.getElementById("hide").style.display = "none";
+       }
+       else
+       {
+                document.getElementById("hide").style.display = "block";
+                $("#field_command").empty() 
+                $.ajax(
+                    {type:"POST",url:"/get_index_fields",data:$("form").serialize(),success:function(response)
+                    {
+                        //alert(response)
+                    $("#field_command").append('<option value="insert" name="insert">select field name</option>')
+                        response_split_value=response.split(" ")
+                        for(var id=0;id<response_split_value.length-1;id++){
+                            //alert(response_split_value.length)
+                            //alert(response_split_value[id]);
+                            $("#field_command").append('<option value="'+response_split_value[id]+'" name="'+response_split_value[id]+'">'+response_split_value[id]+'</option>');
+                        }
+                    }
+                }); 
+        }
+    }
+    var data="";
+    $('#field_command').change(function(e) { 
+        var hide_unhide=document.getElementById("hide").style.display
+        if(hide_unhide==="block")
+        {   
+            var temp=document.getElementById("field_command").value
+            data=data+"*"+temp
+            $("#test_field").html('<center><h1>NEW field</br></h1><h4>'+data+'</h4></center></br></br>')
+            alert(data)                    
+        }
+    });
+    function add_suggestion()
+    {
+        $.ajax(
+        {type:"POST",url:"/add_suggestion_data",data:$("form").serialize() +"&data="+data+"",success:function(response)
+            {
+                alert(response)
+            }
+        });
+    }
+</script>
+        <script src="dashboard_files/jquery.js"></script>
+        <script src="dashboard_files/bootstrap.js" type="text/javascript"></script>
+        <script src="dashboard_files/jquery-ui.js" type="text/javascript"></script>
+        <!-- Morris.js charts -->
+        <script src="dashboard_files/raphael-min.js"></script>
+        <script src="dashboard_files/morris.js" type="text/javascript"></script>
+        <!-- Sparkline -->
+        <script src="dashboard_files/jquery_003.js" type="text/javascript"></script>
+        <!-- jvectormap -->
+        <script src="dashboard_files/jquery-jvectormap-1.js" type="text/javascript"></script>
+        <script src="dashboard_files/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="dashboard_files/jquery_002.js" type="text/javascript"></script>
+        <!-- daterangepicker -->
+        <script src="dashboard_files/daterangepicker.js" type="text/javascript"></script>
+        <!-- datepicker -->
+        <script src="dashboard_files/bootstrap-datepicker.js" type="text/javascript"></script>
+        <!-- Bootstrap WYSIHTML5 -->
+        <script src="dashboard_files/bootstrap3-wysihtml5.js" type="text/javascript"></script>
+        <!-- iCheck -->
+        <script src="dashboard_files/icheck.js" type="text/javascript"></script>
+
+        <!-- AdminLTE App -->
+        <script src="dashboard_files/app.js" type="text/javascript"></script>
+
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="dashboard_files/dashboard.js" type="text/javascript"></script>
+
+        <!-- AdminLTE for demo purposes -->
+        <script src="dashboard_files/demo.js" type="text/javascript"></script>
+    </div>
+    </body>
+</html>

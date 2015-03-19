@@ -1,0 +1,33 @@
+{% extends "unbxd_suggestion.html" %}
+{% block paramName %}
+<b>In Field</b>
+{% endblock %}
+{% block content %}
+<table class="table-fill" >
+<thead>
+<tr>
+	<th class="text-left" width="50%">
+		Field Name
+	</th>
+	<th class="text-left" width="50%">
+		Delete
+	</th>
+</tr>
+</thead>
+<tbody class="table-hover">'
+<div id="button'+id+'">
+	<table class="table-fill" >
+	{%set id=0%}
+	{%for text in response_text%}
+		{%set id=id+1%}
+		<tr>
+		<td class="text-left" width="50%"id="id{{id}}">
+			<b>'{{text}}'</b>
+		</td>
+		<td class="text-left" width="50%" id="{{id}}" onclick=delFunc({{id}})>
+			<img src="/dashboard_files/delete.png" height="40px" width="50px">
+		</td>
+		</tr>
+	{%endfor%}
+
+{% endblock %}

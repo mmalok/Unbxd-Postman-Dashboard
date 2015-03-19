@@ -1,0 +1,41 @@
+@import url('demo.css');
+@import url('common.css');
+@import url('icons.css');
+
+.command ul {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+
+.command > span,
+.command ul li {
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.command ul li {
+	position: absolute;
+	width: 100%;
+	pointer-events: none;
+}
+
+.cd-active.command > span {
+	color: #c29ad2;
+}
+
+.cd-active.command ul li {
+	pointer-events: auto;
+}
+
+.cd-active.command ul li span {
+	-webkit-transition: all 0.2s linear 0s;
+	-moz-transition: all 0.2s linear 0s;
+	-ms-transition: all 0.2s linear 0s;
+	-o-transition: all 0.2s linear 0s;
+	transition: all 0.2s linear 0s;
+}
+
+.cd-active.command ul li span:hover {
+	background: #c29ad2;
+	color: #fff;
+}
