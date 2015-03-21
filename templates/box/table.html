@@ -1,7 +1,11 @@
 {% extends "unbxd_suggestion.html" %}
+{% import 'box/simple_login.html' as login %}
 {% block paramName %}
 <b>Suggestion</b>
 {% endblock %}
+{%block profile%}
+{{ login.profile_box(response) }}
+{%endblock%}
 {% block content %}
 <table class="table-fill" >
 <thead>
@@ -21,7 +25,7 @@
 <div id="button'+id+'">
 	<table class="table-fill" >
 	{%set id=-1%}
-	{%for text in response%}
+	{%for text in response_text%}
 		{%set id=id+2%}
 		<tr>
 				

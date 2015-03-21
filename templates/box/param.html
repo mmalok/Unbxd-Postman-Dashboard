@@ -1,4 +1,8 @@
 {% extends "unbxd_suggestion.html" %}
+{% import 'box/simple_login.html' as login%}
+{%block profile%}
+{{ login.profile_box(response_text) }}
+{%endblock%}
 {% block paramName %}
 <b>{{response}}</b>
 {% endblock %}

@@ -1,0 +1,57 @@
+{% extends "unbxd_suggestion.html" %}
+{% macro profile_box(response) -%}
+    <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                {%if response['gmail']!='NO'%}
+                                <span>{{response['gmail'].name}}<i class="caret"></i></span>
+                                {% else %}
+                                <span>{{response['mail']}}<i class="caret"></i></span>
+                                {%endif%}
+                            </a>
+                            <ul class="dropdown-menu">
+                            
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                    {%if response['gmail']!='NO'%}
+                                    <img src="{{response['gmail'].picture}}" class="img-circle" alt="User Image">
+                                    {% else %}
+                                    <img src="avatar.png" class="img-circle" alt="User Image">
+                                   {%endif%}
+                                   {%if response['gmail']!='NO'%}
+                                    <p>
+                                        {{response['gmail'].email}}
+                                        <small>{{response['gmail'].gender}}</small>
+                                    </p>
+                                    {%endif%}
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                {%if caller%}
+                                    {{ caller() }}
+                                {% endif %}
+                                
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    {%if response['gmail']!='NO'%}
+                                    <div class="pull-left">
+                                        <a href="{{response['gmail'].link}}" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                    {%else%}
+                                    <div class="center">
+                                    {%endif%}
+                                        <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+{%- endmacro %}
+
+{% block profile %}
+{%if response%}
+    {% call profile_box(response) %}
+{% endcall %}
+{%endif%}
+{% endblock %}

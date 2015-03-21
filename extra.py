@@ -10,7 +10,6 @@ from services import *
 from data_handler import *
 import os
 
-
 app = Flask(__name__)
 
 REDIRECT_URI = '/oauth2callback'
@@ -61,14 +60,14 @@ def dashboard():
             response_text=str(res.read())
             parse_response_text=json.loads(response_text)
             session['gmail']=parse_response_text
-            return render_template("box/simple_login.html",response=session)
+            return render_template("box/profile.html",response=parse_response_text)
     else:
         return redirect(url_for("login"))
 
 @app.route('/simple_login')
 def simple_login():
     if "mail" in session:
-        return render_template("box/simple_login.html",response=session);
+        return render_template("box/simple_login.html",response=session.get('gmail',"not set"));
     else:
         return redirect(url_for('login'))
 
@@ -88,7 +87,7 @@ def signin_data():
         sign_done=service_obj.insert(user_name,password)
         #print email_check
         session['mail'] = request.form['mail']
-        session['gmail']=request.form['mail']
+        session['gmail']=str('NO')
         #Sprint session['mail'] 
         return '%s' % sign_done
     return render_template("unbxd_suggestion.html") 
@@ -107,8 +106,62 @@ def unbxd_sugestion():
         return redirect(url_for("login"))
 
 #-------------------------------------------------------------------------------------------------------------------->
+@app.route('/all_unbxd_suggestion', methods=['POST','get'])
+def all_unbxd_suggestion():
+    if "mail" in session:
+        try:
+            if request.method=='POST':
+                message=request.form['command']
+                print message
+                if message!="":
+                    handler=data_handler()
+                    handler_data=str(handler.all_unbxd_suggestion(message))
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=api.unbxdsuggestion.all(data=handler_data)
+                    response_text_json=json.loads(products)
+                    print response_text_json
+                    #print str(asd['popularProductFields'][0])
+                    #print(len(response_text_json['popularProductFields']))
+                    if (type(response_text_json['keywordSuggestions']) is list):
+                        response_text=''
+                        fld_name=''
+                        for val in response_text_json['keywordSuggestions']:
+                            #print val
+                            field_name=(val['fields'])
+                            for values in field_name:
+                                fld_name=fld_name+'>'+str(values)
+                            #print type(field_name)
+                            flds=str(val['name'])
+                            response_text=response_text+(flds+"--->"+fld_name+" ")
+                            fld_name=''
+                            #print response_text
+                        return '%s' % response_text
+                    else:
+                        #print response_text
+                        return '%s' % response_text_json['errors'][0]['message']
+                else:
+                    return render_template("dashboard.html")
+            else:
+                render_template("dashboard.html")
+               
+        except Exception as e:
+            print e
+            return '%s' % e
+        
+
+        #data_object = DAO.DataDAO()
+        #data_object.save_message(processed_text)
+    else:    
+        return redirect(url_for("login"))
 #-------------------------------------------------------------->
 #--------------------------all infield ------------------------>
+@app.route('/all_infield')
+def all_infield():
+    if "mail" in session:
+        if request.method=='GET':
+            return render_template("get_all_infield.html")
+    else:
+        return redirect(url_for("login"))  
 @app.route('/metric_type')
 def metric_type():
     if "mail" in session:
@@ -118,6 +171,49 @@ def metric_type():
         return render_template("box/param.html",response=s,response_text=session)
     else:
         return redirect(url_for("login"))        
+@app.route('/get_all_infield_data', methods=['POST','get'])
+def get_all_infield_data():
+    if "mail" in session:
+        try:
+            if request.method=='POST':
+                message=request.form['command']
+                #print message
+                if message!="":
+                    handler=data_handler()
+                    handler_data=str(handler.get_all_infield(message))
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=api.infield.all(data=handler_data)
+                    response_text_json=json.loads(products)
+                    #print str(asd['popularProductFields'][0])
+                    #print(len(response_text_json['popularProductFields']))
+                    if (type(response_text_json['inFields']) is list):
+                        response_text=''
+                        if (len(response_text_json['inFields']) > 0 ):
+                            print response_text_json
+                            for val in response_text_json['inFields']:
+                                #print val
+                                fields=str(val)
+                                response_text=response_text+(fields+" ")
+                            print response_text
+                            return render_template("box/table.html",response_text=response_text)
+                        else:
+                            response_text="infield_list_is_empty *_*"
+                            return render_template("box/error.html",response_text=response_text)
+                    else:
+                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'])
+                else:
+                    return render_template("unbxd_sugestion.html")
+            else:
+                render_template("unbxd_sugestion.html")
+               
+        except:
+            render_template("login.html")
+        
+
+        #data_object = DAO.DataDAO()
+        #data_object.save_message(processed_text)
+    else:    
+        return redirect(url_for("login"))
 #-------------------------------------------------------------->
 #--------------------------add suggestion --------------------->
 @app.route('/add_suggestions')
@@ -500,6 +596,13 @@ def delete_in_field():
     #return render_template("dashboard.html")
 #------------------------------------------------------------>
 #-----------------add popular searchable -------------------->
+@app.route('/popular_product')
+def popular_product():
+    if "mail" in session:
+        if request.method=='GET':
+            return render_template("popular_product.html")
+    else:
+        return redirect(url_for('login'))
 '''
 @app.route('/add_suggestion_data', methods=['POST','get'])
 def add_suggestion_data():
@@ -559,6 +662,13 @@ def add_suggestion_data():
 '''
 #------------------------------------------------------------>
 #-----------------view popular searchable ------------------->
+@app.route('/in_field')
+def in_field():
+    if "mail" in session:
+        if request.method=='GET':
+            return render_template("infield.html")
+    else:
+        return redirect(url_for('login'))
 '''
 @app.route('/add_suggestion_data', methods=['POST','get'])
 def add_suggestion_data():
@@ -619,6 +729,57 @@ def add_suggestion_data():
 '''
 #------------------------------------------------------------>
 #---------------get all popular product --------------------->
+@app.route('/get_all_popular_product')
+def get_all_popular_product():
+    if "mail" in session:
+        #return redirect(url_for('login'))
+        if request.method=='GET':
+            return render_template("get_all_popular_product.html")
+    else:
+         return redirect(url_for('login'))
+@app.route('/get_popular_product', methods=['POST','get'])
+def get_popular_product():
+    if "mail" in session:
+        try:
+            if request.method=='POST':
+                message=request.form['command']
+                print message
+                if message!="":
+                    handler=data_handler()
+                    handler_data=str(handler.all_popular_product(message))
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=str(api.popularproduct.all(data=handler_data))
+                    #print products
+
+
+                    response_text_json=json.loads(products)
+                    #print str(asd['popularProductFields'][0])
+                    #print(len(response_text_json['popularProductFields']))
+                    if (type(response_text_json['popularProductFields']) is list):
+                        response_text=''
+                        for val in response_text_json['popularProductFields']:
+                            field_name=str(val['fieldName'])
+                            condition=str(val['required'])
+                            response_text=response_text+(field_name+"--->"+condition+" ")
+                            #print response_text
+
+                        #print response_text
+                        return '%s' % response_text
+                    else:                  
+                        return '%s' % response_text_json['errors'][0]['message']
+                else:
+                    return render_template("dashboard.html")
+            else:
+                return render_template("dashboard.html")
+               
+        except:
+            return render_template("dashboard.html")
+    else:
+        return redirect(url_for('login'))
+
+    #data_object = DAO.DataDAO()
+    #data_object.save_message(processed_text)
+
     #return render_template("dashboard.html")
 #-----------------------login data-------------------------->
 @app.route('/validate_mail', methods=['POST','get'])
@@ -668,7 +829,6 @@ def login_data():
         print temp 
         if(str(temp)=='valid'):
             session['mail'] = request.form['mail']
-            session['gmail']= 'NO'
             print session['mail']
             print "session mein stor ho gaya"
         return '%s' % temp
@@ -807,7 +967,7 @@ def display_suggestion():
                             #print response_text
         #if request.method=='GET':
                 print outerlist
-                return render_template("box/table.html",response_text=outerlist ,response=session)
+                return render_template("box/table.html",response=outerlist ,response_text=session)
         elif metric=="In Field":
             #try:
                 if company!="":
@@ -827,12 +987,12 @@ def display_suggestion():
                                 fields=str(val)
                                 response_text.append(fields)
                             print response_text
-                            return render_template("box/infield.html",response_text=response_text,response=session)
+                            return render_template("box/infield.html",response_text=response_text)
                         else:
                             response_text=["infield_list_is_empty *_*"]
-                            return render_template("box/error.html",response_text=response_text,response=session)
+                            return render_template("box/error.html",response_text=response_text)
                     else:
-                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'],response=session)
+                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'])
                 else:
                     return render_template("unbxd_suggestion.html")
             #except:
@@ -862,11 +1022,11 @@ def display_suggestion():
                             outer.append(inner)
                             inner=[]
                         #print response_text
-                        return render_template("box/popular.html",response_text=outer,response=session)
+                        return render_template("box/popular.html",response=outer)
                     else:                  
-                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'],response=session)
+                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'])
         else:
-            return render_template("box/error.html",response_text="Enter the required Metric",response=session)
+            return render_template("box/error.html",response_text="Enter the required Metric")
     else:
         redirect(url_for('login'))
 #------------------------------------------------------------------------->
@@ -1009,12 +1169,3 @@ def authorized(resp):
 @google.tokengetter
 def get_access_token():
     return session.get('access_token')
-
-if __name__ == "__main__":
-    app.secret_key = 'super secret key'
-    #app.config['SESSION_TYPE'] = 'filesystem'
-
-    sess.init_app(app)
-
-    app.debug = True
-    app.run()
