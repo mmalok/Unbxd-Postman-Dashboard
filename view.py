@@ -34,88 +34,81 @@ google = oauth.remote_app('google',
 @app.route('/')
 def start():
     if "mail" in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('simple_login'))
     elif request.method=='GET':
         return render_template("signup.html")
-@app.route('/dashboard')
-def dashboard():
-    if "mail" in session:
-        if request.method=='GET':
-            access_token = session.get('mail')
-            access_token = access_token[0]
-            from urllib2 import Request, urlopen, URLError
+#-----------------------------------------------------------------#
+#-----------------------------------------------------------------#
+#--------------------------SIGN UP GET DATA-----------------------#
 
-            headers = {'Authorization': 'OAuth '+access_token}
-            req = Request('https://www.googleapis.com/oauth2/v1/userinfo',
-                  None, headers)
-            try:
-                res = urlopen(req)
-            except URLError, e:
-                if e.code == 401:
-                # Unauthorized - bad token
-                    print session
-                    session.pop('mail', None)
-                    return redirect(url_for('login'))
-                return res.read()
-            print "$$$$$"
-            response_text=str(res.read())
-            parse_response_text=json.loads(response_text)
-            session['gmail']=parse_response_text
-            return render_template("box/simple_login.html",response=session)
-    else:
-        return redirect(url_for("login"))
-
-@app.route('/simple_login')
-def simple_login():
+@app.route('/signup_data', methods=['POST','get'])
+def signup_data():
     if "mail" in session:
-        return render_template("box/simple_login.html",response=session);
-    else:
-        return redirect(url_for('login'))
-
-@app.route('/signin_data', methods=['POST','get'])
-def signin_data():
-    if "mail" in session:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for("simple_login"))
         #print"login"
     elif request.method=='POST':
         data_dict=request.form.to_dict()
         print data_dict
         user_name=str(request.form['mail'])
         password=str(request.form['password'])
-        #print user_name,password
-        #email_check=login_handler().email()
         service_obj=services()
         sign_done=service_obj.insert(user_name,password)
-        #print email_check
         session['mail'] = request.form['mail']
-        session['gmail']=request.form['mail']
-        #Sprint session['mail'] 
+        session['gmail']='NO'
         return '%s' % sign_done
-    return render_template("unbxd_suggestion.html") 
-#------------------------------------------------------------->
-#--------------------------all unbxd suggestion--------------->       
-@app.route('/unbxd_suggestion')
-def unbxd_sugestion():
+    return render_template("box/simple_login.html") 
+#-----------------------------------------------------------------#
+#-----------------------------------------------------------------#
+#-------------------------LOG IN FOR GOOGLE--------------------------#
+@app.route('/dashboard')
+def dashboard():
     if "mail" in session:
-        return redirect(url_for('dashboard'))
-        print"login"
-        if request.method=='GET':
-            return render_template("unbxd_suggestion.html")
+        if "gmail" in session:
+            if request.method=='GET':
+                access_token = session.get('mail')
+                access_token = access_token[0]
+                from urllib2 import Request, urlopen, URLError
+                headers = {'Authorization': 'OAuth '+access_token}
+                req = Request('https://www.googleapis.com/oauth2/v1/userinfo',
+                  None, headers)
+                try:
+                    res = urlopen(req)
+                except URLError, e:
+                    if e.code == 401:
+                    # Unauthorized - bad token
+                        print session
+                        session.pop('mail', None)
+                        return redirect(url_for('login'))
+                    return res.read()
+                print "$$$$$"
+                response_text=str(res.read())
+                parse_response_text=json.loads(response_text)
+                session['gmail']=parse_response_text
+                return render_template("box/simple_login.html")
+            else:
+                return redirect(url_for("simple_login"))
         else:
             return redirect(url_for("login"))
     else:
         return redirect(url_for("login"))
 
+@app.route('/simple_login')
+def simple_login():
+    if "mail" in session:
+        return render_template("box/simple_login.html");
+    else:
+        return redirect(url_for('login'))
+
 #-------------------------------------------------------------------------------------------------------------------->
 #-------------------------------------------------------------->
-#--------------------------all infield ------------------------>
+#--------------------------PRINT PARAMETER------------------------>
 @app.route('/metric_type')
 def metric_type():
     if "mail" in session:
         #if request.method=='POST':
         z = str(request.args.get('data'))
         s=z.replace("_"," ")
-        return render_template("box/param.html",response=s,response_text=session)
+        return render_template("box/param.html",response=s)
     else:
         return redirect(url_for("login"))        
 #-------------------------------------------------------------->
@@ -647,7 +640,7 @@ def validate_mail():
 @app.route('/login')
 def login():
     if "mail" in session:
-        return redirect(url_for('display_suggestion'))
+        return redirect(url_for('simple_login'))
     elif request.method=='GET':
         return render_template("login.html")
 @app.route('/login_data', methods=['POST','get'])
@@ -743,7 +736,7 @@ def read_only_data():
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.infield.delete(data=handler_data)
                     #print products
-                    return '%s' % products
+                    return '%s' products
                 
                 else:
                     return render_template("dashboard.html")
@@ -774,170 +767,168 @@ def display_suggestion():
     if "mail" in session:
         # z=str(request.form['command'])
         company = str(request.args.get('command'))
-        metric = str(request.args.get('metric'))
-        #print "company id=>"+z
-        handler=data_handler()
-        if metric=="Suggestion":
-            handler_data=str(handler.all_popular_product(company))
-            api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-            products=api.unbxdsuggestion.all(data=handler_data)
-            response_text_json=json.loads(products)
-            print response_text_json
-        #print str(asd['popularProductFields'][0])
-        #print(len(response_text_json['popularProductFields']))
-            if (type(response_text_json['keywordSuggestions']) is list):
-                response_text=''
-                fld_name=''
-                outerlist=[]
-                innerlist=[]
-                for val in response_text_json['keywordSuggestions']:
-                    #print val
-                    field_name=(val['fields'])
-                    #print field_name
-                    for values in field_name:
-                        #print values
-                        fld_name=fld_name+str(values)+','
-                        #print type(field_name)
-                    flds=str(val['name'])
-                    innerlist.append(flds)
-                    innerlist.append(fld_name[0:-1])
-                    outerlist.append(innerlist)
-                    innerlist=[]
-                    fld_name=''
-                            #print response_text
-        #if request.method=='GET':
-                print outerlist
-                return render_template("box/table.html",response_text=outerlist ,response=session)
-        elif metric=="In Field":
-            #try:
-                if company!="":
-                    handler=data_handler()
-                    handler_data=str(handler.get_all_infield(company))
-                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                    products=api.infield.all(data=handler_data)
-                    response_text_json=json.loads(products)
-                    #print str(asd['popularProductFields'][0])
-                    #print(len(response_text_json['popularProductFields']))
-                    if (type(response_text_json['inFields']) is list):
-                        response_text=[]
-                        if (len(response_text_json['inFields']) > 0 ):
-                            print response_text_json
-                            for val in response_text_json['inFields']:
-                                #print val
-                                fields=str(val)
-                                response_text.append(fields)
-                            print response_text
-                            return render_template("box/infield.html",response_text=response_text,response=session)
-                        else:
-                            response_text=["infield_list_is_empty *_*"]
-                            return render_template("box/error.html",response_text=response_text,response=session)
+        if company!="":
+            fields=get_index_fields_to_add(company)
+            metric = str(request.args.get('metric'))
+            if isinstance(fields,list):
+                print "got add data fields"
+            else:
+                return render_template("box/error.html",response_text=fields)
+            #print "company id=>"+z
+            if metric=="Suggestion":            
+                result=show_suggestion(company,metric);
+                if isinstance(result,list):
+                    if len(result)==0:
+                        response_text=["infield_list_is_empty *_*"]
+                        return render_template("box/error.html",response_text=response_text)
                     else:
-                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'],response=session)
+                        return render_template("box/table.html",response_text=result,fields=fields)
                 else:
-                    return render_template("unbxd_suggestion.html")
-            #except:
-             #   render_template("unbxd_suggestion.html")'''
-        elif metric=="Popular Product":
-            if company!="":
-                    handler=data_handler()
-                    handler_data=str(handler.all_popular_product(company))
-                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                    products=str(api.popularproduct.all(data=handler_data))
-                    #print products
-
-
-                    response_text_json=json.loads(products)
-                    #print str(asd['popularProductFields'][0])
-                    #print(len(response_text_json['popularProductFields']))
-                    if (type(response_text_json['popularProductFields']) is list):
-                        outer=[]
-                        inner=[]
-                        for val in response_text_json['popularProductFields']:
-                            field_name=str(val['fieldName'])
-                            condition=str(val['required'])
-                            #response_text=response_text+(field_name+"--->"+condition+" ")
-                            #print response_text
-                            inner.append(field_name)
-                            inner.append(condition)
-                            outer.append(inner)
-                            inner=[]
-                        #print response_text
-                        return render_template("box/popular.html",response_text=outer,response=session)
-                    else:                  
-                        return render_template("box/error.html",response_text=response_text_json['errors'][0]['message'],response=session)
+                    return render_template("box/error.html",response_text=result)
+            elif metric=="In Field":
+                result=show_infield(company,metric)
+                try:
+                    if isinstance(result,list):
+                        if len(result)==0:
+                            response_text=["infield_list_is_empty *_*"]
+                            return render_template("box/error.html",response_text=response_text)
+                        else:
+                            return render_template("box/infield.html",response_text=result,fields=fields)
+                    else:
+                        return render_template("box/error.html",response_text=result)
+                except:
+                    return render_template("box/error.html",response_text="Sometthing Went Wrong Try Again")
+            elif metric=="Popular Product":
+                result=show_popular(company,metric)
+                if isinstance(result,list):
+                    return render_template("box/popular.html",response_text=result,fields=fields)
+                else:
+                    return render_template("box/error.html",response_text=result)
+            else:
+                return render_template("box/error.html",response_text="Enter the required Metric")
         else:
-            return render_template("box/error.html",response_text="Enter the required Metric",response=session)
+            return render_template("box/error.html",response_text="Company Name not specified")    
     else:
-        redirect(url_for('login'))
-#------------------------------------------------------------------------->
-#------------------------------------------------------------------------->
-@app.route('/display_popular', methods=['POST','get'])
-def display_popular():
+        return redirect(url_for('login'))
+#-------------------------------------------------------------------------------------------------------->
+#---------------------------show_suggestion(reads the suggestion value----------------------------------->
+def show_suggestion(company,metric):
     if "mail" in session:
         # z=str(request.form['command'])
         company = str(request.args.get('command'))
         metric = str(request.args.get('metric'))
-        print "company id=>"+z
+        #print "company id=>"+z
         handler=data_handler()
-        if metric=="Popular Product":
-            handler_data=str(handler.all_popular_product(company))
-            api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-            products=api.unbxdsuggestion.all(data=handler_data)
-            response_text_json=json.loads(products)
-            print response_text_json
+        handler_data=str(handler.all_popular_product(company))
+        api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+        products=api.unbxdsuggestion.all(data=handler_data)
+        response_text_json=json.loads(products)
+        print response_text_json
         #print str(asd['popularProductFields'][0])
         #print(len(response_text_json['popularProductFields']))
-            if (type(response_text_json['keywordSuggestions']) is list):
-                response_text=''
-                fld_name=''
-                outerlist=[]
+        if (type(response_text_json['keywordSuggestions']) is list):
+            response_text=''
+            fld_name=''
+            outerlist=[]
+            innerlist=[]
+            for val in response_text_json['keywordSuggestions']:
+                #print val
+                field_name=(val['fields'])
+                #print field_name
+                for values in field_name:
+                    #print values
+                    fld_name=fld_name+str(values)+','
+                    #print type(field_name)
+                flds=str(val['name'])
+                innerlist.append(flds)
+                innerlist.append(fld_name[0:-1])
+                outerlist.append(innerlist)
                 innerlist=[]
-                for val in response_text_json['keywordSuggestions']:
-                    #print val
-                    field_name=(val['fields'])
-                    #print field_name
-                    for values in field_name:
-                        #print values
-                        fld_name=fld_name+str(values)+','
-                        #print type(field_name)
-                    flds=str(val['name'])
-                    innerlist.append(flds)
-                    innerlist.append(fld_name[0:-1])
-                    outerlist.append(innerlist)
-                    innerlist=[]
-                    fld_name=''
-                            #print response_text
-        #if request.method=='GET':
-                print outerlist
-                return render_template("box/table.html",response=outerlist)
-
+                fld_name=''
+                #print response_text
+                #if request.method=='GET':
+                return outerlist
+            return []
+        else:
+            return response_text_json['errors'][0]['message']
     else:
-        redirect(url_for('login'))
-#------------------------------------------------------------------------->
-#------------------------------------------------------------------------->
-    
-    
-@app.route('/get_index_fields', methods=['POST','get'])
-def get_index_fields():
+        return redirect(url_for('login'))
+#---------------------------------------------------------------------------------------------------#
+#---------------------------show_infield(reads the in fields values)--------------------------------#
+def show_infield(company,metric):
+    if 'mail' in session:
+        handler=data_handler()
+        handler_data=str(handler.get_all_infield(company))
+        api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+        products=api.infield.all(data=handler_data)
+        response_text_json=json.loads(products)
+        #print str(asd['popularProductFields'][0])
+        #print(len(response_text_json['popularProductFields']))
+        if (type(response_text_json['inFields']) is list):
+            response_text=[]
+            if (len(response_text_json['inFields']) > 0 ):
+                print response_text_json
+                for val in response_text_json['inFields']:
+                    #print val
+                    fields=str(val)
+                    response_text.append(fields)
+                return response_text
+            else:
+                return []
+        else:
+            return response_text_json['errors'][0]['message']
+    else:
+        return redirect(url_for('login'))
+
+#---------------------------------------------------------------------------------------------#
+#---------------------------show_popular(reads popular products)------------------------------#
+
+def show_popular(company,metric):
+    handler=data_handler()
+    handler_data=str(handler.all_popular_product(company))
+    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+    products=str(api.popularproduct.all(data=handler_data))
+    #print products
+    response_text_json=json.loads(products)
+    #print str(asd['popularProductFields'][0])
+    #print(len(response_text_json['popularProductFields']))
+    if (type(response_text_json['popularProductFields']) is list):
+        outer=[]
+        inner=[]
+        for val in response_text_json['popularProductFields']:
+            field_name=str(val['fieldName'])
+            condition=str(val['required'])
+            #response_text=response_text+(field_name+"--->"+condition+" ")
+            #print response_text
+            inner.append(field_name)
+            inner.append(condition)
+            outer.append(inner)
+            inner=[]
+            #print response_text
+        return outer
+    else:                  
+        return response_text_json['errors'][0]['message']
+#--------------------------------------------------------------------------------------------------#
+#--------------------------get_index_fields_to_add(gets the fields to add)-------------------------#
+
+def get_index_fields_to_add(message):
     if "mail" in session:                                       
         try:
-            if request.method=='POST':
-               # print ("2")
-                data_dict=request.form.to_dict()
-                #print mydict
-                message=str(request.form['command'])
-                exception_obj=exception_handler()
-                handler_data=str(exception_obj.get_index_field(message))
-                json_data=json.loads(handler_data)
-                string=""
-                for item in json_data:
-                    string=string+item['fieldName']+" "
+            data_dict=request.form.to_dict()
+            #print mydict
+            exception_obj=exception_handler()
+            handler_data=str(exception_obj.get_index_field(message))
+            json_data=json.loads(handler_data)
+            fields=[]
+            for item in json_data:
+                fields.append(item['fieldName'])
                 #print string
                 #return '%s' % string
-                return render_template('/box/table.html',response=string)
+            return fields
         except Exception as e:
-            print e
-            return '%s' % "select_company"
+            return e
+    else:
+        return redirect(url_for('login'))
 #----------------------------------------------------------->                
 #-----------------------------ststics file------------------->
 

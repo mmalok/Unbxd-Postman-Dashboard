@@ -1,8 +1,4 @@
 {% extends "box/simple_login.html" %}
-{% import 'box/simple_login.html' as login%}
-{%block profile%}
-{{ login.profile_box(response) }}
-{%endblock%}
 {% block paramName %}
 <b>In Field</b>
 {% endblock %}
@@ -33,5 +29,5 @@
 		</td>
 		</tr>
 	{%endfor%}
-
+</tbody></table>
 {% endblock %}

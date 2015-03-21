@@ -1,11 +1,13 @@
-{% extends "unbxd_suggestion.html" %}
-{% import 'box/simple_login.html' as login %}
+{% extends "box/simple_login.html" %}
+{%import "box/add.html" as add_fields%}
+{%block add %}
+{%if fields%}
+{{add_fields.display_add_fields(fields)}}
+{%endif%}
+{%endblock%}
 {% block paramName %}
 <b>Suggestion</b>
 {% endblock %}
-{%block profile%}
-{{ login.profile_box(response) }}
-{%endblock%}
 {% block content %}
 <table class="table-fill" >
 <thead>
@@ -41,5 +43,7 @@
 		</td>
 		</tr>
 	{%endfor%}
+	</div>
+	</tbody></table>
 
 {% endblock %}
