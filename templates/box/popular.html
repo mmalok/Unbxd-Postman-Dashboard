@@ -8,6 +8,15 @@
 <b>Popular Product</b>
 {% endblock %}
 {% block content %}
+{%if message%}
+{%if message=="Already Present"%}
+<script>
+alert("True already present,Change the Condition")
+</script>
+{% else %}
+<script type="text/javascript">alert("Some problem writting")</script>
+{%endif%}
+{%endif%}
 <table class="table-fill" >
 <thead>
 <tr>
@@ -22,7 +31,7 @@
 	</th>
 </tr>
 </thead>
-<tbody class="table-hover">'
+<tbody class="table-hover">
 <div id="button'+id+'">
 	<table class="table-fill" >
 	{%set id=-1%}

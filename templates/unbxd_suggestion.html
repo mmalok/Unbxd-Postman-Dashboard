@@ -326,42 +326,6 @@ td.text-right {
                      </script-->
 
     <script >
-    function delFunc(id)
-    {
-    //alert(id)
-        var val=$("#id"+id+"").text();
-    //alert(val)
-        $.ajax(
-        {async:false,type:"POST",url:"/delete_suggestion_data",data:$("form").serialize() +"&data="+val+"",success:function(response)
-            { 
-                
-                $("div#button"+id+"").remove();
-                var indent="<br/>"
-                $('#content').html("");
-                for(i=0;i<response.length;i++)
-                {
-                    if(response.charAt(i)=="[" || response.charAt(i)=="{" )
-                    {
-                        
-                        $('#content').append(indent);
-                        indent=indent+"&nbsp&nbsp&nbsp&nbsp"
-                    }
-                    else if(response.charAt(i)=="}" ||response.charAt(i)=="]" )
-                    {
-                        indent=indent.substring(0,indent.length-20)
-                        $('#content').append(indent);
-                    }
-                    else if( response.charAt(i-1)=="{"|| response.charAt(i-1)=="}"|| response.charAt(i-1)=="["|| response.charAt(i-1)=="]" || response.charAt(i-1)==",")
-                    {
-                        $('#content').append(indent);
-                    }
-                    
-                    $('#content').append(response.charAt(i));
-                }
-
-            }
-        });
-    }
 
 
     function Company_Changed() {

@@ -15,21 +15,6 @@
         document.getElementById("hide").style.display = "block";
        }
   }
-  var data="";
-    $('#field_command').change(function(e) { 
-        var hide_unhide=document.getElementById("hide").style.display
-        if(hide_unhide==="block")
-        {   
-            var temp=document.getElementById("field_command").value
-            data=data+"*"+temp
-            $("#test_field").value(data)
-            //alert(data)                    
-        }
-    });
-    function add_suggestion()
-    {
-        window.location = window.location.origin + '/add_suggestion_data'+ '?data='+data+'&'
-    }
   </script>
 <div class="row" >
     <div class="col-lg-7 col-xs-7">
@@ -61,6 +46,10 @@
                             <option value={{val}} name={{val}}>{{val}}</option>
                             {%endfor%}
                         </select>
+                        <select name="condition"  id="condition" style="display:none;">
+                            <option value="false" name="false">FALSE</option>
+                            <option value="true" name="true">TRUE</option>
+                        </select>
                         <br/>
                         <br/>
                         <form>
@@ -80,6 +69,12 @@
     </div>
 </div>
 <script>
+Metric=($( "#cur_param" ).text());
+if(Metric.indexOf("Popular")>-1)
+{
+    document.getElementById("condition").style.display="block"
+}
+
 function add_suggestions()
 {
     Field=document.getElementById("field_command").value;
@@ -89,6 +84,10 @@ function add_suggestions()
     if(Metric.indexOf("Field")>-1)
     {
         Display_Added.value=Field;
+    }
+    else if(Metric.indexOf("Popular")>-1)
+    {
+
     }
     else
     {
@@ -104,6 +103,12 @@ function save_suggestion()
     if(Metric.indexOf("Field")>-1)
     {
         window.location=window.location.origin+"/add_in_field"+"?company="+company+"&fields="+Display_Added
+    }
+    else if(Metric.indexOf("Popular")>-1)
+    {
+        condition=document.getElementById("condition").value
+        field=document.getElementById("field_command").value
+        window.location=window.location.origin+"/add_popular"+"?company="+company+"&fields="+field+"&condition="+condition
     }
     else
     {

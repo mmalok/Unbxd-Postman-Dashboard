@@ -171,40 +171,26 @@ def delete_suggestion_data():
     #print("1")
     if "mail" in session:
         try:
-            if request.method=='POST':
-                print ("2")
-                data_dict=request.form.to_dict()
-                print data_dict
-                message=str(request.form['command'])
-                print messagedele
-                field=str(request.form['data'])
-                
-                '''
-                field=field.split('--->')
-                field=field[0]
-                '''
-                print message,field
-                
-                if message!="":
+            if request.method=='GET':
+                company=str(request.args.get('company'))
+                field=str(request.args.get('data'))[1:-1]
+                if company!="":
                     handler=data_handler()
-                    handler_data=str(handler.delete_unbxd_suggestion(message,field))
-                    #print handler_data
-                    #api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                    #products=api.unbxdsuggestion.delete(data=handler_data)
-                    #res_popular=response_handler()
-                    #final_message=str(res_popular.delSuggestion(products))
-                    return '%s' % "final_message"
-                    #print products
-                    
+                    handler_data=str(handler.delete_unbxd_suggestion(company,field))
+                    print handler_data
+                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
+                    products=api.unbxdsuggestion.delete(data=handler_data)
+                    res_popular=response_handler()
+                    final_message=str(res_popular.delSuggestion(products))
+                    print final_message
 
+                    return redirect(url_for("display_suggestion",command=company,metric="Suggestion"))
                 else:
-                    return render_template("dashboard.html")
-                
+                    return redirect(url_for("error",message="Company Not Specified"))
             else:
-                return render_template("dashboard.html")
-               
-        except:
-            return render_template("dashboard.html")
+                return redirect(url_for("error",message="Call Not Allowed"))       
+        except Exception as e:
+            return redirect(url_for("error",message=e))
     else:
         return redirect(url_for("login"))        
 
@@ -214,95 +200,44 @@ def delete_suggestion_data():
     #return render_template("dashboard.html")
 #------------------------------------------------------------>
 #--------------------------add popular product -------------->
-@app.route('/add_popular_product')
-def add_popular_product():
-    if "mail" in session:
-        if request.method=='GET':
-            return render_template("add_popular_product.html")
-    else:
-        return redirect(url_for("login"))
 @app.route('/add_popular', methods=['POST','get'])
 def add_popular():
     if "mail" in session:
         try:
-            if request.method=='POST':
-                #print "1"
-                data_dict=request.form.to_dict()
-                #print data_dict
-                keylist = data_dict.keys()
-                message=str(data_dict["command"])
-                field=str(data_dict['fields'])
-                condition=str(request.form['condition'])
-                #print field,message,condition
-                '''
-                values=[]
-                for val in keylist:
-                    if(val[0:6]=="alltxt"):
-                        values.append(int(val[6:]))
-                values=sorted(values)
-                #print values
-                string=""
-                for param in values:
-                    #print param
-                    #print str(mydict["mytext"+str(param)])
-                    string=string+str(data_dict["mytext"+str(param)])+"_"
-                field=string[:-2]
-                input_text_list=[]
-                for param in values:
-                    input_text_list.append(str(data_dict["alltxt"+str(param)]))
-                string=""
-                for items in input_text_list:
-                    if items!="":
-                        string=string+str(items)+"_"
-                field=string[:-1]
-                print field
-                #print field,message,condition'''
-                if message!="":
+            if request.method=='GET':
+                company=str(request.args.get("company"))
+                field=str(request.args.get('fields'))
+                condition=str(request.args.get('condition'))
+                if company!="":
                     handler=data_handler()
-                    handler_data=str(handler.add_popular_product(message,field,condition))
-                    #print handler_data
-                    handler_true_data=str(handler.all_popular_product(message))
-                    #print handler_true_data
-                    '''
-                    print handler_true_data
-                    multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                    resp=str(multiple_true_check.popularproduct.all(data=handler_true_data))
-                    print resp
-                    res_handler=response_handler()
-                    times_true=res_handler.true_check(resp)
-                    print type(times_true)'''
+                    handler_data=str(handler.add_popular_product(company,field,condition))
+                    handler_true_data=str(handler.all_popular_product(company))
                     if (condition=='false'):
                         api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                         products=api.popularproduct.update(data=handler_data)
-                        #print products
                         res_popular=response_handler()
                         final_message=str(res_popular.addPopular(products))
-                        return '%s' % final_message
+                        return redirect(url_for("display_suggestion",command=company,metric="Popular Product"))
                     else:
                         multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                         resp=str(multiple_true_check.popularproduct.all(data=handler_true_data))
-                        #print "resp"
-                        #print resp
                         res_handler=response_handler()
                         times_true=res_handler.true_check(resp)
-                        #print times_true
                         if(times_true<=0):
                             api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                             products=api.popularproduct.update(data=handler_data)
-                            #print products
                             res_popular=response_handler()
                             final_message=str(res_popular.addPopular(products))
-                            return '%s' % final_message
+                            return redirect(url_for("display_suggestion",command=company,metric="Popular Product"))
                         else:
                             final_message="true already present->change the condition"
-                            return '%s' % final_message
+                            return redirect(url_for("display_suggestion",command=company,metric="Popular Product",message="Already Present"))
                 else:
-                    return render_template("dashboard.html")
+                    return redirect(url_for("error",message="Company Not Specified"))
             else:
-                return render_template("dashboard.html")
-               
-        except:
-            return render_template("dashboard.html")
+                return redirect(url_for("error",message="Call Not Allowed"))       
+        except Exception as e:
+            return redirect(url_for("error",message=e))
     else:
         return redirect(url_for('login')) 
     
@@ -712,12 +647,12 @@ def error():
 def display_suggestion():
     if "mail" in session:
         # z=str(request.form['command'])
-        print glob['company']
+        #print glob['company']
         company = str(request.args.get('command'))
-        print(company)
+        #print(company)
         if company!="":
             fields=get_index_fields_to_add(company)
-            print fields
+            #print fields
             metric = str(request.args.get('metric'))
             if isinstance(fields,list):
                 print "got add data fields"
@@ -749,7 +684,11 @@ def display_suggestion():
             elif metric=="Popular Product":
                 result=show_popular(company,metric)
                 if isinstance(result,list):
-                    return render_template("box/popular.html",response_text=result,fields=fields,id=company)
+                    if request.args.get("message"):
+                        print"message"
+                        return render_template("box/popular.html",response_text=result,fields=fields,id=company,message=request.args.get("message"))
+                    else:
+                        return render_template("box/popular.html",response_text=result,fields=fields,id=company)
                 else:
                     return redirect(url_for("error",message=result))
             else:

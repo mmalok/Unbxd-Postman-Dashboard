@@ -1,4 +1,5 @@
 {% extends "box/simple_login.html" %}
+{%set id=id %}
 {% import "box/add.html" as add %}
 {% block add %}
 {{add.display_add_fields(fields)}}
@@ -42,4 +43,16 @@
 	{%endfor%}
 	</tbody></table>
 </div>
+<script type="text/javascript">
+	function delFunc(id)
+	{
+		alert(id)
+		company=document.getElementById("command").value
+		data=$("#id"+id+"").text()
+		var delete_permission = confirm("Are you sure you want to delete");
+    	if (delete_permission == true) {
+        	window.location=window.location.origin+"/delete_suggestion_data"+"?company="+company+"&data="+data
+    	} 
+	}
+</script>
 {% endblock %}
