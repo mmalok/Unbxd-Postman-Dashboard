@@ -1,14 +1,14 @@
 {% extends "box/simple_login.html" %}
-{%import "box/add.html" as add_fields%}
-{%block add %}
-{%if fields%}
-{{add_fields.display_add_fields(fields)}}
-{%endif%}
-{%endblock%}
+{% import "box/add.html" as add %}
+{% block add %}
+{{add.display_add_fields(fields)}}
+{% endblock %}
 {% block paramName %}
 <b>Suggestion</b>
 {% endblock %}
 {% block content %}
+
+<div class="pull-left">
 <table class="table-fill" >
 <thead>
 <tr>
@@ -23,14 +23,11 @@
 	</th>
 </tr>
 </thead>
-<tbody class="table-hover">'
-<div id="button'+id+'">
-	<table class="table-fill" >
+<tbody class="table-hover">
 	{%set id=-1%}
 	{%for text in response_text%}
 		{%set id=id+2%}
-		<tr>
-				
+		<tr>	
 		{% for data in text%}
 		<td class="text-left" width="40%"id="id{{id}}">
 			<b>'{{data}}'</b>
@@ -43,7 +40,6 @@
 		</td>
 		</tr>
 	{%endfor%}
-	</div>
 	</tbody></table>
-
+</div>
 {% endblock %}

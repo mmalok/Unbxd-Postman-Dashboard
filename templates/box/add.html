@@ -1,16 +1,119 @@
-
-{%block add%}
+{%extends "box/simple_login.html"%}
+{% macro display_add_fields(fields) -%}
+{%if caller%}
+                        {{caller()}}
+  {%endif%}
+  <script>
+  function show()
+  {
+    if(document.getElementById("hide").style.display==="block")
+       {
+            document.getElementById("hide").style.display = "none";
+       }
+       else
+       {
+        document.getElementById("hide").style.display = "block";
+       }
+  }
+  var data="";
+    $('#field_command').change(function(e) { 
+        var hide_unhide=document.getElementById("hide").style.display
+        if(hide_unhide==="block")
+        {   
+            var temp=document.getElementById("field_command").value
+            data=data+"*"+temp
+            $("#test_field").value(data)
+            //alert(data)                    
+        }
+    });
+    function add_suggestion()
+    {
+        window.location = window.location.origin + '/add_suggestion_data'+ '?data='+data+'&'
+    }
+  </script>
 <div class="row" >
     <div class="col-lg-7 col-xs-7">
         <!-- small box -->
             <div class="small-box ">
                 <div class="inner">                   
                     <div id="aus2" name="aus2">
-                        <input type="button" id="tohide" name="tohide" class="pull-right" value="Add unbxd suggestion" style="background-color:transparent; color:black; font-size:200%; border:none; " onclick=unhide()><center><button onclick="unhide()" class="pull-right" style="background-color:transparent;border:none;"><img src="/dashboard_files/circle_plus.png" class="pull-right" height="40x"></center></button></input>
+                        <button onclick="show()" class="pull-left" style="background-color:transparent;border:none;"><img src="/dashboard_files/circle_plus.png" class="pull-right" height="40x"></button><input type="button" id="tohide" name="tohide" class="pull-left" value="Add Fields" style="background-color:transparent; color:black; font-size:200%; border:none; " ></input>
                     </div>
-                <div class="icon"></div>                        
+                    <div class="icon">
+                    
+                  
+                    </div>                        
+                </div>
             </div>
-        </div>
-    </div><!-- ./col -->
+        </div><!-- ./col -->
+    </div>
+    <div class="row" id="hide" value="hide" style="display :none;" >
+        <div class="col-lg-8 col-xs-8">
+            <!-- small box -->
+            <div >
+                <div class="inner">
+                    <div id="aus2" name="aus2">
+                    <br/>
+                    <br/>
+                        <select name="field_command"  id="field_command">
+                            <option value="insert" name="insert">select field name</option>
+                            {%for val in fields%}
+                            <option value={{val}} name={{val}}>{{val}}</option>
+                            {%endfor%}
+                        </select>
+                        <br/>
+                        <br/>
+                        <form>
+                            <input type='text' id="test_field" placeholder="Display the added values">
+                                
+                            </input>
+                            <input type="button" value="Add suggestion" id="value_send" name="value_send" style="background-color:transparent; color:black; font-size:100%;" onclick="add_suggestions()" />
+                            <br/>
+                            <input type="button" value="SAVE" id="value_send" name="value_send" style="background-color:transparent; color:black; font-size:200%;" onclick="save_suggestion()" >
+                                
+                            </input>
+                        </form>
+                    </div>
+                <div class="icon"></div>
+            </div>
+        </div><!-- ./col -->
+    </div>
 </div>
+<script>
+function add_suggestions()
+{
+    Field=document.getElementById("field_command").value;
+    Display_Added=document.getElementById("test_field")
+    Metric=($( "#cur_param" ).text());
+    alert(Metric)
+    if(Metric.indexOf("Field")>-1)
+    {
+        Display_Added.value=Field;
+    }
+    else
+    {
+        Display_Added.value=Display_Added.value+"*"+Field;
+    }
+}
+function save_suggestion()
+{
+    company=document.getElementById("command").value
+    Display_Added=document.getElementById("test_field").value
+    Metric=$( "#cur_param" ).text();
+    alert(Metric)
+    if(Metric.indexOf("Field")>-1)
+    {
+        window.location=window.location.origin+"/add_in_field"+"?company="+company+"&fields="+Display_Added
+    }
+    else
+    {
+        window.location=window.location.origin+"/add_suggestion_data"+"?company="+company+"&data="+Display_Added
+    }
+    
+}
+</script>
+{%- endmacro %}
+{% block add %}
+{% call display_add_fields(fields) %}
+{% endcall %}
 {%endblock%}

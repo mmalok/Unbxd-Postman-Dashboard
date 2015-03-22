@@ -152,7 +152,7 @@ td.text-right {
 
     <style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<body style="min-height: 1767px;" class="skin-blue wysihtml5-supported  pace-done" onload="a()">
+<body style="min-height: 1767px;" class="skin-blue wysihtml5-supported  pace-done" >
 <div class="pace  pace-inactive">
     <div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
         <div class="pace-progress-inner"></div>
@@ -248,6 +248,7 @@ td.text-right {
                                 <select name="command"  id="command" onchange="Company_Changed()">
                                     <option value="insert" name="insert">select company name</option>
                                     <option value="11888" name="11888">dummy company</option>
+                                    {% block company %}{% endblock %}
                                 </select>
                             </form>
                             
@@ -261,63 +262,25 @@ td.text-right {
 
 
                     <!-- Small boxes (Stat box) -->
+                    <div class="col-lg-12">
+                        <div class="box">
                     <h1>
-                         <div id="cur_param">{%block paramName%}{%endblock%}</div>
+                         <div id="cur_param"><center>{%block paramName%}UNBXD Postmaster API Dashboard{%endblock%}</center>
+                         </div>
                     </h1>
-
-                <!-- Small boxes (Stat box) -->
-                    <div class="row" >
-                        <div class="col-lg-7 col-xs-7">
-                            <!-- small box -->
-                            <div class="small-box ">
-                                <div class="inner">
-                                   
-                                    <div id="aus2" name="aus2">
-                                        <input type="button" id="tohide" name="tohide" class="pull-right" value="Add unbxd suggestion" style="background-color:transparent; color:black; font-size:200%; border:none; " onclick=unhide()><center><button onclick="unhide()" class="pull-right" style="background-color:transparent;border:none;"><img src="/dashboard_files/circle_plus.png" class="pull-right" height="40x"></center></button></input>
-                                       
-                                    </div>
-                                <div class="icon"></div>
-                                    
-                             </div>
-                        </div>
-                    </div><!-- ./col -->
+                    <br/>
+                    </div>
                     </div>
 
-
+                <!-- Small boxes (Stat box) -->
+                    <div class="col-lg-12">
+                        <div class="box">
+                    {%block add%}
+                    {%endblock%}
                     <!-- ./hide col -->
-
-                    <div class="row" id="hide" value="hide" style="display :none;" >
-                        <div class="col-lg-8 col-xs-7">
-                            <!-- small box -->
-                            <div >
-                                <div class="inner">
-                                   
-                                        <div id="aus2" name="aus2">
-                                        </br>
-                                        </br>
-                                        </br>
-                                        <center>
-                                        <select name="field_command"  id="field_command">
-                                            <option value="insert" name="insert">select field name</option>
-                                        </select>
-                                        </center>
-                                        </br>
-                                        </br>
-                                        </br>
-                                        <form>
-                                        <div id="test_field" name="test_field">
-                                            
-                                        </div>
-                                        </form>
-                                        <center><input type="button" value="!Add suggestion" id="value_send" name="value_send" style="background-color:transparent; color:black; font-size:200%;" onclick="add_suggestion()" ></input></center>
-                                            
-                                        </div>
-                                    <div class="icon"></div>
-                                </div>
-                            </div><!-- ./col -->
                         </div>
-                    
-                    </div>    
+                    </div>
+                        
 
                         
 
@@ -325,11 +288,8 @@ td.text-right {
                     <!-- ./hide col -->                
                     
                     <!-- /.row -->
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                 <div class="box">
-                    <div class="box-header">
-                        <h2 class="box-title">Unbxd suggestion</h2>
-                    </div><!-- /.box-header -->
                     <div class="row" >
                         <div class="col-lg-12 ">
                             <!-- small box -->
@@ -342,9 +302,7 @@ td.text-right {
                                 </div>
                             <div class="icon">
                                     
-                        </div>
-                                
-                                
+                        </div>                               
                     </div>
                 </div>
                 </div>
@@ -446,51 +404,7 @@ td.text-right {
             }
            });  
     }
-    function unhide()
-    {
-       if(document.getElementById("hide").style.display==="block")
-       {
-            document.getElementById("hide").style.display = "none";
-       }
-       else
-       {
-                document.getElementById("hide").style.display = "block";
-                $("#field_command").empty() 
-                $.ajax(
-                    {type:"POST",url:"/get_index_fields",data:$("form").serialize(),success:function(response)
-                    {
-                        //alert(response)
-                    $("#field_command").append('<option value="insert" name="insert">select field name</option>')
-                        response_split_value=response.split(" ")
-                        for(var id=0;id<response_split_value.length-1;id++){
-                            //alert(response_split_value.length)
-                            //alert(response_split_value[id]);
-                            $("#field_command").append('<option value="'+response_split_value[id]+'" name="'+response_split_value[id]+'">'+response_split_value[id]+'</option>');
-                        }
-                    }
-                }); 
-        }
-    }
-    var data="";
-    $('#field_command').change(function(e) { 
-        var hide_unhide=document.getElementById("hide").style.display
-        if(hide_unhide==="block")
-        {   
-            var temp=document.getElementById("field_command").value
-            data=data+"*"+temp
-            $("#test_field").html('<center><h1>NEW field</br></h1><h4>'+data+'</h4></center></br></br>')
-            alert(data)                    
-        }
-    });
-    function add_suggestion()
-    {
-        $.ajax(
-        {type:"POST",url:"/add_suggestion_data",data:$("form").serialize() +"&data="+data+"",success:function(response)
-            {
-                alert(response)
-            }
-        });
-    }
+    
 </script>
         <script src="dashboard_files/jquery.js"></script>
         <script src="dashboard_files/bootstrap.js" type="text/javascript"></script>

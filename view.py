@@ -1,6 +1,6 @@
 import unbxd.api 
 import json
-from flask import Flask,session, redirect, url_for, escape
+from flask import Flask,session, redirect, url_for, escape,g
 from flask import request
 from flask import render_template
 from flask_oauth import OAuth
@@ -9,10 +9,12 @@ from exception_handler import *
 from services import *
 from data_handler import *
 import os
-
-
+glob={}
+glob['company']=[]
 app = Flask(__name__)
-
+@app.before_request
+def load_company():
+    g.company=glob['company']
 REDIRECT_URI = '/oauth2callback'
 oauth = OAuth()
 
@@ -33,6 +35,8 @@ google = oauth.remote_app('google',
 
 @app.route('/')
 def start():
+    glob['company']=read_only_data()
+    g.company=glob['company']
     if "mail" in session:
         return redirect(url_for('simple_login'))
     elif request.method=='GET':
@@ -55,16 +59,19 @@ def signup_data():
         sign_done=service_obj.insert(user_name,password)
         session['mail'] = request.form['mail']
         session['gmail']='NO'
+        glob['company']=read_only_data()
         return '%s' % sign_done
-    return render_template("box/simple_login.html") 
+    return redirect(url_for("simple_login"))
 #-----------------------------------------------------------------#
 #-----------------------------------------------------------------#
 #-------------------------LOG IN FOR GOOGLE--------------------------#
 @app.route('/dashboard')
 def dashboard():
     if "mail" in session:
-        if "gmail" in session:
+        if "gmail" not in session:
+            print"gmail"
             if request.method=='GET':
+                print "get"
                 access_token = session.get('mail')
                 access_token = access_token[0]
                 from urllib2 import Request, urlopen, URLError
@@ -84,7 +91,8 @@ def dashboard():
                 response_text=str(res.read())
                 parse_response_text=json.loads(response_text)
                 session['gmail']=parse_response_text
-                return render_template("box/simple_login.html")
+                glob['company']=read_only_data()
+                return redirect(url_for("simple_login"))
             else:
                 return redirect(url_for("simple_login"))
         else:
@@ -94,6 +102,7 @@ def dashboard():
 
 @app.route('/simple_login')
 def simple_login():
+    print session
     if "mail" in session:
         return render_template("box/simple_login.html");
     else:
@@ -113,48 +122,34 @@ def metric_type():
         return redirect(url_for("login"))        
 #-------------------------------------------------------------->
 #--------------------------add suggestion --------------------->
-@app.route('/add_suggestions')
-def add_suggestions():
-    if "mail" in session:
-        if request.method=='GET':
-            return render_template("add_unbxd_suggestion.html")
-    else:
-        return redirect(url_for("login"))
 @app.route('/add_suggestion_data', methods=['POST','get'])
 def add_suggestion_data():
     if "mail" in session:
         try:
-            if request.method=='POST':
+            if request.method=='GET':
+                company = str(request.args.get('company'))
+                data = str(request.args.get('data'))
                 print "add suggestion"
-                data_dict=request.form.to_dict()
-                keylist = data_dict.keys()
-                print keylist
-                message=str(data_dict["command"])
-                data=str(data_dict["data"])
-                print message,data
+                print company,data
                 data=str(data[1:])
-                if message!="":
+                if company!="":
                     handler=data_handler()
-                    handler_data=str(handler.add_unbxd_suggestion(message,data))
-                    print handler_data
-                    
+                    handler_data=str(handler.add_unbxd_suggestion(company,data))
+                    print handler_data                    
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.unbxdsuggestion.update(data=handler_data)
                     res_popular=response_handler()
                     final_message=str(res_popular.addSuggestion(products))
                     #return '%s' % final_message
                     #print products
-                    return '%s' % final_message
-                    
+                    return redirect(url_for("display_suggestion",command=company,metric="Suggestion"))                    
                 else:
-                    return render_template("dashboard.html")
-                '''
+                    return redirect(url_for("error",message="Company not Specified"))
             else:
-                return render_template("dashboard.html")
-               
+                return redirect(url_for("error",message="Access Not Allowed"))    
         except Exception as e:
             print e
-            return '%s' % "error"
+            return redirect(url_for("error",message=e))
     else:
         return redirect(url_for("login"))
 
@@ -384,72 +379,30 @@ def delete_popular():
     #return render_template("dashboard.html")
 #------------------------------------------------------------>
 #--------------------------add infield ---------------------->
-@app.route('/add_infield')
-def add_infield():
-    if "mail" in session:
-        if request.method=='GET':
-            return render_template("add_infield.html")
-    else:
-        return redirect(url_for('login'))
-
 @app.route('/add_in_field', methods=['POST','get'])
 def add_in_field():
     if "mail" in session:
         try:
-            #print("alok")
-            if request.method=='POST':
-                data_dict=request.form.to_dict()
-                #print mydict
-                field=str(request.form['fields'])
-                #keylist = data_dict.keys()
-                message=str(data_dict["command"])
-                '''
-                values=[]
-                for val in keylist:
-                    if(val[0:6]=="alltxt"):
-                        values.append(int(val[6:]))
-                values=sorted(values)
-                #print values
-                string=""
-                for param in values:
-                    #print param
-                    #print str(mydict["mytext"+str(param)])
-                    string=string+str(data_dict["alltxt"+str(param)])+"_"
-                field=string[:-2]
-                #print field
-                
-                input_text_list=[]
-                for param in values:
-                    input_text_list.append(str(data_dict["alltxt"+str(param)]))
-                string=""
-                for items in input_text_list:
-                    if items!="":
-                        string=string+str(items)+"_"
-                field=string[:-1]
-                print field'''
-                if message!="":
+            if request.method=='GET':
+                field=str(request.args.get('fields'))
+                company=str(request.args.get("company"))
+                if company!="":
                     handler=data_handler()
-                    handler_data=str(handler.add_in_field(message,field))
+                    handler_data=str(handler.add_in_field(company,field))
                     #print handler_data
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.infield.update(data=handler_data)
 
-                    #print products
-                    return '%s' % products
+                    print products
+                    return redirect(url_for("display_suggestion",command=company,metric="In Field"))
                 else:
-                    return render_template("dashboard.html")
+                    return redirect(url_for("error",message="Company Not Specified"))
             else:
-                render_template("dashboard.html")
-               
-        except:
-            render_template("dashboard.html")
-        
-
-        #data_object = DAO.DataDAO()
-        #data_object.save_message(processed_text)
+                return redirect(url_for("error",message="Request Not Allowed"))      
+        except Exception as e:
+            return redirect(url_for("error",message="Some error occured"))
     else:
          return redirect(url_for('login'))   
-    #return render_template("dashboard.html")
 #------------------------------------------------------------->
 #--------------------------delete infield -------------------->
 @app.route('/delete_infield')
@@ -481,8 +434,7 @@ def delete_in_field():
                 else:
                     return render_template("dashboard.html")
             else:
-                render_template("dashboard.html")
-               
+                render_template("dashboard.html")       
         except:
             render_template("dashboard.html")
     else:        
@@ -662,9 +614,8 @@ def login_data():
         if(str(temp)=='valid'):
             session['mail'] = request.form['mail']
             session['gmail']= 'NO'
-            print session['mail']
-            print "session mein stor ho gaya"
-        return '%s' % temp
+            glob['company']=read_only_data()
+            return '%s' % temp
         #return render_template("dashboard.html")
     else:
         return redirect(url_for("login"))
@@ -710,42 +661,27 @@ def get_popular_input_data():
     #return render_template("dashboard.html")
 #------------------------------------------------------------>  
 #-------------------------read_only_data--------------------->
-@app.route('/read_only_data', methods=['POST','get'])
 def read_only_data():
     if "mail" in session:                                       
         try:
-            if request.method=='POST':
-               # print ("2")
-                data_dict=request.form.to_dict()
-                print "get popular input data"
-                print data_dict
-                a=services()
-                print "1"
-                data=a.read_data("alok")
-                print "2"
-                return '%s' % data
-                '''
-                message=str(request.form['command'])
-
-                field=str(request.form['fields'])
-                #print message,field
-                if message!="":
-                    handler=data_handler()
-                    handler_data=str(handler.delete_in_field(message,field))
-                    #print handler_data
-                    api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
-                    products=api.infield.delete(data=handler_data)
-                    #print products
-                    return '%s' products
-                
-                else:
-                    return render_template("dashboard.html")
-                '''
-            else:
-                return render_template("dashboard.html")
-               
+            # print ("2")
+            print "priys"
+            a=services()
+            data=a.read_data("alok")
+            print data
+            data=str(data).split(" ")
+            print data
+            outer=[]
+            for entry in data[0:-1]:
+                inner=[]
+                entry=entry.split("_")
+                inner.append(entry[0])
+                inner.append(entry[1])
+                outer.append(inner)
+            return outer
+            
         except Exception as e:
-            return '%s' % e
+            return e
     else:        
         return redirect(url_for('login'))
     #data_object = DAO.DataDAO()
@@ -758,56 +694,68 @@ def read_only_data():
 def logout():
     session.pop('mail', None)
     session.pop('gmail', None)
+    glob['company']=[]
     return redirect(url_for('login'))
 
+#------------------------------------------------------------>
+#----------------------get index files----------------------->
+@app.route('/error', methods=['POST','get'])
+def error():
+    if "mail" in session:
+        message=request.args.get("message")
+        return render_template("box/error.html",response_text=message)
+    else:
+        return redirect(url_for("login"))
 #------------------------------------------------------------>
 #----------------------get index files----------------------->
 @app.route('/display_suggestion', methods=['POST','get'])
 def display_suggestion():
     if "mail" in session:
         # z=str(request.form['command'])
+        print glob['company']
         company = str(request.args.get('command'))
+        print(company)
         if company!="":
             fields=get_index_fields_to_add(company)
+            print fields
             metric = str(request.args.get('metric'))
             if isinstance(fields,list):
                 print "got add data fields"
             else:
-                return render_template("box/error.html",response_text=fields)
-            #print "company id=>"+z
+                return redirect(url_for("error",message=fields))
             if metric=="Suggestion":            
                 result=show_suggestion(company,metric);
                 if isinstance(result,list):
                     if len(result)==0:
                         response_text=["infield_list_is_empty *_*"]
-                        return render_template("box/error.html",response_text=response_text)
+                        return redirect(url_for("error",message=response_text))
                     else:
-                        return render_template("box/table.html",response_text=result,fields=fields)
+                        return render_template("box/table.html",response_text=result,fields=fields,id=company)
                 else:
-                    return render_template("box/error.html",response_text=result)
+                    return redirect(url_for("error",message=result))
             elif metric=="In Field":
                 result=show_infield(company,metric)
                 try:
                     if isinstance(result,list):
                         if len(result)==0:
                             response_text=["infield_list_is_empty *_*"]
-                            return render_template("box/error.html",response_text=response_text)
+                            return redirect(url_for("error",message=response_text))
                         else:
-                            return render_template("box/infield.html",response_text=result,fields=fields)
+                            return render_template("box/infield.html",response_text=result,fields=fields,id=company)
                     else:
-                        return render_template("box/error.html",response_text=result)
+                        return redirect(url_for("error",message=result))
                 except:
-                    return render_template("box/error.html",response_text="Sometthing Went Wrong Try Again")
+                    return redirect(url_for("error",message="Sometthing Went Wrong Try Again"))
             elif metric=="Popular Product":
                 result=show_popular(company,metric)
                 if isinstance(result,list):
-                    return render_template("box/popular.html",response_text=result,fields=fields)
+                    return render_template("box/popular.html",response_text=result,fields=fields,id=company)
                 else:
-                    return render_template("box/error.html",response_text=result)
+                    return redirect(url_for("error",message=result))
             else:
-                return render_template("box/error.html",response_text="Enter the required Metric")
+                return redirect(url_for("error",message="Enter the required Metric"))
         else:
-            return render_template("box/error.html",response_text="Company Name not specified")    
+            return redirect(url_for("error",message="Company Name not specified"))    
     else:
         return redirect(url_for('login'))
 #-------------------------------------------------------------------------------------------------------->
@@ -847,8 +795,7 @@ def show_suggestion(company,metric):
                 fld_name=''
                 #print response_text
                 #if request.method=='GET':
-                return outerlist
-            return []
+            return outerlist
         else:
             return response_text_json['errors'][0]['message']
     else:

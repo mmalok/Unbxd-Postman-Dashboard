@@ -1,4 +1,9 @@
 {% extends "box/simple_login.html" %}
+{%set id=id %}
+{% import "box/add.html" as add %}
+{% block add %}
+{{add.display_add_fields(fields)}}
+{% endblock %}
 {% block paramName %}
 <b>Popular Product</b>
 {% endblock %}
