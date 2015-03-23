@@ -1,4 +1,17 @@
 {% extends "box/simple_login.html" %}
+{% block alert %}
+				<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_modal()"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">{{response}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Select the company name from top to see suggestions</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="remove_modal()" data-dismiss="modal">Okay</button>
+                    <!--button type="button" class="btn btn-primary">Save changes</button-->
+                  </div>
+{%endblock%}
 {% block paramName %}
 <b>{{response}}</b>
 {% endblock %}

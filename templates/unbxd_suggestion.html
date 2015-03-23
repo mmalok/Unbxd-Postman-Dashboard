@@ -244,71 +244,71 @@ td.text-right {
             </section>
             <!-- Main content -->
             <section class="content">
-                <section class="content invoice">
-                    <!-- this row will not appear when printing -->
-                    <div class="row no-print">
-                        <div class="col-xs-12 ">
-                             <form class='pull-right'>
-                                <select name="command"  id="command" onchange="Company_Changed()">
+                <div class="box box-solid box-primary ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <div id="cur_param">
+                                    {%block paramName%}
+                                        UNBXD Postmaster API Dashboard
+                                    {%endblock%}
+                            </div>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <form >
+                                <select name="command" class="form-control" id="command" onchange="Company_Changed()">
                                     <option value="insert" name="insert">select company name</option>
                                     <option value="11888" name="11888">dummy company</option>
                                     {% block company %}{% endblock %}
                                 </select>
                             </form>
                         </div>
-                    </div>    
-                </section>
-                <!-- Small boxes (Stat box) -->
-                <div class="box box-default">
-                    <h1>
-                         <div id="cur_param">
-                            <center>
-                                {%block paramName%}
-                                    UNBXD Postmaster API Dashboard
-                                {%endblock%}
-                            </center>
-                         </div>
-                    </h1>
-                    <br/>
-                </div>
-                <!-- Small boxes (Stat box) -->
-                <div class="col-lg-12">
-                    <div class="box">
-                        {%block add%}
-                        {%endblock%}
-                        <!-- ./hide col -->
                     </div>
                 </div>
-                <!-- ./hide col -->                
-                <!-- /.row -->
-                <div class="col-lg-12">
-                    <div class="box">
-                        <div class="row" >
-                            <div class="col-lg-12 ">
-                                <!-- small box -->
-                                <div class="small-box">
-                                    <div class="inner">
-                                        <div id="autosuggestion" name="autosuggestion">
-                                            {% block content %}
-                                            {% endblock %}
-                                        </div>
-                                    </div>
-                                    <div class="icon">
-                                    </div>                               
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {%block add%}
+                {%endblock%}
+                {%block content%}
+                {%endblock%}
+                <!-- Small boxes (Stat box) -->
+                <!-- Small boxes (Stat box) -->
+                <div class="example-modal">
+            <div class="modal" style="display:block">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                {%block alert%}                
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_modal()"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Welcome to Unbxd Dashboard Api</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Select the Table you would Lile to edit from the Sidebar followed by selecting company name from top</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="remove_modal()" data-dismiss="modal">Okay</button>
+                    <!--button type="button" class="btn btn-primary">Save changes</button-->
+                  </div>
+                  {%endblock%}
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+          </div>
             </section>
         </aside>
     </div>
 <script >
+function remove_modal()
+{
+    $(".modal").css("display","none")
+}
+function show_modal()
+{
+    $(".modal").css("display","block")
+}
 function Company_Changed() {
             var x = document.getElementById("command").value;
          // $.post("/display_suggestion", params={'command':x} );
                  //window.open('/get_index_fields',_self)'"'
             metric = $( "#cur_param" ).text();
+            metric=metric.trim();
             window.location = window.location.origin + '/display_suggestion' + '?command='+x+'&metric='+metric
     }
     function popular_product()

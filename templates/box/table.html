@@ -8,14 +8,24 @@
 <b>Suggestion</b>
 {% endblock %}
 {% block content %}
-
-<div class="pull-left">
-<table class="table-fill" >
-<thead>
-<tr>
-	<th class="text-left" width="40%">
-		Field Name
-	</th>
+<br/>
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+<div class="box box-solid box-primary ">
+    <div class="box-header with-border">
+          <h3 class="box-title">DISPLAY FIELD SUGGESTIONS</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body" style="display: block;">
+		<table class="table-fill" >
+		<thead>
+			<tr>
+				<th class="text-left" width="40%">
+					Field Name
+				</th>
 	<th class="text-left" width="40%">
 		Field Value
 	</th>
@@ -42,7 +52,9 @@
 		</tr>
 	{%endfor%}
 	</tbody></table>
-</div>
+        </div><!-- /.box-body -->
+      </div>
+      </div>
 <script type="text/javascript">
 	function delFunc(id)
 	{
