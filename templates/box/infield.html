@@ -8,6 +8,17 @@
 <b>In Field</b>
 {% endblock %}
 {% block content %}
+<div class="row">
+  
+  <div class="col-md-6">
+<div class="box box-solid box-primary ">
+    <div class="box-header with-border">
+          <h3 class="box-title">DISPLAY IN FIELD</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body" style="display: block;">
 <table class="table-fill" >
 <thead>
 <tr>
@@ -21,7 +32,6 @@
 </thead>
 <tbody class="table-hover">'
 <div id="button'+id+'">
-	<table class="table-fill" >
 	{%set id=0%}
 	{%for text in response_text%}
 		{%set id=id+1%}
@@ -35,7 +45,12 @@
 		</tr>
 	{%endfor%}
 </tbody></table>
+   </div><!-- /.box-body -->
+      </div>
+      </div>
+      </div>
 <script type="text/javascript">
+$(".modal-content").css("display"."none")
 	function delFunc(id)
 	{
 		//alert(id)

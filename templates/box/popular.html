@@ -17,6 +17,17 @@ alert("True already present,Change the Condition")
 <script type="text/javascript">alert("Some problem writting")</script>
 {%endif%}
 {%endif%}
+<div class="row">
+  
+  <div class="col-md-6">
+<div class="box box-solid box-primary ">
+    <div class="box-header with-border">
+          <h3 class="box-title">DISPLAY POPULAR PRODUCT</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body" style="display: block;">
 <table class="table-fill" >
 <thead>
 <tr>
@@ -33,7 +44,7 @@ alert("True already present,Change the Condition")
 </thead>
 <tbody class="table-hover">
 <div id="button'+id+'">
-	<table class="table-fill" >
+	
 	{%set id=-1%}
 	{%for text in response_text%}
 		{%set id=id+2%}
@@ -52,7 +63,12 @@ alert("True already present,Change the Condition")
 		</tr>
 	{%endfor%}
 </tbody></table>
+   </div><!-- /.box-body -->
+      </div>
+      </div>
+      </div>
 <script type="text/javascript">
+remove_modal()
 	function delFunc(id)
 	{
 		//alert(id)

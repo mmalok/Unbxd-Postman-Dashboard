@@ -188,7 +188,7 @@ td.text-right {
     </header>
     <div style="min-height: 679px;" class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
-        <aside style="min-height: 1767px;" class="left-side sidebar-offcanvas">
+        <aside style="min-height: 1767px;" class="left-side sidebar-offcanvas bg-#367fa9;">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
@@ -217,15 +217,15 @@ td.text-right {
                         </a>
                         <ul style="display: none;" class="treeview-menu">
                             <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Popular_Product">
-                                <i class="fa fa-angle-double-right"></i>
+                                <!--i class="fa fa-angle-circle-ot"></i-->
                                 Popular Product
                             </li>
                             <li style="margin-left: 30px;" onclick="Metric(this.id)" id="In_Field">
-                                <i class="fa fa-angle-double-right"></i>
+                                <!--i class="fa fa-angle-double-right"></i-->
                                 In Field
                             </li>
                             <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Suggestion">
-                                <i class="fa fa-angle-double-right"></i>
+                                <!--i class="fa fa-angle-double-right"></i-->
                                 Suggestion
                             </li>
                         </ul>
@@ -297,11 +297,11 @@ td.text-right {
 <script >
 function remove_modal()
 {
-    $(".modal").css("display","none")
+    $(".modal-content").css("display","none")
 }
 function show_modal()
 {
-    $(".modal").css("display","block")
+    $(".modal-content").css("display","block")
 }
 function Company_Changed() {
             var x = document.getElementById("command").value;

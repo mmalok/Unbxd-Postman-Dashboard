@@ -16,9 +16,8 @@
        }
   }
   </script>
-  <div class="col-md-3">
-  </div>
-  <div class="col-md-6">
+  <div class="row">
+<div class="col-md-6">
 <div class="box box-solid box-primary ">
     <div class="box-header with-border">
           <h3 class="box-title">ADD</h3>
@@ -40,14 +39,15 @@
                         <br/>
                         <br/>
                         <form class="form-group">
-                            <input type='text' id="test_field" class="form-control" placeholder="Display the added values"></input>
+                            <input type='text' id="test_field" class="form-control" placeholder="Display the added values"/>
                             <button type="button" class="btn btn-primary btn-flat" onclick="add_suggestions()">Add</button>
                             <button type="button" class="btn btn-primary btn-flat" onclick="save_suggestion()">Save</button>
                             
                         </form>
         </div><!-- /.box-body -->
       </div>
-      </div>                   
+      </div> 
+</div>              
 <script>
 Metric=($( "#cur_param" ).text());
 if(Metric.indexOf("Popular")>-1)
