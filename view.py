@@ -589,6 +589,7 @@ def read_only_data():
 #-----------------------------log out------------------------>
 @app.route('/logout', methods=['POST','get'])
 def logout():
+    session.pop('admin',None)
     session.pop('mail', None)
     session.pop('gmail', None)
     glob['company']=[]
@@ -857,3 +858,75 @@ if __name__ == "__main__":
 
     app.debug = True
     app.run()
+#-------------ADMIN----->
+@app.route('/admin')
+def admin():
+    if "admin" in session:
+        return redirect(url_for("users_detail"))
+    else:
+        return render_template("admin.html")
+@app.route('/admin_login', methods=['POST','get'])
+def admin_login():
+    if "admin" in session:
+        #print"login"
+        return redirect(url_for("users_detail"))
+    elif request.method=='POST':
+        data_dict=request.form.to_dict()
+        print data_dict
+        user_name=str(request.form['mail'])
+        password=str(request.form['password'])
+        #print user_name,password
+        #email_check=login_handler().email()
+        service_obj=services()
+        temp=service_obj.validate_admin(user_name,password)
+        print temp 
+        if(str(temp)=='valid'):
+            session['admin'] = request.form['mail']
+            return '%s' % temp
+        #return render_template("dashboard.html")
+    else:
+        return redirect(url_for("admin"))
+@app.route('/users_detail')
+def users_detail():
+    if "admin" in session:
+        if request.method=='GET':
+            return render_template("users_detail.html")
+    else:
+        return redirect(url_for("admin"))
+
+@app.route('/users_data', methods=['POST','get'])
+def users_data():
+    if "admin" in session:
+        service_obj=services()
+        user_data=service_obj.user_data()
+        print user_data
+        return "%s" % str(user_data)
+    else:
+        return redirect(url_for("admin"))
+@app.route('/delete_user', methods=['POST','get'])
+def delete_user():
+    if "admin" in session:
+        if request.method=="GET":
+            username = str(request.args.get('username'))
+            service_obj=services()
+            del_done=service_obj.delete_user(username)
+            return redirect(url_for("users_detail"))
+    else:
+        return redirect(url_for("admin"))
+@app.route('/update_user',methods=['POST','GET'])
+def update_user():
+    if "admin" in session:
+        username = str(request.args.get('username'))
+        read = str(request.args.get('read'))
+        write = str(request.args.get('write'))
+        delete = str(request.args.get('delete'))
+        print read,write,delete
+        service_obj=services()
+        sign_done=service_obj.update_user(username,read,write,delete)
+        return redirect(url_for("users_detail"))
+    else:
+        return redirect(url_for("admin"))
+@app.route('/admin_logout', methods=['POST','get'])
+def admin_logout():
+    session.pop('admin',None)
+    return redirect(url_for('admin'))

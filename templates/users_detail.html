@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+function filltable()
+{ 
+    $.ajax(
+        { 
+          type:"POST",url:"/users_data",data:$("form").serialize(),success:function(response){
+            //response = JSON && JSON.parse(response) || $.parseJSON(response);
+            alert(response)
+            eval("response="+response)
+            for(var id=0;id<response.length;id++)
+            {
+
+              //response[id]=response_split[id].split("_")
+              $('#permissions').append("<tr><td style='width:30%;' id=username"+id+">"+response[id][0]+"</td><td>"+ response[id][1] +"</td><td id=READ"+id+"><select id=read"+id+"><option value='True'>YES</option><option value='False'>NO</option></select></td><td id=WRITE"+id+"><select id=write"+id+"><option value='True'>YES</option><option value='False'>NO</option></select></td><td id=DELETE"+id+"><select id=delete"+id+"><option value='True'>YES</option><option value='False'>NO</option></select></td><td id='cur_permission"+id+"' ></td><td id=UPDATE"+id+" ><input type=button id='update"+id+"' onclick=update_user(this.id) value='UPADTE'></input></td><td id=user_delete"+id+" ><input type=button id='"+id+"' onclick=delete_user(this.id) value='DELETE'></input></td></tr>")
+              alert(response[id][2])
+              document.getElementById("read"+id+"").value=response[id][2]
+              document.getElementById("write"+id+"").value=response[id][3]
+              document.getElementById("delete"+id+"").value=response[id][4]
+              $("#cur_permission"+id+"").text("No Permissions")
+              if(response[id][2]=="True")
+              {
+                if(response[id][3]=="True")
+                {
+                  if(response[id][4]=="True")
+                  {
+                    $("#cur_permission"+id+"").text("READ , WRITE , DELETE")
+                  }
+                  else
+                  {
+                    $("#cur_permission"+id+"").text("READ , WRITE")
+                  }
+                }
+                else if(response[id][4]=="True")
+                {
+                  $("#cur_permission"+id+"").text("READ, DELETE")
+                }
+                else
+                {
+                  $("#cur_permission"+id+"").text("READ ")
+                }
+              }
+              else if(response[id][3]=="True")
+              {
+                if(response[id][4]=="True")
+                  {
+                    $("#cur_permission"+id+"").text("WRITE , DELETE")
+                  }
+                else
+                {
+                  $("#cur_permission"+id+"").text("WRITE")
+                }
+              }
+              else if(response[id][4]=="True")
+              {
+                $("#cur_permission"+id+"").text("DELETE")
+              }
+            
+            }
+        }
+      });
+
+}
+</script>
+<script>
+function change_permission(id){
+  alert(id)
+}
+function delete_user(id)
+{
+  alert(id)
+  var username=$("#username"+id+"").text();
+  window.location = window.location.origin + '/delete_user'+ '?username='+username
+}
+function logout()
+{
+  window.location = window.location.origin + '/admin_logout'
+}
+function update_user(id)
+{
+  alert(id)
+  id=id.substr(6)
+  var username=$("#username"+id+"").text();
+  var read=document.getElementById("read"+id+"").value;
+  var write=document.getElementById("write"+id+"").value;
+  var deleteVal =document.getElementById("delete"+id+"").value;
+  alert(deleteVal)
+  alert(write)
+  alert(read)
+  var confirmation=confirm("You want to update ")
+  if(confirmation)
+  window.location = window.location.origin + '/update_user'+ '?username='+username+"&read="+read+"&write="+write+"&delete="+deleteVal;
+}
+</script>
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+</style>
+</head>
+
+<body onload="filltable()">
+<input type=button onclick='logout()' value='LOGOUT'></input>
+<table id="permissions" name="permissions">
+  <tr>
+    <th>USERNAME</th>
+    <th>PASSWORD</th>        
+    <th>READ PERMISSION</th>
+    <th>WRITE PERMISSION</th>
+    <th>DELETE PERMISSION</th>
+    <th>CURRENT PERMISSION</th>
+    <th>UPDATE PERMISSION</th>
+    <th>DELETE_USER</th>
+  </tr>
+</table>
+</body>
+</html>

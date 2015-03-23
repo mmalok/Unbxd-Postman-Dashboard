@@ -35,3 +35,40 @@ class store_dao:
 			data=data+site_id+"_"+site_name+" "
 			#data.append(final_data)
 		return data
+	def validate_admin(self,email,password):
+		#print "checkuser-->storedao"
+		for record in login_Admin_Data.select():
+			msg=str(record.username)
+			if(msg==email):
+				if(password==(str(record.Password))):
+					return "valid"
+		return "invalid"
+	def get_user_data(self):
+		string=""
+		outer=[]
+		for record in loginData.select():
+			msg=str(record.username)
+			password=str(record.Password)
+			read=str(record.permissions_read)
+			write=str(record.permissions_write)
+			delete=str(record.permissions_delete)
+			inner=[]
+			inner=[msg,password,read,write,delete]
+			outer.append(inner)
+		print outer
+		return outer
+	def delete_user(self,username):
+		query = loginData.delete().where(loginData.username == username)
+		query.execute()
+		return "done"
+	def update_user(self,name,read,write,delete):
+		if(read=="False"):
+			read=0
+		if(write=="False"):
+			write=0
+		if(delete=="False"):
+			delete=0
+		query=loginData.update(permissions_read= read,permissions_write=write,permissions_delete=delete).where(loginData.username==name);
+		query=query.execute()
+		print (query)
+		return "done"

@@ -17,3 +17,16 @@ class services:
 		print "services"
 		store_dao_object=store_dao()
 		return store_dao_object.get_readonly_data(msg)
+	def validate_admin(self,email,password):
+		#print("services-->validate_user")
+		store_dao_object = store_dao()
+		return store_dao_object.validate_admin(email,password)
+	def user_data(self):
+		store_dao_object=store_dao()
+		return store_dao_object.get_user_data()
+	def delete_user(self,username):
+		store_dao_object=store_dao()
+		return store_dao_object.delete_user(username)
+	def update_user(self,username,read,write,delete):
+		store_dao_object=store_dao()
+		return store_dao_object.update_user(username,read,write,delete)

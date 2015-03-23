@@ -8,6 +8,8 @@ mysql = pw.MySQLDatabase(Database["Name"], host=Database["Host"], \
 read_mysql= pw.MySQLDatabase(readonly_database["Name"], host=readonly_database["Host"], \
         user=readonly_database["User"], passwd=readonly_database["Password"],threadlocals=True)
 #print mysql
+admin_mysql=pw.MySQLDatabase(admin_Database["Name"], host=admin_Database["Host"], \
+        user=admin_Database["User"], passwd=admin_Database["Password"],threadlocals=True)
 
 
 def mysql_connect():
@@ -41,10 +43,21 @@ class loginData(MySQLModel):
     id = pw.PrimaryKeyField()
     username=pw.CharField()
     Password=pw.CharField()
+    permissions_read=pw.BooleanField(default=False)
+    permissions_write=pw.BooleanField(default=False)
+    permissions_delete=pw.BooleanField(default=False)
 class site_request(MySQLModel):
     class Meta:
         database=read_mysql
     #print "3"
     site_id = pw.PrimaryKeyField()
     site_name=pw.CharField()
+class login_Admin_Data(MySQLModel):
+    #print "3"
+    class Meta:
+        database=admin_mysql
+    id = pw.PrimaryKeyField()
+    username=pw.CharField()
+    Password=pw.CharField()
+
    

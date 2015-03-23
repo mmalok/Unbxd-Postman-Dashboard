@@ -12,3 +12,10 @@ readonly_database={
     "User" : "readonlyuser",
     "Password" : "unbxd!2#"
 }
+admin_Database ={
+    "Host" : "127.0.0.1",
+    "Port" : "",
+    "Name" : "admin_Database",
+    "User" : "root",
+    "Password" : "alok"
+}
