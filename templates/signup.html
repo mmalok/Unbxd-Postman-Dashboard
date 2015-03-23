@@ -32,7 +32,7 @@
     }
     else
     {
-      alert("in else")
+      //alert("in else")
       $.ajax(
             {async:false,type:"POST",url:"/validate_mail",data:$("form").serialize(),success:function(response)
                 {
@@ -97,7 +97,7 @@ function send_data() {
     else
     {
       $.ajax(
-            {type:"POST",url:"/signup_data",data:$("form").serialize(),success:function(response)
+            {async:false,type:"POST",url:"/signup_data",data:$("form").serialize(),success:function(response)
                 {
                  //alert("a")
 
@@ -105,7 +105,7 @@ function send_data() {
             });
         
       //alert("sab sahi hai")
-     window.open("/all_unbxd","_self");
+     window.open("/simple_login","_self");
     }
   }
     </script>
@@ -121,11 +121,11 @@ function send_data() {
     </div>
 
     <div class="login-help">
-      <p>Forgot your password? <a href="/login_data">Click here to reset it</a>.</p>
+      
     </div>
   </section>
   <section class="about">
-  <img src="/dashboard_files/google.png" width="100%">
+  <a href="/google_login"> <img src="/dashboard_files/google.png" width="100%"></a>
     <p class="about-links">
       <font size="4" color="black">Already a member</font>
       <a href="/login" ><h1><button><font size="3" color="black">Sign-In</font></button></h1></a>

@@ -259,37 +259,12 @@ def delete_popular_product():
 def delete_popular():
     if "mail" in session:
         try:
-            if request.method=='POST':
-                #print ("2")
-                data_dict=request.form.to_dict()
-                
-                print "++++++++++"
-                print(request)
-                print data_dict
-                print "++++++++++"
-                
-                message=str(request.form['command'])
-                print message
-                try:
-                    field=str(request.form['fields'])
-                except:
-                    field=""
-                print message
-                print field
-
-                print message,field
-                if(field==""):
-                    try:
-                        flds=str(request.form['data'])
-                        #print flds
-                        flds=flds.split("--->")
-                        #print flds
-                        field=flds[0]
-                    except:
-                        print "send is pressed with empty value"
-                if message!="":
+            if request.method=='GET':
+                company=str(request.args.get("company"))
+                field=str(request.args.get("data"))[1:-1]
+                if company!="":
                     handler=data_handler()
-                    handler_data=(handler.delete_popular_product(message,field))
+                    handler_data=(handler.delete_popular_product(company,field))
                     print handler_data
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=str(api.popularproduct.delete(data=handler_data))
@@ -297,21 +272,15 @@ def delete_popular():
                     #print products
                     res_popular=response_handler()
                     final_message=str(res_popular.delPopular(products))
-                    return '%s' % final_message
+                    return redirect(url_for("display_suggestion",command=company,metric="Popular Product"))
                 else:
-                    return render_template("dashboard.html")
+                    return redirect(url_for("error",message="Company Not Specified"))
             else:
-                return render_template("dashboard.html")
-               
-        except:
-            return render_template("dashboard.html")
-        
-
-        #data_object = DAO.DataDAO()
-        #data_object.save_message(processed_text)
+                return redirect(url_for("error",message="Call Not Allowed"))       
+        except Exception as e:
+            return redirect(url_for("error",message=e))
     else:
-        return redirect(url_for('login'))    
-    #return render_template("dashboard.html")
+        return redirect(url_for("login"))
 #------------------------------------------------------------>
 #--------------------------add infield ---------------------->
 @app.route('/add_in_field', methods=['POST','get'])
@@ -351,33 +320,26 @@ def delete_infield():
 def delete_in_field():
     if "mail" in session:                                       
         try:
-            if request.method=='POST':
-               # print ("2")
-                data_dict=request.form.to_dict()
-                #print mydict
-                message=str(request.form['command'])
-                field=str(request.form['fields'])
-                #print message,field
-                if message!="":
+            if request.method=='GET':
+                company=str(request.args.get("company"))
+                field=str(request.args.get("data"))[1:-1]
+                if company!="":
                     handler=data_handler()
-                    handler_data=str(handler.delete_in_field(message,field))
+                    handler_data=str(handler.delete_in_field(company,field))
                     #print handler_data
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.infield.delete(data=handler_data)
                     #print products
-                    return '%s' % products
+                    return redirect(url_for("display_suggestion",command=company,metric="In Field"))
                 else:
-                    return render_template("dashboard.html")
+                    return redirect(url_for("error",message="Company Not Specified"))
             else:
-                render_template("dashboard.html")       
-        except:
-            render_template("dashboard.html")
-    else:        
-        return redirect(url_for('login'))
-    #data_object = DAO.DataDAO()
-    #data_object.save_message(processed_text)
-
-    #return render_template("dashboard.html")
+                return redirect(url_for("error",message="Call Not Allowed"))       
+        except Exception as e:
+            return redirect(url_for("error",message=e))
+    else:
+        return redirect(url_for("login"))
+                    
 #------------------------------------------------------------>
 #-----------------add popular searchable -------------------->
 '''

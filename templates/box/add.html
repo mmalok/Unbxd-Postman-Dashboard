@@ -80,7 +80,7 @@ function add_suggestions()
     Field=document.getElementById("field_command").value;
     Display_Added=document.getElementById("test_field")
     Metric=($( "#cur_param" ).text());
-    alert(Metric)
+    //alert(Metric)
     if(Metric.indexOf("Field")>-1)
     {
         Display_Added.value=Field;
@@ -99,7 +99,7 @@ function save_suggestion()
     company=document.getElementById("command").value
     Display_Added=document.getElementById("test_field").value
     Metric=$( "#cur_param" ).text();
-    alert(Metric)
+    //alert(Metric)
     if(Metric.indexOf("Field")>-1)
     {
         window.location=window.location.origin+"/add_in_field"+"?company="+company+"&fields="+Display_Added

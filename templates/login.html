@@ -90,14 +90,14 @@ function send_data() {
     }
     else
     {
-      alert("priya")
+      //alert("priya")
       $.ajax(
             {type:"POST",url:"/login_data",data:$("form").serialize(),success:function(response)
                 {
-                  alert(response)
+                  //alert(response)
                  if(response==="valid")
                  {
-                  alert("sab sahi hai")
+                  //alert("sab sahi hai")
                   window.location = window.location.origin + '/simple_login'
                   //window.open("/dashboard","_self");
                  }
@@ -128,7 +128,7 @@ function send_data() {
     </div>
 
     <div class="login-help">
-      <p>Forgot your password? <a href="/login_data">Click here to reset it</a>.</p>
+      
     </div>
   </section>
   </section>
