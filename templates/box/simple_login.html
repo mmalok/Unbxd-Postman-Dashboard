@@ -1,4 +1,12 @@
 {% extends "unbxd_suggestion.html" %}
+{%block image%}
+{%if session['gmail']!='NO'%}
+<img src="{{session['gmail'].picture}}" class="img-circle" alt="User Image">
+{%else%}
+<img src="dashboard_files/avatar.png" class="img-circle" alt="User Image">
+{%endif%}
+{%endblock%}
+
 {% macro profile_box() -%}
     <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -816,6 +816,9 @@ def js(path):
 @app.route('/fonts/<path:path>')
 def fonts(path):
     return app.send_static_file(os.path.join('fonts', path))
+@app.route('/lib/<path:path>')
+def lib(path):
+    return app.send_static_file(os.path.join('lib', path))
 #------------------------------------------------------------->
 
 @app.route('/google_login')
