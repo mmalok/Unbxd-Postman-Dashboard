@@ -1,9 +1,14 @@
 {% extends "box/simple_login.html" %}
 {%set id=id %}
+
+
+
 {% import "box/add.html" as add %}
 {% block add %}
 {{add.display_add_fields(fields)}}
 {% endblock %}
+
+
 {% block paramName %}
 <b>Suggestion</b>
 {% endblock %}
@@ -16,6 +21,7 @@
           <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
           </div><!-- /.box-tools -->
+
         </div><!-- /.box-header -->
         <div class="box-body" style="display: block;">
 		<table class="table-fill" >
@@ -27,9 +33,11 @@
 	<th class="text-left" width="40%">
 		Field Value
 	</th>
+	{%if session['delete'] !='NO'%}
 	<th class="text-left" width="10%">
 		Delete
 	</th>
+	{%endif%}
 </tr>
 </thead>
 <tbody class="table-hover">
@@ -43,10 +51,12 @@
 		</td>
 		{%set id=id+1%}
 		{%endfor%}
+		{%if session['delete'] !='NO'%}
 		
 		<td class="text-left" width="10%" id="{{id}}" onclick=delFunc({{id}})>
-			<img src="/dashboard_files/delete.png" height="40px" width="50px">
+			<center><img src="/dashboard_files/delete.png" height="20px" width="20px"></center>
 		</td>
+		{%endif%}
 		</tr>
 	{%endfor%}
 	</tbody></table>

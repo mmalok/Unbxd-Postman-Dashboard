@@ -509,9 +509,24 @@ def login_data():
         temp=service_obj.validate_user(user_name,password)
         print temp 
         if(str(temp)=='valid'):
+            service_obj=services()
+            permissions=service_obj.session_permission(user_name)
+            print permissions
+            print type(permissions[2])
+            if(permissions[1]):
+                session['write']='YES'
+            else:
+                session['write']='NO'
+            if(permissions[2]):
+                print permissions[2]
+                session['delete']='YES'
+            else:
+                session['delete']='NO'
+
             session['mail'] = request.form['mail']
             session['gmail']= 'NO'
             glob['company']=read_only_data()
+            print session
             return '%s' % temp
         #return render_template("dashboard.html")
     else:
@@ -561,13 +576,9 @@ def get_popular_input_data():
 def read_only_data():
     if "mail" in session:                                       
         try:
-            # print ("2")
-            print "priys"
-            a=services()
-            data=a.read_data("alok")
-            print data
+            service_obj=services()
+            data=service_obj.read_data("alok")
             data=str(data).split(" ")
-            print data
             outer=[]
             for entry in data[0:-1]:
                 inner=[]
@@ -589,7 +600,9 @@ def read_only_data():
 #-----------------------------log out------------------------>
 @app.route('/logout', methods=['POST','get'])
 def logout():
-    session.pop('admin',None)
+    session.pop('read',None)
+    session.pop('write', None)
+    session.pop('delete',None)
     session.pop('mail', None)
     session.pop('gmail', None)
     glob['company']=[]

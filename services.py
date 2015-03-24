@@ -30,3 +30,6 @@ class services:
 	def update_user(self,username,read,write,delete):
 		store_dao_object=store_dao()
 		return store_dao_object.update_user(username,read,write,delete)
+	def session_permission(self,username):
+		store_dao_object=store_dao()
+		return store_dao_object.session_permission(username)

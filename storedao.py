@@ -72,3 +72,16 @@ class store_dao:
 		query=query.execute()
 		print (query)
 		return "done"
+	def session_permission(self,user_name):
+		permission=[]
+		for record in loginData.select():
+			name=str(record.username)
+			if(name==user_name):
+				read=(record.permissions_read)
+				write=(record.permissions_write)
+				delete=(record.permissions_delete)
+				permission=[read,write,delete]
+				print permission
+				return permission
+		return "something went wrong"
+		

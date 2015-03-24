@@ -264,10 +264,13 @@ td.text-right {
                         </div>
                     </div>
                 </div>
+                {%if session['write'] !='NO'%}
                 {%block add%}
                 {%endblock%}
+                {%endif%}
                 {%block content%}
                 {%endblock%}
+                
                 <!-- Small boxes (Stat box) -->
                 <!-- Small boxes (Stat box) -->
                 <div class="example-modal">
@@ -376,5 +379,17 @@ function Company_Changed() {
 
         <!-- AdminLTE for demo purposes -->
         <script src="dashboard_files/demo.js" type="text/javascript"></script>
+<div class="md-modal md-fall md-show" id="logout-modal">
+            <div class="md-content">
+                <h3><strong>Logout</strong> Confirmation</h3>
+                <div>
+                    <p class="text-center">Are you sure want to logout from this awesome system?</p>
+                    <p class="text-center">
+                    <button class="btn btn-danger md-close">Nope!</button>
+                    <a href="login.html" class="btn btn-success md-close">Yeah, I'm sure</a>
+                    </p>
+                </div>
+            </div>
+        </div>
 </body>
 </html>    

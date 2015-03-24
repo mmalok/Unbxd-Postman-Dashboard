@@ -25,9 +25,11 @@
 	<th class="text-left" width="50%">
 		Field Name
 	</th>
+	{%if session['delete'] !='NO'%}
 	<th class="text-left" width="50%">
 		Delete
 	</th>
+	{%endif%}
 </tr>
 </thead>
 <tbody class="table-hover">'
@@ -39,9 +41,11 @@
 		<td class="text-left" width="50%"id="id{{id}}">
 			<b>'{{text}}'</b>
 		</td>
+		{%if session['delete'] !='NO'%}
 		<td class="text-left" width="50%" id="{{id}}" onclick=delFunc({{id}})>
-			<img src="/dashboard_files/delete.png" height="40px" width="50px">
+			<center><img src="/dashboard_files/delete.png" height="20px" width="20px"></center>
 		</td>
+		{%endif%}
 		</tr>
 	{%endfor%}
 </tbody></table>
