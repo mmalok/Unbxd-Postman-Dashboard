@@ -90,6 +90,28 @@ def dashboard():
                 print "$$$$$"
                 response_text=str(res.read())
                 parse_response_text=json.loads(response_text)
+                print parse_response_text
+                verify_email=parse_response_text['email']
+                print verify_email
+                verify_email_id=verify_email[-9:]
+                if(verify_email_id !='unbxd.com'):
+                    return redirect(url_for("logout"))
+                service_obj=services()
+                user_db=service_obj.check(verify_email)
+                if(user_db=='new user'):
+                    service_obj.insert(verify_email,"google login")
+                permissions=service_obj.session_permission(verify_email)
+                print permissions
+                print type(permissions[2])
+                if(permissions[1]):
+                    session['write']='YES'
+                else:
+                    session['write']='NO'
+                if(permissions[2]):
+                    print permissions[2]
+                    session['delete']='YES'
+                else:
+                    session['delete']='NO'
                 session['gmail']=parse_response_text
                 glob['company']=read_only_data()
                 return redirect(url_for("simple_login"))
