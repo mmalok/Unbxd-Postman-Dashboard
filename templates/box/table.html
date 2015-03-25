@@ -68,16 +68,21 @@
 	function delFunc(id)
 	{
 		//alert(id)
+
 		company=document.getElementById("command").value
 		data=$("#id"+id+"").text()
-		$("alert_delete").css("display","none")
-		var delete_permission = confirm("Are you sure you want to delete");
-    	if (delete_permission == true) {
-        	window.location=window.location.origin+"/delete_suggestion_data"+"?company="+company+"&data="+data
-    	} 
+		globId.data =data;
+		globId.function="delete_suggestion_data"
+		alert(globId.function)
+		//alert(globId.data)
+		$("#alert_delete").css("display","block");
+		//alert("okay")
+		//var delete_permission = confirm("Are you sure you want to delete");
+    	//if (delete_permission == true) {
+        //	window.location=window.location.origin+"/delete_suggestion_data"+"?company="+company+"&data="+data
+    	//} 
 	}
 </script>
 {% endblock %}
 {% block alert %}
-
 {% endblock %}

@@ -54,16 +54,20 @@
       </div>
       </div>
 <script type="text/javascript">
-$(".modal-content").css("display"."none")
 	function delFunc(id)
 	{
 		//alert(id)
-		company=document.getElementById("command").value
+		company=document.getElementById("command").value;
 		data=$("#id"+id+"").text()
-		var delete_permission = confirm("Are you sure you want to delete");
-    	if (delete_permission == true) {
-        	window.location=window.location.origin+"/delete_in_field"+"?company="+company+"&data="+data
-    	} 
+		alert(data)
+		globId.data=data;
+		globId.function="delete_in_field";
+		alert(globId.function)
+		$("#alert_delete").css("display","block");
+		//var delete_permission = confirm("Are you sure you want to delete");
+    	//if (delete_permission == true) {
+        //	window.location=window.location.origin+"/delete_in_field"+"?company="+company+"&data="+data
+    	//} 
 	}
 </script>
 {% endblock %}

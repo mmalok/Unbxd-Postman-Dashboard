@@ -77,10 +77,15 @@ remove_modal()
 		//alert(id)
 		company=document.getElementById("command").value
 		data=$("#id"+id+"").text()
-		var delete_permission = confirm("Are you sure you want to delete");
-    	if (delete_permission == true) {
-        	window.location=window.location.origin+"/delete_popular"+"?company="+company+"&data="+data
-    	} 
+		globId.data =data;
+		globId.function="delete_popular"
+		alert(globId.function)
+		alert(globId.data)
+		$("#alert_delete").css("display","block");
+		//var delete_permission = confirm("Are you sure you want to delete");
+    	//if (delete_permission == true) {
+        //	window.location=window.location.origin+"/delete_popular"+"?company="+company+"&data="+data
+    	//} 
 	}
 </script>
 {% endblock %}
