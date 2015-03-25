@@ -211,25 +211,34 @@ td.text-right {
                             <i class="fa fa-dashboard"></i> <span>HOME</span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview" style="display: block;">
                         <a href="#">
                             <i class="fa fa-folder"></i> 
-                            <span>Postmanapi</span>
+                            <span>AUTOsuggest</span>
                             <i class="fa pull-right fa-angle-left"></i>
                         </a>
-                        <ul style="display: none;" class="treeview-menu">
-                            <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Popular_Product">
+                        <ul style="display: block;" class="treeview-menu">
+                            <a href="#">
+                            <li onclick="Metric(this.id)" id="Popular_Product" style="margin-left: 30px;"><i class="fa fa-circle-o">
                                 <!--i class="fa fa-angle-circle-ot"></i-->
                                 Popular Product
+                            </i>
                             </li>
-                            <li style="margin-left: 30px;" onclick="Metric(this.id)" id="In_Field">
+                            <a href="#">
+                            </li>
+                            <li style="margin-left: 30px;" onclick="Metric(this.id)" id="In_Field"><i class="fa fa-circle-o">
                                 <!--i class="fa fa-angle-double-right"></i-->
                                 In Field
+                                </i>
                             </li>
-                            <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Suggestion">
+                            </a>
+                            <a href='#'>
+                            <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Suggestion"><i class="fa fa-circle-o">
                                 <!--i class="fa fa-angle-double-right"></i-->
                                 Suggestion
+                                </i>
                             </li>
+                            </a>
                         </ul>
                     </li>
                 </ul>
@@ -270,49 +279,54 @@ td.text-right {
                 {%block add%}
                 {%endblock%}
                 {%endif%}
+            <div id="alert_delete" name="alert_delete" style="display:none;">
+              <div class="example-modal">
+                <div class="modal" style="display:block">
+                  <div class="modal-dialog">
+                    <div class="modal-content" style="display: block;">
+                                
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_alert()"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">DELETE</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you wnts to delete??</p>
+                      </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" id="del_button" data-dismiss="modal">delete</button>
+                      <!--button type="button" class="btn btn-primary">Save changes</button-->
+                    </div>
+                  
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+            </div>
+          </div>
                 {%block content%}
                 {%endblock%}
                 
                 <!-- Small boxes (Stat box) -->
                 <!-- Small boxes (Stat box) -->
-                <div class="example-modal">
-            <div class="modal" style="display:block">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                {%block alert%}                
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_modal()"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Welcome to Unbxd Dashboard Api</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>Select the Table you would Lile to edit from the Sidebar followed by selecting company name from top</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" onclick="remove_modal()" data-dismiss="modal">Okay</button>
-                    <!--button type="button" class="btn btn-primary">Save changes</button-->
-                  </div>
-                  {%endblock%}
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-          </div>
+
+                    {%block alert%}                
+                    
+                    {%endblock%}
+              
             </section>
         </aside>
     </div>
 <script >
 function remove_modal()
 {
-    $(".modal-content").css("display","none")
+    $("#help").css("display","none")
 }
-function show_modal()
-{
-    $(".modal-content").css("display","block")
-}
+
 function Company_Changed() {
             var x = document.getElementById("command").value;
          // $.post("/display_suggestion", params={'command':x} );
                  //window.open('/get_index_fields',_self)'"'
             metric = $( "#cur_param" ).text();
+            $("#help").css("display","none")
             metric=metric.trim();
             window.location = window.location.origin + '/display_suggestion' + '?command='+x+'&metric='+metric
     }
@@ -334,7 +348,11 @@ function Company_Changed() {
     {
             $.post("/get_all_infield",{data:"In Field"});
     }
+    function remove_alert()
+    {
+      $("#alert_delete").css("display","none");
     
+    }
     
 </script>
         <script src="dashboard_files/jquery.js"></script>
@@ -368,5 +386,6 @@ function Company_Changed() {
         <!-- AdminLTE for demo purposes -->
         <script src="dashboard_files/demo.js" type="text/javascript"></script>
         <script src="lib/sweet-alert.min.js"></script> <link rel="stylesheet" type="text/css" href="lib/sweet-alert.css">
+
 </body>
 </html>    

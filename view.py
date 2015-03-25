@@ -798,12 +798,7 @@ def get_index_fields_to_add(message):
 @app.route('/dashboard_files/<path:path>')
 def dashboard_files(path):
     return app.send_static_file(os.path.join('dashboard_files', path))
-@app.route('/all_unbxd_suggestion_files/<path:path>')
-def all_unbxd_suggestion_files(path):
-    return app.send_static_file(os.path.join('all_unbxd_suggestion_files', path))
-@app.route('/get_all_infield_files/<path:path>')
-def get_all_infield_files(path):
-    return app.send_static_file(os.path.join('get_all_infield_files', path))
+
 @app.route('/css/<path:path>')
 def css(path):
     return app.send_static_file(os.path.join('css', path))
