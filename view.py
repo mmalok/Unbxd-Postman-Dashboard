@@ -8,10 +8,20 @@ from response_handler import *
 from exception_handler import *
 from services import *
 from data_handler import *
+from flask.ext.mail import Mail,Message
 import os
+import smtplib
 glob={}
 glob['company']=[]
 app = Flask(__name__)
+mail=Mail(app)
+app.config.update(MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=False,
+    MAIL_USE_TLS=True,
+    MAIL_USERNAME = 'autosuggest.unbxd@gmail.com',
+    MAIL_PASSWORD = 'sales@unbxd')
+
 @app.before_request
 def load_company():
     g.company=glob['company']
@@ -137,9 +147,9 @@ def simple_login():
 def metric_type():
     if "mail" in session:
         #if request.method=='POST':
-        z = str(request.args.get('data'))
-        s=z.replace("_"," ")
-        return render_template("box/param.html",response=s)
+        data_dict = str(request.args.get('data'))
+        replace_data=data_dict.replace("_"," ")
+        return render_template("box/param.html",response=replace_data)
     else:
         return redirect(url_for("login"))        
 #-------------------------------------------------------------->
@@ -200,6 +210,15 @@ def delete_suggestion_data():
                     handler=data_handler()
                     handler_data=str(handler.delete_unbxd_suggestion(company,field))
                     print handler_data
+                    #msg = Message('Hello',sender='autosuggest.unbxd@gmail.com',recipients=['autosuggest.unbxd@gmail.com'])
+                    #msg.body = "suggestion deleted"
+                    #print msg
+                    #print mail
+                    #print "mail"
+                    #mail.send(msg)
+                    smtpObj = smtplib.SMTP('localhost')
+                    smtpObj.login("alok.gupta1785@gmail.com", "applemacbookpro")
+                    smtpObj.sendmail("autosuggest.unbxd@gmail.com", "alok.gupta1785@gmail.com", session['mail']) 
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.unbxdsuggestion.delete(data=handler_data)
                     res_popular=response_handler()
@@ -501,10 +520,10 @@ def validate_mail():
                 #print data_dict
                 return '%s' % temp
             else:
-                render_template("dashboard.html")
+                return render_template("dashboard.html")
                
         except:
-            render_template("dashboard.html")
+            return render_template("dashboard.html")
     
 #------------------------------------------------------------->
 #--------------------------all unbxd suggestion---------------> 
@@ -550,6 +569,8 @@ def login_data():
             glob['company']=read_only_data()
             print session
             return '%s' % temp
+        else:
+            return redirect(url_for("login"))
         #return render_template("dashboard.html")
     else:
         return redirect(url_for("login"))

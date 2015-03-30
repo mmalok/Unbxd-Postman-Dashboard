@@ -10,5 +10,4 @@ except Exception as e :
 	sys.exit()
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-
 app.run(debug=True)

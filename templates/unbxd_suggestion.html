@@ -199,7 +199,9 @@ td.text-right {
                         {%endblock%}
                     </div>
                     <div class="pull-left info">
-                        <p>Hello, UNBXD</p>             
+                    </br>
+                        <center><p>Hello {%block name%}
+                        {%endblock%}</p></center>             
                     </div>
                 </div>
                 <!-- search form -->
@@ -323,13 +325,13 @@ function remove_modal()
 }
 
 function Company_Changed() {
-            var x = document.getElementById("command").value;
+            var company_name = document.getElementById("command").value;
          // $.post("/display_suggestion", params={'command':x} );
                  //window.open('/get_index_fields',_self)'"'
             metric = $( "#cur_param" ).text();
             $("#help").css("display","none")
             metric=metric.trim();
-            window.location = window.location.origin + '/display_suggestion' + '?command='+x+'&metric='+metric
+            window.location = window.location.origin + '/display_suggestion' + '?command='+company_name+'&metric='+metric
     }
     function popular_product()
     {
@@ -340,8 +342,16 @@ function Company_Changed() {
     }
     function Metric(clicked_id)
     {
+      var company=document.getElementById("command").value;
+      if(company.localeCompare("insert")==0)
         window.location = window.location.origin + '/metric_type'+ '?data='+clicked_id
-    
+      else
+      {
+          clicked_id=clicked_id.replace('_',' ')
+          $( "#cur_param" ).text(clicked_id);
+          Company_Changed()
+
+      }
            // $.post("/get_all_infield",{data:"Popular Products"});
             //window.location = window.location.origin + '/display_popular'
     }
