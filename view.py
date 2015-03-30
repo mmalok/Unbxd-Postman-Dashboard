@@ -1,4 +1,5 @@
 import unbxd.api 
+import logging
 import json
 from flask import Flask,session, redirect, url_for, escape,g
 from flask import request
@@ -14,6 +15,36 @@ import smtplib
 glob={}
 glob['company']=[]
 app = Flask(__name__)
+gmail_user="autosuggest.unbxd@gmail.com"
+gmail_pwd="sales@unbxd"
+TO=['autosuggest.unbxd@gmail.com']
+FROM = 'autosuggest.unbxd@gmail.com'
+SUBJECT="COMMIT IN AUTOSUGGEST"
+
+
+
+#-----------------logging------------------->
+logger = logging.getLogger('log')
+logger.setLevel(logging.DEBUG)
+# create file handler which logs even debug messages
+fh = logging.FileHandler('spam.log')
+fh.setLevel(logging.DEBUG)
+# create console handler with a higher log level
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
+# create formatter and add it to the handlers
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+fh.setFormatter(formatter)
+# add the handlers to logger
+logger.addHandler(ch)
+logger.addHandler(fh)
+#-------------------------------------------->
+'''
+
+
+
+
 mail=Mail(app)
 app.config.update(MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=465,
@@ -21,7 +52,7 @@ app.config.update(MAIL_SERVER='smtp.gmail.com',
     MAIL_USE_TLS=True,
     MAIL_USERNAME = 'autosuggest.unbxd@gmail.com',
     MAIL_PASSWORD = 'sales@unbxd')
-
+'''
 @app.before_request
 def load_company():
     g.company=glob['company']
@@ -45,6 +76,7 @@ google = oauth.remote_app('google',
 
 @app.route('/')
 def start():
+    logger.info("company name stored in global variable")
     glob['company']=read_only_data()
     g.company=glob['company']
     if "mail" in session:
@@ -69,7 +101,9 @@ def signup_data():
         sign_done=service_obj.insert(user_name,password)
         session['mail'] = request.form['mail']
         session['gmail']='NO'
+        logger.info("mail in session and gmail no")
         glob['company']=read_only_data()
+        logger.info("sign in done")
         return '%s' % sign_done
     return redirect(url_for("simple_login"))
 #-----------------------------------------------------------------#
@@ -93,39 +127,49 @@ def dashboard():
                 except URLError, e:
                     if e.code == 401:
                     # Unauthorized - bad token
-                        print session
+                        logger.error("unauthorized bad token")
+                        logger.error(e)
                         session.pop('mail', None)
                         return redirect(url_for('login'))
                     return res.read()
-                print "$$$$$"
                 response_text=str(res.read())
                 parse_response_text=json.loads(response_text)
-                print parse_response_text
+                logger.info("parse_response_text")
                 verify_email=parse_response_text['email']
-                print verify_email
+                logger.info("email_check")
                 verify_email_id=verify_email[-9:]
                 if(verify_email_id !='unbxd.com'):
+                    logger.warn("pls use yours verified mail")
                     return redirect(url_for("logout"))
                 service_obj=services()
                 user_db=service_obj.check(verify_email)
                 if(user_db=='new user'):
+                    logger.info("new user")
                     service_obj.insert(verify_email,"google login")
                 permissions=service_obj.session_permission(verify_email)
                 print permissions
                 print type(permissions[2])
                 if(permissions[1]):
+                    logger.info(session['mail'])
+                    logger.info("write permission")
                     session['write']='YES'
                 else:
+                    logger.info(session['mail'])
+                    logger.info("no write permission")
                     session['write']='NO'
                 if(permissions[2]):
-                    print permissions[2]
+                    logger.info(session['mail'])
+                    loggger.info("delete permission")
                     session['delete']='YES'
                 else:
+                    logger.info(session['mail'])
+                    logger.info("no delete permisssion")
                     session['delete']='NO'
                 session['gmail']=parse_response_text
                 glob['company']=read_only_data()
                 return redirect(url_for("simple_login"))
             else:
+                logger.info("not get request")
                 return redirect(url_for("simple_login"))
         else:
             return redirect(url_for("login"))
@@ -136,6 +180,7 @@ def dashboard():
 def simple_login():
     print session
     if "mail" in session:
+        logger.info("simple login")
         return render_template("box/simple_login.html");
     else:
         return redirect(url_for('login'))
@@ -174,12 +219,21 @@ def add_suggestion_data():
                     final_message=str(res_popular.addSuggestion(products))
                     #return '%s' % final_message
                     #print products
+                    try:
+                        print session['gmail']['email']
+                        logger.info("add suggestions "+str(session['gmail']['email'])+":"+data+":"+company)
+                    except:
+                        logger.info("add suggestion "+str(session['mail'])+":"+data+":"+company)
+                    logger.info("updated the suggestion data")
                     return redirect(url_for("display_suggestion",command=company,metric="Suggestion"))                    
                 else:
+                    logger.critical("company not specified")
                     return redirect(url_for("error",message="Company not Specified"))
             else:
+                logger.warn("access not allowed")
                 return redirect(url_for("error",message="Access Not Allowed"))    
         except Exception as e:
+            logger.debug(e)
             print e
             return redirect(url_for("error",message=e))
     else:
@@ -216,21 +270,46 @@ def delete_suggestion_data():
                     #print mail
                     #print "mail"
                     #mail.send(msg)
-                    smtpObj = smtplib.SMTP('localhost')
-                    smtpObj.login("alok.gupta1785@gmail.com", "applemacbookpro")
-                    smtpObj.sendmail("autosuggest.unbxd@gmail.com", "alok.gupta1785@gmail.com", session['mail']) 
+                    #smtpObj = smtplib.SMTP('localhost')
+                    #smtpObj.login("alok.gupta1785@gmail.com", "applemacbookpro")
+                    #smtpObj.sendmail("autosuggest.unbxd@gmail.com", "alok.gupta1785@gmail.com", session['mail']) 
+
+                    #TEXT = session['mail']+"THIS EMAIL-ID COMMITED IN AUTOSUGGEST API"
+
+                    # Prepare actual message
+                    #message = """\From: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, TEXT)
+                
+                    #server = smtplib.SMTP(SERVER) 
+                    #server = smtplib.SMTP("smtp.gmail.com", 587) #or port 465 doesn't seem to work!
+                    #server.ehlo()
+                    #server.starttls()
+                    #server.login(gmail_user, gmail_pwd)
+                    #server.sendmail(FROM, TO, message)
+                    #server.quit()
+                    #server.close()
+                    #print 'successfully sent the mail'
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.unbxdsuggestion.delete(data=handler_data)
                     res_popular=response_handler()
                     final_message=str(res_popular.delSuggestion(products))
                     print final_message
-
+                    try:
+                        print session['gmail']['email']
+                        logger.info("delete suggestion "+str(session['gmail']['email'])+":"+field+":"+company)
+                    except:
+                        logger.info("delete suggestion "+str(session['mail'])+":"+field+":"+company)
+                    
+                    logger.info("suggestion deleted")
+                    
                     return redirect(url_for("display_suggestion",command=company,metric="Suggestion"))
                 else:
+                    logger.debug("company not specified")
                     return redirect(url_for("error",message="Company Not Specified"))
             else:
+                logger.warn("call not allowed")
                 return redirect(url_for("error",message="Call Not Allowed"))       
         except Exception as e:
+            logger.error(e)
             return redirect(url_for("error",message=e))
     else:
         return redirect(url_for("login"))        
@@ -258,6 +337,13 @@ def add_popular():
                         products=api.popularproduct.update(data=handler_data)
                         res_popular=response_handler()
                         final_message=str(res_popular.addPopular(products))
+                        logger.info("popular product addded withh condition false")
+                        try:
+                            print session['gmail']['email']
+                            logger.info("add popular "+str(session['gmail']['email'])+":"+field+":"+company)
+                        except:
+                            logger.info("add popular "+str(session['mail'])+":"+field+":"+company)
+                    
                         return redirect(url_for("display_suggestion",command=company,metric="Popular Product"))
                     else:
                         multiple_true_check=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
@@ -269,15 +355,26 @@ def add_popular():
                             products=api.popularproduct.update(data=handler_data)
                             res_popular=response_handler()
                             final_message=str(res_popular.addPopular(products))
+                            try:
+                                print session['gmail']['email']
+                                logger.info("add popular "+str(session['gmail']['email'])+":"+field+":"+company)
+                            except:
+                                logger.info("add popular "+str(session['mail'])+":"+field+":"+company)
+                    
+                            logger.info("popular product addded withh condition true")
                             return redirect(url_for("display_suggestion",command=company,metric="Popular Product"))
                         else:
+                            logger.info("more than one true conditions exits")
                             final_message="true already present->change the condition"
                             return redirect(url_for("display_suggestion",command=company,metric="Popular Product",message="Already Present"))
                 else:
+                    logger.warn("company not specified")
                     return redirect(url_for("error",message="Company Not Specified"))
             else:
+                logger.info("call not allowed")
                 return redirect(url_for("error",message="Call Not Allowed"))       
         except Exception as e:
+            logger.debug(e)
             return redirect(url_for("error",message=e))
     else:
         return redirect(url_for('login')) 
@@ -313,12 +410,21 @@ def delete_popular():
                     #print products
                     res_popular=response_handler()
                     final_message=str(res_popular.delPopular(products))
+                    logger.info("popular product deleted")
+                    try:
+                        print session['gmail']['email']
+                        logger.info("delete popular "+str(session['gmail']['email'])+":"+field+":"+company)
+                    except:
+                        logger.info("delete popular "+str(session['mail'])+":"+field+":"+company)
+                    
                     return redirect(url_for("display_suggestion",command=company,metric="Popular Product"))
                 else:
+                    logger.info("company not specified")
                     return redirect(url_for("error",message="Company Not Specified"))
             else:
                 return redirect(url_for("error",message="Call Not Allowed"))       
         except Exception as e:
+            logger.debug(e)
             return redirect(url_for("error",message=e))
     else:
         return redirect(url_for("login"))
@@ -337,14 +443,21 @@ def add_in_field():
                     #print handler_data
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.infield.update(data=handler_data)
-
+                    try:
+                        print session['gmail']['email']
+                        logger.info("add infield "+str(session['gmail']['email'])+":"+field+":"+company)
+                    except:
+                        logger.info("add infield "+str(session['mail'])+":"+field+":"+company)
+                                    
                     print products
                     return redirect(url_for("display_suggestion",command=company,metric="In Field"))
                 else:
                     return redirect(url_for("error",message="Company Not Specified"))
             else:
+                logger.info("request not allowed")
                 return redirect(url_for("error",message="Request Not Allowed"))      
         except Exception as e:
+            logger.debug(e)
             return redirect(url_for("error",message="Some error occured"))
     else:
          return redirect(url_for('login'))   
@@ -371,12 +484,20 @@ def delete_in_field():
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.infield.delete(data=handler_data)
                     #print products
+                    logger.info("delete in field")
+                    try:
+                        print session['gmail']['email']
+                        logger.info("delete infield "+str(session['gmail']['email'])+":"+field+":"+company)
+                    except:
+                        logger.info("delete infield "+str(session['mail'])+":"+field+":"+company)
+                    
                     return redirect(url_for("display_suggestion",command=company,metric="In Field"))
                 else:
                     return redirect(url_for("error",message="Company Not Specified"))
             else:
                 return redirect(url_for("error",message="Call Not Allowed"))       
         except Exception as e:
+            logger.debug(e)
             return redirect(url_for("error",message=e))
     else:
         return redirect(url_for("login"))
@@ -518,6 +639,7 @@ def validate_mail():
                 temp=service_obj.check(email)
                 #print temp 
                 #print data_dict
+                logger.info("email checked")
                 return '%s' % temp
             else:
                 return render_template("dashboard.html")
@@ -553,12 +675,19 @@ def login_data():
             service_obj=services()
             permissions=service_obj.session_permission(user_name)
             print permissions
+            #logger.info(session['mail'])
             print type(permissions[2])
             if(permissions[1]):
+                #logger.info(session['mail'])
+                logger.info("read permission")
                 session['write']='YES'
             else:
+                #logger.info(session['mail'])
+                logger.info("no read permission")
                 session['write']='NO'
             if(permissions[2]):
+                #logger.info(session['mail'])
+                logger.info("delete permission")
                 print permissions[2]
                 session['delete']='YES'
             else:
@@ -632,6 +761,7 @@ def read_only_data():
             return outer
             
         except Exception as e:
+            logger.debug(e)
             return e
     else:        
         return redirect(url_for('login'))
@@ -643,6 +773,7 @@ def read_only_data():
 #-----------------------------log out------------------------>
 @app.route('/logout', methods=['POST','get'])
 def logout():
+    logger.critical("read ,write,delete,mail,gmail session clear")
     session.pop('read',None)
     session.pop('write', None)
     session.pop('delete',None)
@@ -656,6 +787,7 @@ def logout():
 @app.route('/error', methods=['POST','get'])
 def error():
     if "mail" in session:
+        logger.info("error in alert")
         message=request.args.get("message")
         return render_template("box/error.html",response_text=message)
     else:
@@ -669,6 +801,7 @@ def display_suggestion():
         #print glob['company']
         company = str(request.args.get('command'))
         #print(company)
+        logger.info(company)
         if company!="":
             fields=get_index_fields_to_add(company)
             #print fields
@@ -684,6 +817,7 @@ def display_suggestion():
                         response_text=["infield_list_is_empty *_*"]
                         return redirect(url_for("error",message=response_text))
                     else:
+                        logger.debug("error in chossing metrics")
                         return render_template("box/table.html",response_text=result,fields=fields,id=company)
                 else:
                     return redirect(url_for("error",message=result))
@@ -831,6 +965,7 @@ def get_index_fields_to_add(message):
                 #return '%s' % string
             return fields
         except Exception as e:
+            logger.debug(e)
             return e
     else:
         return redirect(url_for('login'))

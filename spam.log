@@ -1,0 +1,14 @@
+2015-03-31 00:14:20,409 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 00:14:25,639 - log - INFO - parse_response_text
+2015-03-31 00:14:25,639 - log - INFO - email_check
+2015-03-31 00:14:25,642 - log - INFO - (u'ya29.RgEXXDiEiwdaSlXoNAhkS3Z4HC1NS8E8w0p0OjtEIo8oIZiO8tf5HoKDUKzy2WPXH-3Jm7id3TLibQ', '')
+2015-03-31 00:14:25,642 - log - INFO - write permission
+2015-03-31 00:14:25,643 - log - INFO - (u'ya29.RgEXXDiEiwdaSlXoNAhkS3Z4HC1NS8E8w0p0OjtEIo8oIZiO8tf5HoKDUKzy2WPXH-3Jm7id3TLibQ', '')
+2015-03-31 00:14:25,643 - log - INFO - no delete permisssion
+2015-03-31 00:14:26,231 - log - INFO - simple login
+2015-03-31 00:14:47,289 - log - INFO - 16077
+2015-03-31 00:14:47,697 - log - DEBUG - error in chossing metrics
+2015-03-31 00:15:03,135 - log - INFO - add suggestions alok.kumar@unbxd.com:imageUrl*category:16077
+2015-03-31 00:15:03,135 - log - INFO - updated the suggestion data
+2015-03-31 00:15:03,145 - log - INFO - 16077
+2015-03-31 00:15:03,522 - log - DEBUG - error in chossing metrics
