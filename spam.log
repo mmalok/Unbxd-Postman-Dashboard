@@ -12,3 +12,149 @@
 2015-03-31 00:15:03,135 - log - INFO - updated the suggestion data
 2015-03-31 00:15:03,145 - log - INFO - 16077
 2015-03-31 00:15:03,522 - log - DEBUG - error in chossing metrics
+2015-03-31 01:08:17,726 - log - INFO - 16077
+2015-03-31 01:20:06,199 - log - INFO - 16077
+2015-03-31 01:20:06,718 - log - DEBUG - error in chossing metrics
+2015-03-31 01:20:12,864 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 01:20:16,768 - log - INFO - parse_response_text
+2015-03-31 01:20:16,768 - log - INFO - email_check
+2015-03-31 01:20:16,779 - log - INFO - (u'ya29.RgHElC7E6hqB8AeBCW402asPYBlqRx04wFVoa2un7AbyJh30nQbbaubXuXJ57ScqbCqIM3yn3xPO-w', '')
+2015-03-31 01:20:16,779 - log - INFO - write permission
+2015-03-31 01:20:16,780 - log - INFO - (u'ya29.RgHElC7E6hqB8AeBCW402asPYBlqRx04wFVoa2un7AbyJh30nQbbaubXuXJ57ScqbCqIM3yn3xPO-w', '')
+2015-03-31 01:20:16,780 - log - INFO - no delete permisssion
+2015-03-31 01:20:17,352 - log - INFO - simple login
+2015-03-31 01:20:24,258 - log - INFO - 1281
+2015-03-31 01:20:24,461 - log - INFO - error in alert
+2015-03-31 01:20:30,199 - log - INFO - 16077
+2015-03-31 01:20:30,365 - log - INFO - error in alert
+2015-03-31 01:20:35,900 - log - INFO - 673
+2015-03-31 01:20:36,249 - log - INFO - error in alert
+2015-03-31 01:23:02,936 - log - INFO - error in alert
+2015-03-31 01:23:09,236 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 01:23:12,369 - log - INFO - parse_response_text
+2015-03-31 01:23:12,369 - log - INFO - email_check
+2015-03-31 01:23:12,373 - log - INFO - (u'ya29.RgFRvwr4JbPl7gRoJoANWyfn7u44VFKXpS3MlNySnQi38gS8rCJ9SIGIZZIxnje2LogXb12pL9D-pg', '')
+2015-03-31 01:23:12,373 - log - INFO - write permission
+2015-03-31 01:23:12,374 - log - INFO - (u'ya29.RgFRvwr4JbPl7gRoJoANWyfn7u44VFKXpS3MlNySnQi38gS8rCJ9SIGIZZIxnje2LogXb12pL9D-pg', '')
+2015-03-31 01:23:12,374 - log - INFO - no delete permisssion
+2015-03-31 01:23:12,754 - log - INFO - simple login
+2015-03-31 12:14:42,404 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:14:53,012 - log - INFO - parse_response_text
+2015-03-31 12:14:53,013 - log - INFO - email_check
+2015-03-31 12:14:53,013 - log - WARNING - pls use yours verified mail
+2015-03-31 12:14:53,025 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:15:20,701 - log - INFO - parse_response_text
+2015-03-31 12:15:20,701 - log - INFO - email_check
+2015-03-31 12:15:20,701 - log - WARNING - pls use yours verified mail
+2015-03-31 12:15:20,708 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:15:48,893 - log - INFO - parse_response_text
+2015-03-31 12:15:48,893 - log - INFO - email_check
+2015-03-31 12:15:48,970 - log - INFO - (u'ya29.RwEebpiddlnQDogAaOy13LAFJO1K-soP37LW5IJd7ycARASckkU6trdif8mGvJVEegGE0fpCaDxE3Q', '')
+2015-03-31 12:15:48,970 - log - INFO - write permission
+2015-03-31 12:15:48,970 - log - INFO - (u'ya29.RwEebpiddlnQDogAaOy13LAFJO1K-soP37LW5IJd7ycARASckkU6trdif8mGvJVEegGE0fpCaDxE3Q', '')
+2015-03-31 12:15:48,970 - log - INFO - no delete permisssion
+2015-03-31 12:15:49,864 - log - INFO - simple login
+2015-03-31 12:16:11,803 - log - INFO - 11888
+2015-03-31 12:16:12,081 - log - INFO - error in alert
+2015-03-31 12:16:30,342 - log - INFO - 16077
+2015-03-31 12:16:38,913 - log - INFO - 16077
+2015-03-31 12:17:33,057 - log - INFO - popular product addded withh condition false
+2015-03-31 12:17:33,057 - log - INFO - add popular alok.kumar@unbxd.com:imageUrl:16077
+2015-03-31 12:17:33,096 - log - INFO - 16077
+2015-03-31 12:17:45,517 - log - INFO - 16077
+2015-03-31 12:17:45,933 - log - DEBUG - error in chossing metrics
+2015-03-31 12:18:04,400 - log - INFO - add suggestions alok.kumar@unbxd.com:description*productDescription:16077
+2015-03-31 12:18:04,400 - log - INFO - updated the suggestion data
+2015-03-31 12:18:04,408 - log - INFO - 16077
+2015-03-31 12:18:04,739 - log - DEBUG - error in chossing metrics
+2015-03-31 12:18:16,695 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:18:33,604 - log - INFO - parse_response_text
+2015-03-31 12:18:33,604 - log - INFO - email_check
+2015-03-31 12:18:33,608 - log - INFO - (u'ya29.RwFisWD725c2u3rjp80pOJE9CqSRBZpn1gjnRVSoDsmyEAQ_Pf0sgDqBEi1fyoxHHC3chnDUO_VAmw', '')
+2015-03-31 12:18:33,609 - log - INFO - write permission
+2015-03-31 12:18:33,609 - log - INFO - (u'ya29.RwFisWD725c2u3rjp80pOJE9CqSRBZpn1gjnRVSoDsmyEAQ_Pf0sgDqBEi1fyoxHHC3chnDUO_VAmw', '')
+2015-03-31 12:18:42,525 - log - INFO - company name stored in global variable
+2015-03-31 12:18:43,099 - log - INFO - simple login
+2015-03-31 12:18:58,130 - log - INFO - simple login
+2015-03-31 12:19:13,584 - log - INFO - simple login
+2015-03-31 12:19:18,096 - log - INFO - company name stored in global variable
+2015-03-31 12:19:18,823 - log - INFO - simple login
+2015-03-31 12:19:31,227 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:19:42,557 - log - INFO - parse_response_text
+2015-03-31 12:19:42,557 - log - INFO - email_check
+2015-03-31 12:19:42,560 - log - INFO - (u'ya29.RwEnFRNKLbvgueB1SC9RSUUQKWCBSaXhd1ntgadSXCyArFIn294kmtjuu2wq8SISAs6ciIo_2aF8pA', '')
+2015-03-31 12:19:42,560 - log - INFO - write permission
+2015-03-31 12:19:42,560 - log - INFO - (u'ya29.RwEnFRNKLbvgueB1SC9RSUUQKWCBSaXhd1ntgadSXCyArFIn294kmtjuu2wq8SISAs6ciIo_2aF8pA', '')
+2015-03-31 12:20:20,618 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:20:26,405 - log - INFO - parse_response_text
+2015-03-31 12:20:26,405 - log - INFO - email_check
+2015-03-31 12:20:26,408 - log - INFO - (u'ya29.RwHdBk5CmLohXmpf6QJFjlv0if9pMe-P3rjN7_LaUYssuw29X-6pQHL64vucZskftgSf4HxDOJizdA', '')
+2015-03-31 12:20:26,408 - log - INFO - write permission
+2015-03-31 12:20:26,408 - log - INFO - (u'ya29.RwHdBk5CmLohXmpf6QJFjlv0if9pMe-P3rjN7_LaUYssuw29X-6pQHL64vucZskftgSf4HxDOJizdA', '')
+2015-03-31 12:20:26,408 - log - INFO - delete permission
+2015-03-31 12:20:27,294 - log - INFO - simple login
+2015-03-31 12:20:38,118 - log - INFO - 16077
+2015-03-31 12:20:39,030 - log - DEBUG - error in chossing metrics
+2015-03-31 12:20:52,479 - log - INFO - delete suggestion alok.kumar@unbxd.com:description_productDescription:16077
+2015-03-31 12:20:52,479 - log - INFO - suggestion deleted
+2015-03-31 12:20:52,491 - log - INFO - 16077
+2015-03-31 12:20:53,084 - log - DEBUG - error in chossing metrics
+2015-03-31 12:21:15,601 - log - INFO - delete suggestion alok.kumar@unbxd.com:imageUrl_category:16077
+2015-03-31 12:21:15,602 - log - INFO - suggestion deleted
+2015-03-31 12:21:15,611 - log - INFO - 16077
+2015-03-31 12:21:15,981 - log - DEBUG - error in chossing metrics
+2015-03-31 12:21:54,302 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:26:50,754 - log - INFO - parse_response_text
+2015-03-31 12:26:50,754 - log - INFO - email_check
+2015-03-31 12:26:50,754 - log - WARNING - pls use yours verified mail
+2015-03-31 12:26:50,760 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:27:15,465 - log - INFO - parse_response_text
+2015-03-31 12:27:15,465 - log - INFO - email_check
+2015-03-31 12:27:15,465 - log - WARNING - pls use yours verified mail
+2015-03-31 12:27:15,479 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:27:38,904 - log - INFO - parse_response_text
+2015-03-31 12:27:38,904 - log - INFO - email_check
+2015-03-31 12:27:38,905 - log - WARNING - pls use yours verified mail
+2015-03-31 12:27:38,913 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:47:39,877 - log - INFO - parse_response_text
+2015-03-31 12:47:39,877 - log - INFO - email_check
+2015-03-31 12:47:39,877 - log - WARNING - pls use yours verified mail
+2015-03-31 12:47:39,923 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:47:45,248 - log - INFO - parse_response_text
+2015-03-31 12:47:45,248 - log - INFO - email_check
+2015-03-31 12:47:45,253 - log - INFO - (u'ya29.RwG1u_EYRo2QicHfw9zxT8bX8O-5vPHGqvYJJxAgkTPVxCNcEf-Q_9FabzPzfwYhLz4ib-phiQprOA', '')
+2015-03-31 12:47:45,253 - log - INFO - write permission
+2015-03-31 12:47:45,253 - log - INFO - (u'ya29.RwG1u_EYRo2QicHfw9zxT8bX8O-5vPHGqvYJJxAgkTPVxCNcEf-Q_9FabzPzfwYhLz4ib-phiQprOA', '')
+2015-03-31 12:47:45,253 - log - INFO - delete permission
+2015-03-31 12:47:46,047 - log - INFO - simple login
+2015-03-31 12:48:09,006 - log - INFO - 16077
+2015-03-31 12:48:11,017 - log - DEBUG - error in chossing metrics
+2015-03-31 12:48:39,277 - log - INFO - 16077
+2015-03-31 12:48:39,654 - log - DEBUG - error in chossing metrics
+2015-03-31 12:49:09,006 - log - INFO - 16077
+2015-03-31 12:49:16,567 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:49:22,625 - log - INFO - parse_response_text
+2015-03-31 12:49:22,625 - log - INFO - email_check
+2015-03-31 12:49:22,627 - log - INFO - (u'ya29.RwH7barWs1OI73ngU3Xu6FtuiwEqFRDJ4_uiEAM5ZsxAlknvRT-NiZd57xczgO6VVAMzo1pYbVoFNw', '')
+2015-03-31 12:49:22,627 - log - INFO - no write permission
+2015-03-31 12:49:22,627 - log - INFO - (u'ya29.RwH7barWs1OI73ngU3Xu6FtuiwEqFRDJ4_uiEAM5ZsxAlknvRT-NiZd57xczgO6VVAMzo1pYbVoFNw', '')
+2015-03-31 12:49:22,627 - log - INFO - no delete permisssion
+2015-03-31 12:49:23,220 - log - INFO - simple login
+2015-03-31 12:49:40,246 - log - INFO - 16077
+2015-03-31 12:49:41,977 - log - DEBUG - error in chossing metrics
+2015-03-31 12:49:53,391 - log - INFO - 16077
+2015-03-31 12:50:11,500 - log - INFO - simple login
+2015-03-31 12:50:40,747 - log - INFO - simple login
+2015-03-31 12:51:25,390 - log - INFO - 16077
+2015-03-31 12:51:38,951 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:51:59,179 - log - INFO - read permission
+2015-03-31 12:51:59,179 - log - INFO - delete permission
+2015-03-31 12:51:59,652 - log - INFO - simple login
+2015-03-31 12:52:11,744 - log - INFO - 16077
+2015-03-31 12:52:12,101 - log - DEBUG - error in chossing metrics
+2015-03-31 12:52:25,273 - log - INFO - 16077
+2015-03-31 12:52:25,566 - log - DEBUG - error in chossing metrics
+2015-03-31 12:52:39,283 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 12:53:01,450 - log - INFO - no read permission
+2015-03-31 12:53:01,875 - log - INFO - simple login
+2015-03-31 12:53:17,961 - log - INFO - 16077

@@ -526,14 +526,14 @@ td.text-right {
                 $.ajax(
                         {type:"POST",url:"/read_only_data",data:$("form").serialize(),success:function(response)
                             { 
-                                var x = document.getElementById("command");
+                                var coompany = document.getElementById("command");
                                 var option = document.createElement("option");
                                 option.text = "Kiwi";
-                                x.add(option, x[0]);
+                                company.add(option, company[0]);
                                 //alert("alok")
-                                //$("#command").append('<option value="alok" name="kumar">alok</option>');
+                                //$("#command").append(compan<option value="alok" name="kumar">alok</option>');
 
-                                alert(response);
+                                //alert(response);
                             }
                     });
             }

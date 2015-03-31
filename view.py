@@ -94,7 +94,7 @@ def signup_data():
         #print"login"
     elif request.method=='POST':
         data_dict=request.form.to_dict()
-        print data_dict
+        #print data_dict
         user_name=str(request.form['mail'])
         password=str(request.form['password'])
         service_obj=services()
@@ -113,9 +113,9 @@ def signup_data():
 def dashboard():
     if "mail" in session:
         if "gmail" not in session:
-            print"gmail"
+            #print"gmail"
             if request.method=='GET':
-                print "get"
+                #print "get"
                 access_token = session.get('mail')
                 access_token = access_token[0]
                 from urllib2 import Request, urlopen, URLError
@@ -147,8 +147,8 @@ def dashboard():
                     logger.info("new user")
                     service_obj.insert(verify_email,"google login")
                 permissions=service_obj.session_permission(verify_email)
-                print permissions
-                print type(permissions[2])
+                #print permissions
+                #print type(permissions[2])
                 if(permissions[1]):
                     logger.info(session['mail'])
                     logger.info("write permission")
@@ -159,7 +159,7 @@ def dashboard():
                     session['write']='NO'
                 if(permissions[2]):
                     logger.info(session['mail'])
-                    loggger.info("delete permission")
+                    logger.info("delete permission")
                     session['delete']='YES'
                 else:
                     logger.info(session['mail'])
@@ -206,13 +206,13 @@ def add_suggestion_data():
             if request.method=='GET':
                 company = str(request.args.get('company'))
                 data = str(request.args.get('data'))
-                print "add suggestion"
-                print company,data
+                #print "add suggestion"
+                #print company,data
                 data=str(data[1:])
                 if company!="":
                     handler=data_handler()
                     handler_data=str(handler.add_unbxd_suggestion(company,data))
-                    print handler_data                    
+                    #print handler_data                    
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.unbxdsuggestion.update(data=handler_data)
                     res_popular=response_handler()
@@ -636,11 +636,11 @@ def validate_mail():
                 data_dict=request.form.to_dict()
                 email=str(request.form['mail'])
                 service_obj=services()
-                temp=service_obj.check(email)
+                response=service_obj.check(email)
                 #print temp 
                 #print data_dict
                 logger.info("email checked")
-                return '%s' % temp
+                return '%s' % response
             else:
                 return render_template("dashboard.html")
                
