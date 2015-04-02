@@ -84,4 +84,10 @@ class store_dao:
 				print permission
 				return permission
 		return "something went wrong"
-		
+	
+	def get_internal_sitename(self,company):
+		for record in site_request.select():
+			site_id=str(record.site_id)
+			if(site_id==company):
+				return str(record.site_name_internal)
+		return "nothing found"

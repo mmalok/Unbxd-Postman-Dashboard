@@ -33,3 +33,6 @@ class services:
 	def session_permission(self,username):
 		store_dao_object=store_dao()
 		return store_dao_object.session_permission(username)
+	def get_internal_sitename(self,company):
+		store_dao_object=store_dao()
+		return store_dao_object.get_internal_sitename(company)

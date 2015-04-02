@@ -277,6 +277,29 @@ td.text-right {
                         </div>
                     </div>
                 </div>
+                <div id="alert_commit" name="alert_commit" style="display:none;">
+              <div class="example-modal">
+                <div class="modal modal-info" style="display:block">
+                  <div class="modal-dialog" >
+                    <div class="modal-content" style="display: block;" >
+                                
+                      <div class="modal-header" style="background-color: #367fa9">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_commit()"><span aria-hidden="true" ><b style="color:white">x</b></span></button>
+                        <h4 class="modal-title" style="color:white">COMMIT</h4>
+                      </div>
+                      <div class="modal-body" style="background-color: #367fa9">
+                        <p style="color:white"><b>Do you want to commit ur previous changes??</b></p>
+                      </div>
+                    <div class="modal-footer" style="background-color: #367fa9">
+                      <button type="button" class="btn btn-default" id="commit_button" data-dismiss="modal" onclick="commit_alert()" >commit</button>
+                      <!--button type="button" class="btn btn-primary">Save changes</button-->
+                    </div>
+                  
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+            </div>
+          </div>
                 {%if session['write'] !='NO'%}
                 {%block add%}
                 {%endblock%}
@@ -319,19 +342,48 @@ td.text-right {
     </div>
 <script >
 var globId = {};
+//cookievalue= escape("NO");
+//document.cookie=cookievalue;
+//alert("Setting Cookies : " + "name=" + cookievalue );
 function remove_modal()
 {
     $("#help").css("display","none")
 }
+function remove_commit()
+{
+    localStorage.setItem("commit", null);
+    $("#alert_commit").css("display","none")
+    var company_name = document.getElementById("command").value;
+              // $.post("/display_suggestion", params={'command':x} );
+                 //window.open('/get_index_fields',_self)'"'
+              localStorage.setItem("prev_company",company_name);
+              metric = $( "#cur_param" ).text();
+              $("#help").css("display","none")
+              metric=metric.trim();
+              window.location = window.location.origin + '/display_suggestion' + '?command='+company_name+'&metric='+metric
+}
 
 function Company_Changed() {
-            var company_name = document.getElementById("command").value;
-         // $.post("/display_suggestion", params={'command':x} );
+            var commits = localStorage.getItem("commit");
+           
+            if(commits!="null")
+            {
+              //alert("1")
+              $("#alert_commit").css("display","block");
+
+
+            }
+            else
+            {
+              var company_name = document.getElementById("command").value;
+              // $.post("/display_suggestion", params={'command':x} );
                  //window.open('/get_index_fields',_self)'"'
-            metric = $( "#cur_param" ).text();
-            $("#help").css("display","none")
-            metric=metric.trim();
-            window.location = window.location.origin + '/display_suggestion' + '?command='+company_name+'&metric='+metric
+              localStorage.setItem("prev_company",company_name);
+              metric = $( "#cur_param" ).text();
+              $("#help").css("display","none")
+              metric=metric.trim();
+              window.location = window.location.origin + '/display_suggestion' + '?command='+company_name+'&metric='+metric
+            }
     }
     function popular_product()
     {
@@ -361,6 +413,7 @@ function Company_Changed() {
     }
     function remove_alert()
     {
+
       $("#alert_delete").css("display","none");
     
     }
@@ -368,10 +421,42 @@ function Company_Changed() {
     {
       //alert(globId.data);
       //alert(globId.function);
+      //globId.commit="commit";
+      //alert(globId.commit)
+      localStorage.setItem("commit", "commit");
+      var commits = localStorage.getItem("commit");
+            alert(commits);
+      //cookievalue= escape("commit");
+      //alert(commit)
       window.location=window.location.origin+"/"+globId.function+""+"?company="+company+"&data="+globId.data
       //$("#alert_delete").css("display","none");
     
     }
+    function commit_alert()
+    {
+      localStorage.setItem("commit", null);
+      //alert(localStorage.getItem("commit"))
+      //alert("2")
+      var prev_comp=localStorage.getItem("prev_company")
+      alert(localStorage.getItem("prev_company"))
+      $("#alert_commit").css("display","none")
+      $.ajax(
+        { 
+          type:"POST",url:"/commit",data:$("form").serialize()+"&prev_company="+prev_comp+"",success:function(response){
+            //response = JSON && JSON.parse(response) || $.parseJSON(response);
+            alert(response)
+        }
+      });
+      var company_name = document.getElementById("command").value;
+              // $.post("/display_suggestion", params={'command':x} );
+                 //window.open('/get_index_fields',_self)'"'
+              localStorage.setItem("prev_company",company_name);
+              metric = $( "#cur_param" ).text();
+              $("#help").css("display","none")
+              metric=metric.trim();
+              window.location = window.location.origin + '/display_suggestion' + '?command='+company_name+'&metric='+metric
+    }
+
 </script>
         <script src="dashboard_files/jquery.js"></script>
         <script src="dashboard_files/bootstrap.js" type="text/javascript"></script>
@@ -404,6 +489,21 @@ function Company_Changed() {
         <!-- AdminLTE for demo purposes -->
         <script src="dashboard_files/demo.js" type="text/javascript"></script>
         <script src="lib/sweet-alert.min.js"></script> <link rel="stylesheet" type="text/css" href="lib/sweet-alert.css">
+<script>
+function logout()
+{
+    var check_commit=localStorage.getItem("commit");
+    if(check_commit!="null")
+        {
+            $("#alert_commit").css("display","block");
+        }
+    else
+    {
+        window.location = window.location.origin + '/logout'
+    }
+
+}
+</script>
 
 </body>
 </html>    

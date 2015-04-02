@@ -84,6 +84,22 @@ def start():
     elif request.method=='GET':
         return render_template("signup.html")
 #-----------------------------------------------------------------#
+@app.route('/commit', methods=['POST','get'])
+def commit():
+    if "mail" in session:
+        if request.method=='POST':
+            data_dict=request.form.to_dict()
+            print data_dict
+            company=str(request.form['prev_company'])
+            service_obj=services()
+            site_internal_name=service_obj.get_internal_sitename(company)
+            #commit_response=service_obj.send_autosuggest_data(site_internal_name)
+
+            print(site_internal_name)
+            return '%s' % site_internal_name
+    else:
+        return redirect(url_for("login"))
+
 #-----------------------------------------------------------------#
 #--------------------------SIGN UP GET DATA-----------------------#
 
@@ -1064,13 +1080,14 @@ def admin_login():
         print data_dict
         user_name=str(request.form['mail'])
         password=str(request.form['password'])
-        #print user_name,password
+        print user_name,password
         #email_check=login_handler().email()
         service_obj=services()
         temp=service_obj.validate_admin(user_name,password)
         print temp 
         if(str(temp)=='valid'):
             session['admin'] = request.form['mail']
+            print session
             return '%s' % temp
         #return render_template("dashboard.html")
     else:

@@ -158,3 +158,742 @@
 2015-03-31 12:53:01,450 - log - INFO - no read permission
 2015-03-31 12:53:01,875 - log - INFO - simple login
 2015-03-31 12:53:17,961 - log - INFO - 16077
+2015-03-31 14:54:40,778 - log - INFO - company name stored in global variable
+2015-03-31 14:54:47,525 - log - INFO - parse_response_text
+2015-03-31 14:54:47,526 - log - INFO - email_check
+2015-03-31 14:54:47,526 - log - WARNING - pls use yours verified mail
+2015-03-31 14:54:47,533 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 14:54:50,864 - log - INFO - parse_response_text
+2015-03-31 14:54:50,865 - log - INFO - email_check
+2015-03-31 14:54:50,865 - log - WARNING - pls use yours verified mail
+2015-03-31 14:54:50,871 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 14:55:48,862 - log - INFO - parse_response_text
+2015-03-31 14:55:48,862 - log - INFO - email_check
+2015-03-31 14:55:48,865 - log - INFO - (u'ya29.RwERR8OcpkgQe-DTVL-uTNDoNFv8RTwBcFlTk00ux7yV6lq0LjbhibmFO071_t-cYhoNlXNvGi6eRw', '')
+2015-03-31 14:55:48,866 - log - INFO - no write permission
+2015-03-31 14:55:48,866 - log - INFO - (u'ya29.RwERR8OcpkgQe-DTVL-uTNDoNFv8RTwBcFlTk00ux7yV6lq0LjbhibmFO071_t-cYhoNlXNvGi6eRw', '')
+2015-03-31 14:55:48,866 - log - INFO - delete permission
+2015-03-31 14:55:49,600 - log - INFO - simple login
+2015-03-31 14:56:09,972 - log - INFO - 16077
+2015-03-31 15:29:58,593 - log - INFO - 16077
+2015-03-31 15:30:12,067 - log - INFO - 16119
+2015-03-31 15:30:19,014 - log - INFO - 16122
+2015-03-31 15:30:37,828 - log - INFO - 16122
+2015-03-31 15:30:47,273 - log - INFO - 16077
+2015-03-31 15:30:59,268 - log - INFO - 16155
+2015-03-31 15:44:04,243 - log - INFO - 16155
+2015-03-31 15:46:57,566 - log - INFO - 16155
+2015-03-31 15:47:15,440 - log - INFO - 16155
+2015-03-31 15:47:15,785 - log - DEBUG - error in chossing metrics
+2015-03-31 15:47:26,017 - log - INFO - 16077
+2015-03-31 15:47:26,431 - log - DEBUG - error in chossing metrics
+2015-03-31 15:47:37,045 - log - INFO - delete suggestion alok.kumar@unbxd.com:brand:16077
+2015-03-31 15:47:37,045 - log - INFO - suggestion deleted
+2015-03-31 15:47:37,073 - log - INFO - 16077
+2015-03-31 15:47:37,401 - log - DEBUG - error in chossing metrics
+2015-03-31 15:47:48,106 - log - INFO - 8407
+2015-03-31 15:47:48,596 - log - DEBUG - error in chossing metrics
+2015-03-31 15:48:46,794 - log - INFO - 8407
+2015-03-31 15:48:47,434 - log - DEBUG - error in chossing metrics
+2015-03-31 15:49:59,488 - log - INFO - 8407
+2015-03-31 15:50:02,137 - log - DEBUG - error in chossing metrics
+2015-03-31 15:52:01,253 - log - INFO - 8407
+2015-03-31 15:52:02,544 - log - DEBUG - error in chossing metrics
+2015-03-31 15:52:45,839 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 15:52:49,341 - log - INFO - parse_response_text
+2015-03-31 15:52:49,341 - log - INFO - email_check
+2015-03-31 15:52:49,344 - log - INFO - (u'ya29.RwEEHaeAHBqwAK-G55mSE-AKSXjCFmNRpDr_OikiiY2UWmeTeNwFQtQTkq8m52dMnubrKkZFtAhrXA', '')
+2015-03-31 15:52:49,344 - log - INFO - no write permission
+2015-03-31 15:52:49,344 - log - INFO - (u'ya29.RwEEHaeAHBqwAK-G55mSE-AKSXjCFmNRpDr_OikiiY2UWmeTeNwFQtQTkq8m52dMnubrKkZFtAhrXA', '')
+2015-03-31 15:52:49,344 - log - INFO - delete permission
+2015-03-31 15:54:18,705 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 15:54:22,107 - log - INFO - parse_response_text
+2015-03-31 15:54:22,107 - log - INFO - email_check
+2015-03-31 15:54:22,110 - log - INFO - (u'ya29.RwFv3NvqjH8dk4DLYjhehwtA8XHcZJ0qpQ0Q1hmYGj4Mqs3RmwySeH24NX9r-d9y114v5oRyF4gafA', '')
+2015-03-31 15:54:22,111 - log - INFO - no write permission
+2015-03-31 15:54:22,111 - log - INFO - (u'ya29.RwFv3NvqjH8dk4DLYjhehwtA8XHcZJ0qpQ0Q1hmYGj4Mqs3RmwySeH24NX9r-d9y114v5oRyF4gafA', '')
+2015-03-31 15:54:22,111 - log - INFO - delete permission
+2015-03-31 15:54:22,822 - log - INFO - simple login
+2015-03-31 15:56:08,608 - log - INFO - 16077
+2015-03-31 15:56:08,987 - log - DEBUG - error in chossing metrics
+2015-03-31 15:56:26,792 - log - INFO - delete suggestion alok.kumar@unbxd.com:price_color:16077
+2015-03-31 15:56:26,792 - log - INFO - suggestion deleted
+2015-03-31 15:56:26,798 - log - INFO - 16077
+2015-03-31 15:56:27,109 - log - DEBUG - error in chossing metrics
+2015-03-31 15:58:31,625 - log - INFO - 16077
+2015-03-31 15:58:34,040 - log - DEBUG - error in chossing metrics
+2015-03-31 15:59:26,078 - log - INFO - 16077
+2015-03-31 15:59:26,823 - log - DEBUG - error in chossing metrics
+2015-03-31 15:59:51,472 - log - INFO - delete suggestion alok.kumar@unbxd.com:brand_productDescription:16077
+2015-03-31 15:59:51,472 - log - INFO - suggestion deleted
+2015-03-31 15:59:51,479 - log - INFO - 16077
+2015-03-31 15:59:51,898 - log - DEBUG - error in chossing metrics
+2015-03-31 16:00:50,799 - log - INFO - 16077
+2015-03-31 16:00:53,155 - log - DEBUG - error in chossing metrics
+2015-03-31 16:01:36,207 - log - INFO - 16077
+2015-03-31 16:01:36,822 - log - DEBUG - error in chossing metrics
+2015-03-31 16:02:58,859 - log - INFO - delete suggestion alok.kumar@unbxd.com:url:16077
+2015-03-31 16:02:58,860 - log - INFO - suggestion deleted
+2015-03-31 16:02:58,873 - log - INFO - 16077
+2015-03-31 16:02:59,200 - log - DEBUG - error in chossing metrics
+2015-03-31 16:04:22,935 - log - INFO - 16077
+2015-03-31 16:04:25,061 - log - DEBUG - error in chossing metrics
+2015-03-31 16:04:42,026 - log - INFO - delete suggestion alok.kumar@unbxd.com:category_price:16077
+2015-03-31 16:04:42,026 - log - INFO - suggestion deleted
+2015-03-31 16:04:42,033 - log - INFO - 16077
+2015-03-31 16:04:42,348 - log - DEBUG - error in chossing metrics
+2015-03-31 16:10:52,515 - log - INFO - 16077
+2015-03-31 16:10:53,197 - log - DEBUG - error in chossing metrics
+2015-03-31 16:11:15,264 - log - INFO - delete suggestion alok.kumar@unbxd.com:category:16077
+2015-03-31 16:11:15,265 - log - INFO - suggestion deleted
+2015-03-31 16:11:15,272 - log - INFO - 16077
+2015-03-31 16:11:15,566 - log - DEBUG - error in chossing metrics
+2015-03-31 16:11:31,769 - log - INFO - 8407
+2015-03-31 16:11:34,248 - log - DEBUG - error in chossing metrics
+2015-03-31 16:16:29,706 - log - INFO - 8407
+2015-03-31 16:16:30,364 - log - DEBUG - error in chossing metrics
+2015-03-31 16:16:39,184 - log - INFO - 16077
+2015-03-31 16:16:39,613 - log - DEBUG - error in chossing metrics
+2015-03-31 16:16:51,835 - log - INFO - delete suggestion alok.kumar@unbxd.com:price:16077
+2015-03-31 16:16:51,835 - log - INFO - suggestion deleted
+2015-03-31 16:16:51,842 - log - INFO - 16077
+2015-03-31 16:16:52,132 - log - DEBUG - error in chossing metrics
+2015-03-31 16:17:00,142 - log - INFO - 8407
+2015-03-31 16:17:00,579 - log - DEBUG - error in chossing metrics
+2015-03-31 16:17:43,813 - log - INFO - 16077
+2015-03-31 16:17:44,171 - log - DEBUG - error in chossing metrics
+2015-03-31 16:17:47,788 - log - INFO - 16077
+2015-03-31 16:17:48,085 - log - DEBUG - error in chossing metrics
+2015-03-31 16:17:59,676 - log - INFO - delete suggestion alok.kumar@unbxd.com:description:16077
+2015-03-31 16:17:59,676 - log - INFO - suggestion deleted
+2015-03-31 16:17:59,683 - log - INFO - 16077
+2015-03-31 16:18:00,072 - log - DEBUG - error in chossing metrics
+2015-03-31 16:19:44,282 - log - INFO - 16077
+2015-03-31 16:19:44,628 - log - DEBUG - error in chossing metrics
+2015-03-31 16:20:09,860 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:21:20,401 - log - INFO - parse_response_text
+2015-03-31 16:21:20,401 - log - INFO - email_check
+2015-03-31 16:21:20,404 - log - INFO - (u'ya29.RwGJXSCrvip7B7J3iN2aGnElZC5EbMjJy9JuOgmj5W3apg8EmFWR3GzMBk52A3oThfcgXmnxnLpT0A', '')
+2015-03-31 16:21:20,404 - log - INFO - no write permission
+2015-03-31 16:21:20,404 - log - INFO - (u'ya29.RwGJXSCrvip7B7J3iN2aGnElZC5EbMjJy9JuOgmj5W3apg8EmFWR3GzMBk52A3oThfcgXmnxnLpT0A', '')
+2015-03-31 16:21:20,404 - log - INFO - delete permission
+2015-03-31 16:26:32,278 - log - INFO - simple login
+2015-03-31 16:26:41,180 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:28:59,848 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:45:29,241 - log - INFO - 16077
+2015-03-31 16:45:29,333 - log - DEBUG - [Errno -2] Name or service not known
+2015-03-31 16:45:29,347 - log - INFO - error in alert
+2015-03-31 16:45:45,583 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:46:40,234 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:47:09,050 - log - INFO - parse_response_text
+2015-03-31 16:47:09,050 - log - INFO - email_check
+2015-03-31 16:47:09,055 - log - INFO - (u'ya29.RwGdjacpMsbcajs_GylmoRBBB-v-pGAuppKY8_vbys_4to-ZZ0_cTWTa7fpIwXeTxlNWNGQe2aydYQ', '')
+2015-03-31 16:47:09,055 - log - INFO - no write permission
+2015-03-31 16:47:09,056 - log - INFO - (u'ya29.RwGdjacpMsbcajs_GylmoRBBB-v-pGAuppKY8_vbys_4to-ZZ0_cTWTa7fpIwXeTxlNWNGQe2aydYQ', '')
+2015-03-31 16:47:09,056 - log - INFO - delete permission
+2015-03-31 16:47:09,921 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:47:19,114 - log - INFO - parse_response_text
+2015-03-31 16:47:19,114 - log - INFO - email_check
+2015-03-31 16:47:19,120 - log - INFO - (u'ya29.RwGAhvIjAUfDFBEuMsMc32-MBqK8w8uihg8Z4EgejprhTtuIXN5kYutCCTU0n0SYrwjf3F93uERFIw', '')
+2015-03-31 16:47:19,120 - log - INFO - no write permission
+2015-03-31 16:47:19,120 - log - INFO - (u'ya29.RwGAhvIjAUfDFBEuMsMc32-MBqK8w8uihg8Z4EgejprhTtuIXN5kYutCCTU0n0SYrwjf3F93uERFIw', '')
+2015-03-31 16:47:19,120 - log - INFO - delete permission
+2015-03-31 16:47:20,039 - log - INFO - simple login
+2015-03-31 16:48:00,575 - log - INFO - 16077
+2015-03-31 16:48:01,048 - log - DEBUG - error in chossing metrics
+2015-03-31 16:48:12,160 - log - INFO - delete suggestion alok.kumar@unbxd.com:imageUrl:16077
+2015-03-31 16:48:12,160 - log - INFO - suggestion deleted
+2015-03-31 16:48:12,176 - log - INFO - 16077
+2015-03-31 16:48:12,605 - log - DEBUG - error in chossing metrics
+2015-03-31 16:48:21,487 - log - INFO - 8407
+2015-03-31 16:48:43,297 - log - DEBUG - error in chossing metrics
+2015-03-31 16:56:53,473 - log - INFO - 8407
+2015-03-31 16:56:55,909 - log - DEBUG - error in chossing metrics
+2015-03-31 16:57:04,647 - log - INFO - 16077
+2015-03-31 16:57:05,025 - log - DEBUG - error in chossing metrics
+2015-03-31 16:57:15,529 - log - INFO - delete suggestion alok.kumar@unbxd.com:categories:16077
+2015-03-31 16:57:15,529 - log - INFO - suggestion deleted
+2015-03-31 16:57:15,537 - log - INFO - 16077
+2015-03-31 16:57:15,884 - log - DEBUG - error in chossing metrics
+2015-03-31 16:57:29,383 - log - INFO - delete suggestion alok.kumar@unbxd.com:categories:16077
+2015-03-31 16:57:29,384 - log - INFO - suggestion deleted
+2015-03-31 16:57:29,393 - log - INFO - 16077
+2015-03-31 16:57:29,721 - log - DEBUG - error in chossing metrics
+2015-03-31 16:57:40,306 - log - INFO - 8407
+2015-03-31 16:57:41,007 - log - DEBUG - error in chossing metrics
+2015-03-31 16:58:18,052 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-03-31 16:58:19,860 - log - INFO - read permission
+2015-03-31 16:58:19,860 - log - INFO - delete permission
+2015-03-31 16:58:36,350 - log - INFO - read permission
+2015-03-31 16:58:36,350 - log - INFO - delete permission
+2015-03-31 16:58:37,326 - log - INFO - simple login
+2015-03-31 16:58:49,139 - log - INFO - 16077
+2015-03-31 16:58:49,638 - log - DEBUG - error in chossing metrics
+2015-03-31 16:58:57,088 - log - INFO - add suggestion alok.gupta1785@gmail.com::16077
+2015-03-31 16:58:57,088 - log - INFO - updated the suggestion data
+2015-03-31 16:58:57,096 - log - INFO - 16077
+2015-03-31 16:58:57,462 - log - DEBUG - error in chossing metrics
+2015-03-31 16:59:08,678 - log - INFO - add suggestion alok.gupta1785@gmail.com:brand:16077
+2015-03-31 16:59:08,678 - log - INFO - updated the suggestion data
+2015-03-31 16:59:08,689 - log - INFO - 16077
+2015-03-31 16:59:08,997 - log - DEBUG - error in chossing metrics
+2015-03-31 16:59:19,292 - log - INFO - add suggestion alok.gupta1785@gmail.com:categories:16077
+2015-03-31 16:59:19,292 - log - INFO - updated the suggestion data
+2015-03-31 16:59:19,298 - log - INFO - 16077
+2015-03-31 16:59:19,669 - log - DEBUG - error in chossing metrics
+2015-03-31 16:59:29,622 - log - INFO - add suggestion alok.gupta1785@gmail.com:category:16077
+2015-03-31 16:59:29,622 - log - INFO - updated the suggestion data
+2015-03-31 16:59:29,635 - log - INFO - 16077
+2015-03-31 16:59:29,993 - log - DEBUG - error in chossing metrics
+2015-03-31 16:59:40,346 - log - INFO - add suggestion alok.gupta1785@gmail.com:id:16077
+2015-03-31 16:59:40,346 - log - INFO - updated the suggestion data
+2015-03-31 16:59:40,354 - log - INFO - 16077
+2015-03-31 16:59:40,754 - log - DEBUG - error in chossing metrics
+2015-03-31 16:59:53,331 - log - INFO - delete suggestion alok.gupta1785@gmail.com:id:16077
+2015-03-31 16:59:53,331 - log - INFO - suggestion deleted
+2015-03-31 16:59:53,339 - log - INFO - 16077
+2015-03-31 16:59:54,607 - log - DEBUG - error in chossing metrics
+2015-03-31 17:00:04,807 - log - INFO - 8407
+2015-03-31 17:00:05,489 - log - DEBUG - error in chossing metrics
+2015-03-31 17:06:03,553 - log - INFO - 8407
+2015-03-31 17:06:04,919 - log - DEBUG - error in chossing metrics
+2015-03-31 17:06:14,460 - log - INFO - 16077
+2015-03-31 17:06:15,075 - log - DEBUG - error in chossing metrics
+2015-03-31 17:06:28,638 - log - INFO - delete suggestion alok.gupta1785@gmail.com:category:16077
+2015-03-31 17:06:28,638 - log - INFO - suggestion deleted
+2015-03-31 17:06:28,645 - log - INFO - 16077
+2015-03-31 17:06:28,992 - log - DEBUG - error in chossing metrics
+2015-03-31 17:06:37,043 - log - INFO - 8407
+2015-03-31 17:06:37,955 - log - DEBUG - error in chossing metrics
+2015-03-31 17:09:51,207 - log - INFO - 16077
+2015-03-31 17:09:51,676 - log - DEBUG - error in chossing metrics
+2015-03-31 17:10:03,517 - log - INFO - delete suggestion alok.gupta1785@gmail.com:categories:16077
+2015-03-31 17:10:03,517 - log - INFO - suggestion deleted
+2015-03-31 17:10:03,525 - log - INFO - 16077
+2015-03-31 17:10:03,851 - log - DEBUG - error in chossing metrics
+2015-03-31 17:11:02,036 - log - INFO - 8407
+2015-03-31 17:11:02,839 - log - DEBUG - error in chossing metrics
+2015-03-31 17:11:34,050 - log - INFO - 16077
+2015-03-31 17:11:34,428 - log - DEBUG - error in chossing metrics
+2015-03-31 17:11:58,931 - log - INFO - 16076
+2015-03-31 17:11:59,400 - log - DEBUG - error in chossing metrics
+2015-03-31 17:13:54,078 - log - INFO - 16076
+2015-03-31 17:13:54,470 - log - DEBUG - error in chossing metrics
+2015-04-01 07:39:56,128 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:39:59,211 - log - INFO - parse_response_text
+2015-04-01 07:39:59,211 - log - INFO - email_check
+2015-04-01 07:39:59,216 - log - INFO - (u'ya29.SAHnBjBz9C6Mj6KpU0OeJplc8AiNnh8l71rk-TJnYJOgtVzYlRJkdqFjsrcpyDew7OKhLQ7IwrkumQ', '')
+2015-04-01 07:39:59,216 - log - INFO - no write permission
+2015-04-01 07:39:59,216 - log - INFO - (u'ya29.SAHnBjBz9C6Mj6KpU0OeJplc8AiNnh8l71rk-TJnYJOgtVzYlRJkdqFjsrcpyDew7OKhLQ7IwrkumQ', '')
+2015-04-01 07:39:59,216 - log - INFO - delete permission
+2015-04-01 07:39:59,792 - log - INFO - simple login
+2015-04-01 07:40:35,894 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:40:53,854 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:42:21,193 - log - INFO - parse_response_text
+2015-04-01 07:42:21,193 - log - INFO - email_check
+2015-04-01 07:42:21,195 - log - INFO - (u'ya29.SAGbXzVdxsDuXEcamC60symey_pWQhpZVrMUQVs7Vo8dxUREHoDv5rlgvKjn4r3u5VxEGCLKcJ02_w', '')
+2015-04-01 07:42:21,195 - log - INFO - no write permission
+2015-04-01 07:42:21,195 - log - INFO - (u'ya29.SAGbXzVdxsDuXEcamC60symey_pWQhpZVrMUQVs7Vo8dxUREHoDv5rlgvKjn4r3u5VxEGCLKcJ02_w', '')
+2015-04-01 07:42:21,196 - log - INFO - delete permission
+2015-04-01 07:42:21,584 - log - INFO - simple login
+2015-04-01 07:42:39,215 - log - INFO - 16077
+2015-04-01 07:42:39,997 - log - DEBUG - error in chossing metrics
+2015-04-01 07:43:04,222 - log - INFO - delete suggestion alok.kumar@unbxd.com:brand:16077
+2015-04-01 07:43:04,222 - log - INFO - suggestion deleted
+2015-04-01 07:43:04,251 - log - INFO - 16077
+2015-04-01 07:43:04,543 - log - DEBUG - error in chossing metrics
+2015-04-01 07:43:15,498 - log - INFO - 8407
+2015-04-01 07:43:15,968 - log - DEBUG - error in chossing metrics
+2015-04-01 07:44:04,838 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:44:07,882 - log - INFO - read permission
+2015-04-01 07:44:07,882 - log - INFO - delete permission
+2015-04-01 07:44:10,422 - log - INFO - read permission
+2015-04-01 07:44:10,423 - log - INFO - delete permission
+2015-04-01 07:44:12,050 - log - INFO - read permission
+2015-04-01 07:44:12,050 - log - INFO - delete permission
+2015-04-01 07:44:14,631 - log - INFO - read permission
+2015-04-01 07:44:14,631 - log - INFO - delete permission
+2015-04-01 07:44:16,234 - log - INFO - read permission
+2015-04-01 07:44:16,234 - log - INFO - delete permission
+2015-04-01 07:44:17,686 - log - INFO - read permission
+2015-04-01 07:44:17,686 - log - INFO - delete permission
+2015-04-01 07:44:29,421 - log - INFO - read permission
+2015-04-01 07:44:29,421 - log - INFO - delete permission
+2015-04-01 07:44:45,969 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:45:21,759 - log - INFO - 8407
+2015-04-01 07:45:22,347 - log - DEBUG - error in chossing metrics
+2015-04-01 07:45:32,579 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:45:38,482 - log - INFO - parse_response_text
+2015-04-01 07:45:38,482 - log - INFO - email_check
+2015-04-01 07:45:38,490 - log - INFO - (u'ya29.SAE-2pbvRMCzomU5b_SzpJXJG0arFQ4hb7Zn8N4YibuCzS5yuwxRnYaNHQdU0MqvnRp4rDI9kHgf9g', '')
+2015-04-01 07:45:38,490 - log - INFO - no write permission
+2015-04-01 07:45:38,490 - log - INFO - (u'ya29.SAE-2pbvRMCzomU5b_SzpJXJG0arFQ4hb7Zn8N4YibuCzS5yuwxRnYaNHQdU0MqvnRp4rDI9kHgf9g', '')
+2015-04-01 07:45:38,490 - log - INFO - delete permission
+2015-04-01 07:45:38,931 - log - INFO - simple login
+2015-04-01 07:45:55,698 - log - INFO - 16077
+2015-04-01 07:45:56,435 - log - DEBUG - error in chossing metrics
+2015-04-01 07:46:10,893 - log - INFO - delete suggestion alok.kumar@unbxd.com:brand_category:16077
+2015-04-01 07:46:10,893 - log - INFO - suggestion deleted
+2015-04-01 07:46:10,929 - log - INFO - 16077
+2015-04-01 07:46:11,262 - log - INFO - error in alert
+2015-04-01 07:46:26,170 - log - INFO - 8407
+2015-04-01 07:46:26,627 - log - INFO - error in alert
+2015-04-01 07:47:05,554 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 07:47:11,674 - log - INFO - parse_response_text
+2015-04-01 07:47:11,674 - log - INFO - email_check
+2015-04-01 07:47:11,677 - log - INFO - (u'ya29.SAFTsxzYneOWNGWqTtS4aSKxRMmvP3Hpd6W7nMn_f27Z0yWhTRvituiJSPGE6yrjEy6BL94nIKOL_Q', '')
+2015-04-01 07:47:11,677 - log - INFO - write permission
+2015-04-01 07:47:11,677 - log - INFO - (u'ya29.SAFTsxzYneOWNGWqTtS4aSKxRMmvP3Hpd6W7nMn_f27Z0yWhTRvituiJSPGE6yrjEy6BL94nIKOL_Q', '')
+2015-04-01 07:47:11,677 - log - INFO - delete permission
+2015-04-01 07:47:12,155 - log - INFO - simple login
+2015-04-01 07:47:26,537 - log - INFO - 16077
+2015-04-01 07:47:31,672 - log - INFO - error in alert
+2015-04-01 07:49:01,443 - log - INFO - 16077
+2015-04-01 07:49:01,924 - log - DEBUG - error in chossing metrics
+2015-04-01 07:49:13,716 - log - INFO - add suggestions alok.kumar@unbxd.com:brand:16077
+2015-04-01 07:49:13,716 - log - INFO - updated the suggestion data
+2015-04-01 07:49:13,765 - log - INFO - 16077
+2015-04-01 07:49:14,083 - log - DEBUG - error in chossing metrics
+2015-04-01 07:49:25,454 - log - INFO - add suggestions alok.kumar@unbxd.com:categories:16077
+2015-04-01 07:49:25,454 - log - INFO - updated the suggestion data
+2015-04-01 07:49:25,490 - log - INFO - 16077
+2015-04-01 07:49:25,805 - log - DEBUG - error in chossing metrics
+2015-04-01 07:49:37,562 - log - INFO - delete suggestion alok.kumar@unbxd.com:a_b:16077
+2015-04-01 07:49:37,562 - log - INFO - suggestion deleted
+2015-04-01 07:49:37,598 - log - INFO - 16077
+2015-04-01 07:49:37,920 - log - DEBUG - error in chossing metrics
+2015-04-01 07:49:51,010 - log - INFO - 8407
+2015-04-01 07:49:51,582 - log - DEBUG - error in chossing metrics
+2015-04-01 07:55:28,456 - log - INFO - 8407
+2015-04-01 07:55:28,975 - log - DEBUG - error in chossing metrics
+2015-04-01 07:55:38,329 - log - INFO - 8407
+2015-04-01 07:55:38,766 - log - DEBUG - error in chossing metrics
+2015-04-01 07:55:47,294 - log - INFO - 16077
+2015-04-01 07:55:47,622 - log - DEBUG - error in chossing metrics
+2015-04-01 07:57:40,934 - log - INFO - 16077
+2015-04-01 07:57:41,323 - log - DEBUG - error in chossing metrics
+2015-04-01 07:58:03,332 - log - INFO - delete suggestion alok.kumar@unbxd.com:categories:16077
+2015-04-01 07:58:03,332 - log - INFO - suggestion deleted
+2015-04-01 07:58:03,384 - log - INFO - 16077
+2015-04-01 07:58:03,677 - log - DEBUG - error in chossing metrics
+2015-04-01 07:58:33,514 - log - INFO - add suggestions alok.kumar@unbxd.com:description:16077
+2015-04-01 07:58:33,514 - log - INFO - updated the suggestion data
+2015-04-01 07:58:33,543 - log - INFO - 16077
+2015-04-01 07:58:33,842 - log - DEBUG - error in chossing metrics
+2015-04-01 07:58:47,432 - log - INFO - delete suggestion alok.kumar@unbxd.com:description:16077
+2015-04-01 07:58:47,432 - log - INFO - suggestion deleted
+2015-04-01 07:58:47,465 - log - INFO - 16077
+2015-04-01 07:58:47,760 - log - DEBUG - error in chossing metrics
+2015-04-01 07:59:05,749 - log - INFO - 8407
+2015-04-01 07:59:06,214 - log - DEBUG - error in chossing metrics
+2015-04-01 07:59:14,412 - log - INFO - 8407
+2015-04-01 07:59:14,805 - log - DEBUG - error in chossing metrics
+2015-04-01 08:06:10,427 - log - INFO - simple login
+2015-04-01 08:06:26,986 - log - INFO - 16077
+2015-04-01 08:06:27,388 - log - DEBUG - error in chossing metrics
+2015-04-01 08:06:38,738 - log - INFO - add suggestions alok.kumar@unbxd.com:color:16077
+2015-04-01 08:06:38,738 - log - INFO - updated the suggestion data
+2015-04-01 08:06:38,775 - log - INFO - 16077
+2015-04-01 08:06:39,116 - log - DEBUG - error in chossing metrics
+2015-04-01 08:06:48,892 - log - INFO - add suggestions alok.kumar@unbxd.com:id:16077
+2015-04-01 08:06:48,892 - log - INFO - updated the suggestion data
+2015-04-01 08:06:48,933 - log - INFO - 16077
+2015-04-01 08:06:49,229 - log - DEBUG - error in chossing metrics
+2015-04-01 08:07:01,198 - log - INFO - delete suggestion alok.kumar@unbxd.com:id:16077
+2015-04-01 08:07:01,198 - log - INFO - suggestion deleted
+2015-04-01 08:07:01,234 - log - INFO - 16077
+2015-04-01 08:07:01,608 - log - DEBUG - error in chossing metrics
+2015-04-01 08:07:12,311 - log - INFO - 8407
+2015-04-01 08:07:12,827 - log - DEBUG - error in chossing metrics
+2015-04-01 08:07:34,554 - log - INFO - 16077
+2015-04-01 08:07:34,990 - log - DEBUG - error in chossing metrics
+2015-04-01 08:07:57,800 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-01 08:08:04,588 - log - INFO - parse_response_text
+2015-04-01 08:08:04,588 - log - INFO - email_check
+2015-04-01 08:08:04,591 - log - INFO - (u'ya29.SAGxtz-DTEgFYrHgV6bBnKZaJwJL0Em3_fe-yV8AmVL_opQZoo3nJoM4UyWUgYyYe3AyDq6Pp_7YgA', '')
+2015-04-01 08:08:04,591 - log - INFO - write permission
+2015-04-01 08:08:04,591 - log - INFO - (u'ya29.SAGxtz-DTEgFYrHgV6bBnKZaJwJL0Em3_fe-yV8AmVL_opQZoo3nJoM4UyWUgYyYe3AyDq6Pp_7YgA', '')
+2015-04-01 08:08:04,591 - log - INFO - delete permission
+2015-04-01 08:08:05,117 - log - INFO - simple login
+2015-04-01 08:08:23,424 - log - INFO - 16077
+2015-04-01 08:08:23,770 - log - DEBUG - error in chossing metrics
+2015-04-02 10:52:23,740 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 10:52:52,953 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 10:52:59,746 - log - INFO - parse_response_text
+2015-04-02 10:52:59,747 - log - INFO - email_check
+2015-04-02 10:52:59,750 - log - INFO - (u'ya29.SQHDFZHcEsq-vDDagdeK1Ep7YbjAip_tVb9HvRoJ0e9hG8E9kePF86XIQ0hH7O4Eh1TUffR9GfUWKw', '')
+2015-04-02 10:52:59,750 - log - INFO - write permission
+2015-04-02 10:52:59,750 - log - INFO - (u'ya29.SQHDFZHcEsq-vDDagdeK1Ep7YbjAip_tVb9HvRoJ0e9hG8E9kePF86XIQ0hH7O4Eh1TUffR9GfUWKw', '')
+2015-04-02 10:52:59,750 - log - INFO - delete permission
+2015-04-02 10:53:00,510 - log - INFO - simple login
+2015-04-02 10:54:50,410 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 11:07:39,863 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 11:07:42,568 - log - INFO - read permission
+2015-04-02 11:07:42,568 - log - INFO - delete permission
+2015-04-02 11:07:57,588 - log - INFO - read permission
+2015-04-02 11:07:57,588 - log - INFO - delete permission
+2015-04-02 11:31:07,569 - log - INFO - simple login
+2015-04-02 11:37:03,244 - log - INFO - parse_response_text
+2015-04-02 11:37:03,266 - log - INFO - email_check
+2015-04-02 11:37:03,269 - log - INFO - (u'ya29.SQGdv0hI5HnPRPXukhPuz6XkaexSEExLhxfF1vP5KyYttvJBqP3ELWfovs9HySpy9fG5Ew5Jkw9xLw', '')
+2015-04-02 11:37:03,269 - log - INFO - write permission
+2015-04-02 11:37:03,269 - log - INFO - (u'ya29.SQGdv0hI5HnPRPXukhPuz6XkaexSEExLhxfF1vP5KyYttvJBqP3ELWfovs9HySpy9fG5Ew5Jkw9xLw', '')
+2015-04-02 11:37:03,269 - log - INFO - delete permission
+2015-04-02 11:37:03,982 - log - INFO - simple login
+2015-04-02 11:52:04,508 - log - INFO - 16077
+2015-04-02 11:52:06,542 - log - DEBUG - error in chossing metrics
+2015-04-02 11:52:30,597 - log - INFO - delete suggestion alok.kumar@unbxd.com:color:16077
+2015-04-02 11:52:30,597 - log - INFO - suggestion deleted
+2015-04-02 11:52:30,609 - log - INFO - 16077
+2015-04-02 11:52:32,775 - log - DEBUG - error in chossing metrics
+2015-04-02 11:52:46,043 - log - INFO - 8407
+2015-04-02 11:52:46,589 - log - DEBUG - error in chossing metrics
+2015-04-02 11:53:51,216 - log - INFO - 16077
+2015-04-02 11:53:51,652 - log - DEBUG - error in chossing metrics
+2015-04-02 11:53:59,889 - log - INFO - 16077
+2015-04-02 11:54:00,026 - log - DEBUG - No JSON object could be decoded
+2015-04-02 11:54:00,035 - log - INFO - error in alert
+2015-04-02 11:59:03,992 - log - INFO - error in alert
+2015-04-02 12:21:23,406 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 12:21:26,693 - log - INFO - parse_response_text
+2015-04-02 12:21:26,693 - log - INFO - email_check
+2015-04-02 12:21:26,696 - log - INFO - (u'ya29.SQEUZf53tFreAMh0ODLBosTxHvP5Fvi6Rt04WS3NeKLGxtZLG47W0pkXe8igtUIVd8qX3GfTK4Cfuw', '')
+2015-04-02 12:21:26,696 - log - INFO - write permission
+2015-04-02 12:21:26,697 - log - INFO - (u'ya29.SQEUZf53tFreAMh0ODLBosTxHvP5Fvi6Rt04WS3NeKLGxtZLG47W0pkXe8igtUIVd8qX3GfTK4Cfuw', '')
+2015-04-02 12:21:26,697 - log - INFO - delete permission
+2015-04-02 12:21:27,650 - log - INFO - simple login
+2015-04-02 12:29:46,427 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 12:30:03,323 - log - INFO - parse_response_text
+2015-04-02 12:30:03,323 - log - INFO - email_check
+2015-04-02 12:30:03,326 - log - INFO - (u'ya29.SQG4sYbS-a2zPP7cPig_-N4fZfKQbfPvAT6TkpeKTUwM_W_IUsCoEIAAeAtPwa-zZH4cBGYrc2tkKA', '')
+2015-04-02 12:30:03,326 - log - INFO - write permission
+2015-04-02 12:30:03,326 - log - INFO - (u'ya29.SQG4sYbS-a2zPP7cPig_-N4fZfKQbfPvAT6TkpeKTUwM_W_IUsCoEIAAeAtPwa-zZH4cBGYrc2tkKA', '')
+2015-04-02 12:30:03,326 - log - INFO - delete permission
+2015-04-02 12:30:04,159 - log - INFO - simple login
+2015-04-02 12:35:50,163 - log - INFO - 8407
+2015-04-02 12:35:59,106 - log - DEBUG - error in chossing metrics
+2015-04-02 12:36:17,129 - log - INFO - 16077
+2015-04-02 12:36:42,151 - log - DEBUG - [Errno -2] Name or service not known
+2015-04-02 12:36:42,159 - log - INFO - error in alert
+2015-04-02 12:36:54,212 - log - INFO - 8407
+2015-04-02 12:36:55,238 - log - INFO - error in alert
+2015-04-02 12:37:11,966 - log - INFO - 16077
+2015-04-02 12:37:12,379 - log - DEBUG - error in chossing metrics
+2015-04-02 12:37:27,487 - log - INFO - add suggestions alok.kumar@unbxd.com:category:16077
+2015-04-02 12:37:27,487 - log - INFO - updated the suggestion data
+2015-04-02 12:37:27,496 - log - INFO - 16077
+2015-04-02 12:37:27,822 - log - DEBUG - error in chossing metrics
+2015-04-02 12:37:42,367 - log - INFO - delete suggestion alok.kumar@unbxd.com:category:16077
+2015-04-02 12:37:42,367 - log - INFO - suggestion deleted
+2015-04-02 12:37:42,374 - log - INFO - 16077
+2015-04-02 12:37:42,941 - log - DEBUG - error in chossing metrics
+2015-04-02 12:38:36,275 - log - INFO - 8407
+2015-04-02 12:38:37,246 - log - DEBUG - error in chossing metrics
+2015-04-02 12:47:39,778 - log - INFO - 16077
+2015-04-02 12:47:40,201 - log - DEBUG - error in chossing metrics
+2015-04-02 12:47:59,062 - log - INFO - add suggestions alok.kumar@unbxd.com:url:16077
+2015-04-02 12:47:59,062 - log - INFO - updated the suggestion data
+2015-04-02 12:47:59,069 - log - INFO - 16077
+2015-04-02 12:47:59,390 - log - DEBUG - error in chossing metrics
+2015-04-02 12:48:15,075 - log - INFO - delete suggestion alok.kumar@unbxd.com:url:16077
+2015-04-02 12:48:15,075 - log - INFO - suggestion deleted
+2015-04-02 12:48:15,086 - log - INFO - 16077
+2015-04-02 12:48:15,407 - log - DEBUG - error in chossing metrics
+2015-04-02 12:48:34,437 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 12:48:37,959 - log - INFO - parse_response_text
+2015-04-02 12:48:37,959 - log - INFO - email_check
+2015-04-02 12:48:37,961 - log - INFO - (u'ya29.SQG05c5623ZfgGYfbzm_tGnwz0BwF2uR_kexfhqucUUP3s-9q7h3yYIwZXtuFkJdMJNfT-R1hA1lWw', '')
+2015-04-02 12:48:37,961 - log - INFO - write permission
+2015-04-02 12:48:37,962 - log - INFO - (u'ya29.SQG05c5623ZfgGYfbzm_tGnwz0BwF2uR_kexfhqucUUP3s-9q7h3yYIwZXtuFkJdMJNfT-R1hA1lWw', '')
+2015-04-02 12:48:37,962 - log - INFO - delete permission
+2015-04-02 12:54:35,551 - log - INFO - parse_response_text
+2015-04-02 12:54:35,552 - log - INFO - email_check
+2015-04-02 12:54:35,555 - log - INFO - (u'ya29.SQG05c5623ZfgGYfbzm_tGnwz0BwF2uR_kexfhqucUUP3s-9q7h3yYIwZXtuFkJdMJNfT-R1hA1lWw', '')
+2015-04-02 12:54:35,555 - log - INFO - write permission
+2015-04-02 12:54:35,555 - log - INFO - (u'ya29.SQG05c5623ZfgGYfbzm_tGnwz0BwF2uR_kexfhqucUUP3s-9q7h3yYIwZXtuFkJdMJNfT-R1hA1lWw', '')
+2015-04-02 12:54:35,555 - log - INFO - delete permission
+2015-04-02 12:54:36,378 - log - INFO - simple login
+2015-04-02 12:54:40,331 - log - INFO - simple login
+2015-04-02 12:54:53,726 - log - INFO - simple login
+2015-04-02 12:55:04,464 - log - INFO - simple login
+2015-04-02 12:55:15,458 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 12:55:17,681 - log - INFO - read permission
+2015-04-02 12:55:18,157 - log - INFO - simple login
+2015-04-02 12:59:35,390 - log - INFO - 8407
+2015-04-02 12:59:37,883 - log - DEBUG - error in chossing metrics
+2015-04-02 12:59:42,919 - log - INFO - 16077
+2015-04-02 12:59:43,605 - log - DEBUG - error in chossing metrics
+2015-04-02 12:59:52,760 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 12:59:55,728 - log - INFO - read permission
+2015-04-02 12:59:56,610 - log - INFO - simple login
+2015-04-02 13:13:11,640 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:13:15,358 - log - INFO - parse_response_text
+2015-04-02 13:13:15,358 - log - INFO - email_check
+2015-04-02 13:13:15,361 - log - INFO - (u'ya29.SQG12dpq96rj631NEgauoqxoxOydYxIIS4_WOWUoWHBR7GJRkKLVOYd409wZLM1aKnoU41AgcJzQhA', '')
+2015-04-02 13:13:15,361 - log - INFO - write permission
+2015-04-02 13:13:15,361 - log - INFO - (u'ya29.SQG12dpq96rj631NEgauoqxoxOydYxIIS4_WOWUoWHBR7GJRkKLVOYd409wZLM1aKnoU41AgcJzQhA', '')
+2015-04-02 13:13:15,361 - log - INFO - delete permission
+2015-04-02 13:13:36,010 - log - INFO - parse_response_text
+2015-04-02 13:13:36,010 - log - INFO - email_check
+2015-04-02 13:13:36,014 - log - INFO - (u'ya29.SQG12dpq96rj631NEgauoqxoxOydYxIIS4_WOWUoWHBR7GJRkKLVOYd409wZLM1aKnoU41AgcJzQhA', '')
+2015-04-02 13:13:36,014 - log - INFO - write permission
+2015-04-02 13:13:36,014 - log - INFO - (u'ya29.SQG12dpq96rj631NEgauoqxoxOydYxIIS4_WOWUoWHBR7GJRkKLVOYd409wZLM1aKnoU41AgcJzQhA', '')
+2015-04-02 13:13:36,014 - log - INFO - delete permission
+2015-04-02 13:13:36,824 - log - INFO - simple login
+2015-04-02 13:13:43,957 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:13:51,384 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:13:55,022 - log - INFO - read permission
+2015-04-02 13:13:55,476 - log - INFO - simple login
+2015-04-02 13:14:14,439 - log - INFO - 16077
+2015-04-02 13:14:14,832 - log - DEBUG - error in chossing metrics
+2015-04-02 13:14:24,670 - log - INFO - add suggestion alok.gupta1785@gmail.com:categories:16077
+2015-04-02 13:14:24,671 - log - INFO - updated the suggestion data
+2015-04-02 13:14:24,678 - log - INFO - 16077
+2015-04-02 13:14:24,981 - log - DEBUG - error in chossing metrics
+2015-04-02 13:14:35,366 - log - INFO - add suggestion alok.gupta1785@gmail.com:price:16077
+2015-04-02 13:14:35,366 - log - INFO - updated the suggestion data
+2015-04-02 13:14:35,372 - log - INFO - 16077
+2015-04-02 13:14:35,690 - log - DEBUG - error in chossing metrics
+2015-04-02 13:14:42,413 - log - INFO - 8407
+2015-04-02 13:14:42,876 - log - DEBUG - error in chossing metrics
+2015-04-02 13:15:31,430 - log - INFO - 8407
+2015-04-02 13:15:32,001 - log - DEBUG - error in chossing metrics
+2015-04-02 13:17:17,146 - log - INFO - 8407
+2015-04-02 13:17:20,572 - log - DEBUG - error in chossing metrics
+2015-04-02 13:18:11,640 - log - INFO - 8407
+2015-04-02 13:18:14,063 - log - DEBUG - error in chossing metrics
+2015-04-02 13:19:55,461 - log - INFO - 8407
+2015-04-02 13:19:56,029 - log - DEBUG - error in chossing metrics
+2015-04-02 13:20:22,760 - log - INFO - 16077
+2015-04-02 13:20:23,232 - log - DEBUG - error in chossing metrics
+2015-04-02 13:20:31,948 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:20:36,158 - log - INFO - read permission
+2015-04-02 13:20:36,720 - log - INFO - simple login
+2015-04-02 13:21:35,339 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:21:37,886 - log - INFO - read permission
+2015-04-02 13:21:37,886 - log - INFO - delete permission
+2015-04-02 13:21:38,524 - log - INFO - simple login
+2015-04-02 13:21:49,726 - log - INFO - 16077
+2015-04-02 13:22:00,116 - log - DEBUG - error in chossing metrics
+2015-04-02 13:22:06,807 - log - INFO - 8407
+2015-04-02 13:22:07,289 - log - DEBUG - error in chossing metrics
+2015-04-02 13:22:14,528 - log - INFO - 16077
+2015-04-02 13:22:14,850 - log - DEBUG - error in chossing metrics
+2015-04-02 13:22:27,169 - log - INFO - delete suggestion alok.gupta1785@gmail.com:price:16077
+2015-04-02 13:22:27,169 - log - INFO - suggestion deleted
+2015-04-02 13:22:27,177 - log - INFO - 16077
+2015-04-02 13:22:27,506 - log - DEBUG - error in chossing metrics
+2015-04-02 13:22:55,810 - log - INFO - 8407
+2015-04-02 13:22:56,357 - log - DEBUG - error in chossing metrics
+2015-04-02 13:23:02,292 - log - INFO - 16077
+2015-04-02 13:23:02,740 - log - DEBUG - error in chossing metrics
+2015-04-02 13:23:08,728 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:24:15,599 - log - INFO - read permission
+2015-04-02 13:24:15,599 - log - INFO - delete permission
+2015-04-02 13:24:16,156 - log - INFO - simple login
+2015-04-02 13:24:26,939 - log - INFO - 8407
+2015-04-02 13:24:27,586 - log - DEBUG - error in chossing metrics
+2015-04-02 13:24:35,510 - log - INFO - 16077
+2015-04-02 13:24:35,849 - log - DEBUG - error in chossing metrics
+2015-04-02 13:24:47,585 - log - INFO - add suggestion alok.gupta1785@gmail.com:id:16077
+2015-04-02 13:24:47,585 - log - INFO - updated the suggestion data
+2015-04-02 13:24:47,591 - log - INFO - 16077
+2015-04-02 13:24:47,886 - log - DEBUG - error in chossing metrics
+2015-04-02 13:24:59,294 - log - INFO - delete suggestion alok.gupta1785@gmail.com:id:16077
+2015-04-02 13:24:59,294 - log - INFO - suggestion deleted
+2015-04-02 13:24:59,300 - log - INFO - 16077
+2015-04-02 13:24:59,629 - log - DEBUG - error in chossing metrics
+2015-04-02 13:26:18,682 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:50:32,316 - log - INFO - read permission
+2015-04-02 13:50:32,317 - log - INFO - delete permission
+2015-04-02 13:50:33,053 - log - INFO - simple login
+2015-04-02 13:50:43,646 - log - INFO - 16077
+2015-04-02 13:50:44,003 - log - DEBUG - error in chossing metrics
+2015-04-02 13:50:57,125 - log - INFO - delete suggestion alok.gupta1785@gmail.com:categories:16077
+2015-04-02 13:50:57,126 - log - INFO - suggestion deleted
+2015-04-02 13:50:57,138 - log - INFO - 16077
+2015-04-02 13:50:57,457 - log - DEBUG - error in chossing metrics
+2015-04-02 13:51:11,875 - log - INFO - delete suggestion alok.gupta1785@gmail.com:categories:16077
+2015-04-02 13:51:11,875 - log - INFO - suggestion deleted
+2015-04-02 13:51:11,884 - log - INFO - 16077
+2015-04-02 13:51:12,237 - log - DEBUG - error in chossing metrics
+2015-04-02 13:52:31,923 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 13:52:34,266 - log - INFO - read permission
+2015-04-02 13:52:34,266 - log - INFO - delete permission
+2015-04-02 13:52:35,218 - log - INFO - simple login
+2015-04-02 13:52:44,582 - log - INFO - 16077
+2015-04-02 13:52:44,966 - log - DEBUG - error in chossing metrics
+2015-04-02 13:52:55,185 - log - INFO - add suggestion alok.gupta1785@gmail.com:color:16077
+2015-04-02 13:52:55,185 - log - INFO - updated the suggestion data
+2015-04-02 13:52:55,194 - log - INFO - 16077
+2015-04-02 13:53:00,488 - log - DEBUG - error in chossing metrics
+2015-04-02 13:53:12,187 - log - INFO - delete suggestion alok.gupta1785@gmail.com:color:16077
+2015-04-02 13:53:12,187 - log - INFO - suggestion deleted
+2015-04-02 13:53:12,196 - log - INFO - 16077
+2015-04-02 13:53:12,530 - log - DEBUG - error in chossing metrics
+2015-04-02 13:54:18,556 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 14:42:15,056 - log - INFO - read permission
+2015-04-02 14:42:15,056 - log - INFO - delete permission
+2015-04-02 14:42:30,800 - log - INFO - read permission
+2015-04-02 14:42:30,800 - log - INFO - delete permission
+2015-04-02 14:42:31,721 - log - INFO - simple login
+2015-04-02 14:42:43,421 - log - INFO - 16077
+2015-04-02 14:42:43,657 - log - INFO - error in alert
+2015-04-02 14:47:50,812 - log - INFO - error in alert
+2015-04-02 14:48:01,952 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 14:48:39,624 - log - INFO - parse_response_text
+2015-04-02 14:48:39,624 - log - INFO - email_check
+2015-04-02 14:48:39,626 - log - INFO - (u'ya29.SQEsEaYCCO5IylZ2kc8XQBEQr0189SEO9A_Gog613rEqmwjQHvyMAZSYeEWxhF_Nr9X4YTZzW0YueA', '')
+2015-04-02 14:48:39,626 - log - INFO - write permission
+2015-04-02 14:48:39,626 - log - INFO - (u'ya29.SQEsEaYCCO5IylZ2kc8XQBEQr0189SEO9A_Gog613rEqmwjQHvyMAZSYeEWxhF_Nr9X4YTZzW0YueA', '')
+2015-04-02 14:48:39,626 - log - INFO - no delete permisssion
+2015-04-02 14:48:40,337 - log - INFO - simple login
+2015-04-02 14:49:36,683 - log - INFO - 8407
+2015-04-02 14:49:37,341 - log - DEBUG - error in chossing metrics
+2015-04-02 14:49:49,885 - log - INFO - 16077
+2015-04-02 14:49:50,317 - log - DEBUG - error in chossing metrics
+2015-04-02 14:50:07,069 - log - INFO - add suggestions alok.kumar@unbxd.com:color:16077
+2015-04-02 14:50:07,069 - log - INFO - updated the suggestion data
+2015-04-02 14:50:07,116 - log - INFO - 16077
+2015-04-02 14:50:07,455 - log - DEBUG - error in chossing metrics
+2015-04-02 14:50:22,611 - log - INFO - add suggestions alok.kumar@unbxd.com:description:16077
+2015-04-02 14:50:22,611 - log - INFO - updated the suggestion data
+2015-04-02 14:50:22,653 - log - INFO - 16077
+2015-04-02 14:50:23,081 - log - DEBUG - error in chossing metrics
+2015-04-02 14:50:46,533 - log - INFO - add suggestions alok.kumar@unbxd.com:title:8407
+2015-04-02 14:50:46,534 - log - INFO - updated the suggestion data
+2015-04-02 14:50:46,583 - log - INFO - 8407
+2015-04-02 14:50:47,437 - log - DEBUG - error in chossing metrics
+2015-04-02 14:51:42,942 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 14:51:49,423 - log - INFO - parse_response_text
+2015-04-02 14:51:49,423 - log - INFO - email_check
+2015-04-02 14:51:49,425 - log - INFO - (u'ya29.SQFa00EgYLZh5PUXX2b4XIsyqkCxKUq2GnW8t2FsJAWa_b6S1uIJSRhA-F0oUT9Km0BvftPe_k15hw', '')
+2015-04-02 14:51:49,426 - log - INFO - write permission
+2015-04-02 14:51:49,426 - log - INFO - (u'ya29.SQFa00EgYLZh5PUXX2b4XIsyqkCxKUq2GnW8t2FsJAWa_b6S1uIJSRhA-F0oUT9Km0BvftPe_k15hw', '')
+2015-04-02 14:51:49,426 - log - INFO - delete permission
+2015-04-02 14:51:50,139 - log - INFO - simple login
+2015-04-02 14:52:03,108 - log - INFO - 8407
+2015-04-02 14:52:03,665 - log - DEBUG - error in chossing metrics
+2015-04-02 14:52:15,993 - log - INFO - delete suggestion alok.kumar@unbxd.com:title:8407
+2015-04-02 14:52:15,993 - log - INFO - suggestion deleted
+2015-04-02 14:52:16,042 - log - INFO - 8407
+2015-04-02 14:52:16,439 - log - DEBUG - error in chossing metrics
+2015-04-02 14:52:40,947 - log - INFO - 16077
+2015-04-02 14:52:41,304 - log - DEBUG - error in chossing metrics
+2015-04-02 14:53:54,856 - log - INFO - 16077
+2015-04-02 14:53:55,259 - log - DEBUG - error in chossing metrics
+2015-04-02 14:54:07,619 - log - INFO - delete suggestion alok.kumar@unbxd.com:description:16077
+2015-04-02 14:54:07,620 - log - INFO - suggestion deleted
+2015-04-02 14:54:07,666 - log - INFO - 16077
+2015-04-02 14:54:08,065 - log - DEBUG - error in chossing metrics
+2015-04-02 14:54:43,323 - log - INFO - 11888
+2015-04-02 14:54:45,050 - log - DEBUG - error in chossing metrics
+2015-04-02 14:55:18,825 - log - INFO - 16077
+2015-04-02 14:55:19,151 - log - DEBUG - error in chossing metrics
+2015-04-02 14:56:42,527 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 14:56:50,599 - log - INFO - parse_response_text
+2015-04-02 14:56:50,599 - log - INFO - email_check
+2015-04-02 14:56:50,601 - log - INFO - (u'ya29.SQE225HmhTo89vhhgOmm2GD6VLqsT6zWBve9yL6pNgXwYODGCOlNCBLw5_Zce_IOhfeRmchSwsLj4Q', '')
+2015-04-02 14:56:50,601 - log - INFO - write permission
+2015-04-02 14:56:50,601 - log - INFO - (u'ya29.SQE225HmhTo89vhhgOmm2GD6VLqsT6zWBve9yL6pNgXwYODGCOlNCBLw5_Zce_IOhfeRmchSwsLj4Q', '')
+2015-04-02 14:56:50,601 - log - INFO - delete permission
+2015-04-02 14:56:52,352 - log - INFO - simple login
+2015-04-02 14:57:05,070 - log - INFO - 16077
+2015-04-02 14:57:05,489 - log - DEBUG - error in chossing metrics
+2015-04-02 14:57:17,629 - log - INFO - add suggestions alok.kumar@unbxd.com:gender:16077
+2015-04-02 14:57:17,629 - log - INFO - updated the suggestion data
+2015-04-02 14:57:17,636 - log - INFO - 16077
+2015-04-02 14:57:18,043 - log - DEBUG - error in chossing metrics
+2015-04-02 14:59:21,982 - log - INFO - 16742
+2015-04-02 14:59:22,333 - log - DEBUG - error in chossing metrics
+2015-04-02 15:04:02,870 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 15:04:35,248 - log - INFO - no read permission
+2015-04-02 15:04:35,995 - log - INFO - simple login
+2015-04-02 15:04:46,669 - log - INFO - 16077
+2015-04-02 15:04:47,464 - log - DEBUG - error in chossing metrics
+2015-04-02 15:04:55,296 - log - INFO - 16077
+2015-04-02 15:05:00,107 - log - INFO - 16077
+2015-04-02 15:05:07,515 - log - INFO - 8407
+2015-04-02 15:05:13,125 - log - INFO - 8407
+2015-04-02 15:05:19,200 - log - INFO - 8407
+2015-04-02 15:05:23,964 - log - INFO - 8407
+2015-04-02 15:05:24,415 - log - DEBUG - error in chossing metrics
+2015-04-02 15:05:39,362 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 15:05:58,468 - log - INFO - parse_response_text
+2015-04-02 15:05:58,468 - log - INFO - email_check
+2015-04-02 15:05:58,473 - log - INFO - (u'ya29.SQF5SRhOJXd39ULdiCbDbYGBPIZa79z7JdwcXcmwEf4JnmPuPS63KNcol2LW-POqoEmZt2scQunC7Q', '')
+2015-04-02 15:05:58,473 - log - INFO - no write permission
+2015-04-02 15:05:58,473 - log - INFO - (u'ya29.SQF5SRhOJXd39ULdiCbDbYGBPIZa79z7JdwcXcmwEf4JnmPuPS63KNcol2LW-POqoEmZt2scQunC7Q', '')
+2015-04-02 15:05:58,473 - log - INFO - delete permission
+2015-04-02 15:05:59,122 - log - INFO - simple login
+2015-04-02 15:06:10,475 - log - INFO - 16077
+2015-04-02 15:06:10,825 - log - DEBUG - error in chossing metrics
+2015-04-02 15:06:32,757 - log - INFO - delete suggestion alok.kumar@unbxd.com:gender:16077
+2015-04-02 15:06:32,757 - log - INFO - suggestion deleted
+2015-04-02 15:06:32,766 - log - INFO - 16077
+2015-04-02 15:06:33,081 - log - DEBUG - error in chossing metrics
+2015-04-02 15:07:10,917 - log - INFO - 16742
+2015-04-02 15:07:11,211 - log - DEBUG - error in chossing metrics
+2015-04-02 15:07:28,169 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 15:07:36,574 - log - INFO - parse_response_text
+2015-04-02 15:07:36,574 - log - INFO - email_check
+2015-04-02 15:07:36,576 - log - INFO - (u'ya29.SQHg_SWQ4ZXfMp-uRjngpCjbYLlcM-jvyqDhFWfBS8Y40F83o1F4pFN3oCHfRnw3WlC3aP-o2bL0Sg', '')
+2015-04-02 15:07:36,577 - log - INFO - no write permission
+2015-04-02 15:07:36,577 - log - INFO - (u'ya29.SQHg_SWQ4ZXfMp-uRjngpCjbYLlcM-jvyqDhFWfBS8Y40F83o1F4pFN3oCHfRnw3WlC3aP-o2bL0Sg', '')
+2015-04-02 15:07:36,577 - log - INFO - delete permission
+2015-04-02 15:07:37,859 - log - INFO - simple login
+2015-04-02 15:07:45,306 - log - INFO - 16742
+2015-04-02 15:07:45,506 - log - INFO - error in alert
+2015-04-02 15:08:00,712 - log - INFO - 16742
+2015-04-02 15:08:01,029 - log - DEBUG - error in chossing metrics
+2015-04-02 15:08:16,693 - log - INFO - delete suggestion alok.kumar@unbxd.com:color_category:16742
+2015-04-02 15:08:16,693 - log - INFO - suggestion deleted
+2015-04-02 15:08:16,704 - log - INFO - 16742
+2015-04-02 15:08:17,182 - log - DEBUG - error in chossing metrics
+2015-04-02 15:08:32,939 - log - INFO - 16742
+2015-04-02 15:08:33,245 - log - DEBUG - error in chossing metrics
+2015-04-02 15:08:43,715 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 15:10:10,536 - log - INFO - parse_response_text
+2015-04-02 15:10:10,537 - log - INFO - email_check
+2015-04-02 15:10:10,540 - log - INFO - (u'ya29.SQFkjUm_3W-EGXfwjNl20EbB0hlRACn1HYpOkZDCdzbE193x9ShTnRfyJqZLzVZZ-Is9DTIPJAKVfg', '')
+2015-04-02 15:10:10,540 - log - INFO - write permission
+2015-04-02 15:10:10,540 - log - INFO - (u'ya29.SQFkjUm_3W-EGXfwjNl20EbB0hlRACn1HYpOkZDCdzbE193x9ShTnRfyJqZLzVZZ-Is9DTIPJAKVfg', '')
+2015-04-02 15:10:10,541 - log - INFO - no delete permisssion
+2015-04-02 15:10:11,262 - log - INFO - simple login
+2015-04-02 15:10:22,710 - log - INFO - 16077
+2015-04-02 15:10:23,945 - log - DEBUG - error in chossing metrics
+2015-04-02 15:10:38,153 - log - INFO - add suggestions alok.kumar@unbxd.com:color:16077
+2015-04-02 15:10:38,153 - log - INFO - updated the suggestion data
+2015-04-02 15:10:38,160 - log - INFO - 16077
+2015-04-02 15:10:40,734 - log - DEBUG - error in chossing metrics
+2015-04-02 15:10:52,447 - log - INFO - add suggestions alok.kumar@unbxd.com:description:16077
+2015-04-02 15:10:52,447 - log - INFO - updated the suggestion data
+2015-04-02 15:10:52,454 - log - INFO - 16077
+2015-04-02 15:10:52,762 - log - DEBUG - error in chossing metrics
+2015-04-02 15:11:08,079 - log - INFO - 8407
+2015-04-02 15:11:08,528 - log - DEBUG - error in chossing metrics
+2015-04-02 15:11:19,661 - log - INFO - 16742
+2015-04-02 15:11:19,999 - log - DEBUG - error in chossing metrics
+2015-04-02 15:12:12,965 - log - INFO - add suggestions alok.kumar@unbxd.com:color*category:16742
+2015-04-02 15:12:12,965 - log - INFO - updated the suggestion data
+2015-04-02 15:12:12,973 - log - INFO - 16742
+2015-04-02 15:12:13,304 - log - DEBUG - error in chossing metrics
+2015-04-02 15:12:54,860 - log - INFO - 16077
+2015-04-02 15:12:55,205 - log - DEBUG - error in chossing metrics
+2015-04-02 15:13:00,493 - log - INFO - 16077
+2015-04-02 15:13:05,682 - log - CRITICAL - read ,write,delete,mail,gmail session clear
+2015-04-02 15:25:02,235 - log - INFO - parse_response_text
+2015-04-02 15:25:02,235 - log - INFO - email_check
+2015-04-02 15:25:02,240 - log - INFO - (u'ya29.SQHc9lupziJ7T5K5HD8-RlsrimOZKVEyVrXjsPHBE7s0OWOyoHVsY_dZ6G0GArOwa3iDKS9v9rjOjw', '')
+2015-04-02 15:25:02,240 - log - INFO - write permission
+2015-04-02 15:25:02,240 - log - INFO - (u'ya29.SQHc9lupziJ7T5K5HD8-RlsrimOZKVEyVrXjsPHBE7s0OWOyoHVsY_dZ6G0GArOwa3iDKS9v9rjOjw', '')
+2015-04-02 15:25:02,240 - log - INFO - no delete permisssion
+2015-04-02 15:25:03,159 - log - INFO - simple login
+2015-04-02 15:25:17,173 - log - INFO - 16077
+2015-04-02 15:25:17,554 - log - DEBUG - error in chossing metrics
+2015-04-02 15:25:29,979 - log - INFO - add suggestions alok.kumar@unbxd.com:category:16077
+2015-04-02 15:25:29,980 - log - INFO - updated the suggestion data
+2015-04-02 15:25:29,986 - log - INFO - 16077
+2015-04-02 15:25:30,304 - log - DEBUG - error in chossing metrics
+2015-04-02 15:26:01,632 - log - INFO - 16742
+2015-04-02 15:26:02,001 - log - DEBUG - error in chossing metrics

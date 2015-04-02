@@ -52,6 +52,7 @@ class site_request(MySQLModel):
     #print "3"
     site_id = pw.PrimaryKeyField()
     site_name=pw.CharField()
+    site_name_internal=pw.CharField()
 class login_Admin_Data(MySQLModel):
     #print "3"
     class Meta:
