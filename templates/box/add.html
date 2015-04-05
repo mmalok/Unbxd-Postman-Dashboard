@@ -40,8 +40,9 @@
                         <br/>
                         <form class="form-group">
                             <input type='text' id="test_field" class="form-control" placeholder="Display the added values"/>
-                            <button type="button" class="btn btn-primary btn-flat" onclick="add_suggestions()">Add</button>
+                            <button type="button" class="btn btn-primary btn-flat" onclick="add_suggestions()" id="click_to_add">Click to Add</button>
                             <button type="button" class="btn btn-primary btn-flat pull-right" onclick="save_suggestion()">Save</button>
+                            <br/>
                             
                         </form>
         </div><!-- /.box-body -->
@@ -49,24 +50,28 @@
       </div> 
 </div>              
 <script>
-Metric=($( "#cur_param" ).text());
-if(Metric.indexOf("Popular")>-1)
+Metrics=($( "#cur_param" ).text());
+if(Metrics.indexOf("Popular")>-1)
 {
     document.getElementById("condition").style.display="block"
+    document.getElementById("click_to_add").style.display="none"
+    document.getElementById("test_field").style.display="none"
 }
 
 function add_suggestions()
 {
-    alert("1")
+    //alert("1")
     Field=document.getElementById("field_command").value;
     Display_Added=document.getElementById("test_field")
-    Metric=($( "#cur_param" ).text());
+    Metrics=($( "#cur_param" ).text());
     //alert(Metric)
-    if(Metric.indexOf("Field")>-1)
+    if(Field.indexOf("insert")!=0)
+    {
+    if(Metrics.indexOf("Field")>-1)
     {
         Display_Added.value=Field;
     }
-    else if(Metric.indexOf("Popular")>-1)
+    else if(Metrics.indexOf("Popular")>-1)
     {
 
     }
@@ -74,22 +79,24 @@ function add_suggestions()
     {
         Display_Added.value=Display_Added.value+"*"+Field;
     }
+  }
 }
 function save_suggestion()
 {
     localStorage.setItem("commit", "commit");
     company=document.getElementById("command").value
     Display_Added=document.getElementById("test_field").value
-    Metric=$( "#cur_param" ).text();
+    Metrics=$( "#cur_param" ).text();
     //alert(Metric)
-    if(Metric.indexOf("Field")>-1)
+    if(Metrics.indexOf("Field")>-1)
     {
         window.location=window.location.origin+"/add_in_field"+"?company="+company+"&fields="+Display_Added
     }
-    else if(Metric.indexOf("Popular")>-1)
+    else if(Metrics.indexOf("Popular")>-1)
     {
         condition=document.getElementById("condition").value
         field=document.getElementById("field_command").value
+        if(field.indexOf("insert")!=0)
         window.location=window.location.origin+"/add_popular"+"?company="+company+"&fields="+field+"&condition="+condition
     }
     else
