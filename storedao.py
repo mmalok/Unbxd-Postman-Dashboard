@@ -1,3 +1,4 @@
+import requests
 from dao.model import *
 class store_dao:	
 	def store_user(self,username,password):
@@ -91,3 +92,9 @@ class store_dao:
 			if(site_id==company):
 				return str(record.site_name_internal)
 		return "nothing found"
+	def send_autosuggest_data(self,site_name_internal):
+		url='http://beta.feed.unbxdapi.com/sendAutosuggestDataToSearch?iSiteName='+site_name_internal
+		print url
+		response=requests.post(url)
+		print response.text
+		return response.text

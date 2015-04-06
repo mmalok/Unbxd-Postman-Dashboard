@@ -36,3 +36,6 @@ class services:
 	def get_internal_sitename(self,company):
 		store_dao_object=store_dao()
 		return store_dao_object.get_internal_sitename(company)
+	def send_autosuggest_data(self,site_internal_name):
+		store_dao_object=store_dao()
+		return store_dao_object.send_autosuggest_data(site_internal_name)

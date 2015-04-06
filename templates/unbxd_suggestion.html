@@ -2,7 +2,7 @@
 <html style="min-height: 1767px;"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
-        <title>AdminLTE | Dashboard</title>
+        <title>Dashboard</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link href="dashboard_files/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="dashboard_files/font-awesome.css" rel="stylesheet" type="text/css">
@@ -36,7 +36,11 @@
         <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
-
+.modal-background {
+    background-color: green;
+   
+   
+}
 
 div.table-title {
    display: block;
@@ -425,7 +429,7 @@ function Company_Changed() {
       //alert(globId.commit)
       localStorage.setItem("commit", "commit");
       var commits = localStorage.getItem("commit");
-            alert(commits);
+            //alert(commits);
       //cookievalue= escape("commit");
       //alert(commit)
       window.location=window.location.origin+"/"+globId.function+""+"?company="+company+"&data="+globId.data
@@ -438,13 +442,12 @@ function Company_Changed() {
       //alert(localStorage.getItem("commit"))
       //alert("2")
       var prev_comp=localStorage.getItem("prev_company")
-      alert(localStorage.getItem("prev_company"))
-      $("#alert_commit").css("display","none")
+      //alert(localStorage.getItem("prev_company"))
+      //$("#alert_commit").css("display","none")
       $.ajax(
-        { 
-          type:"POST",url:"/commit",data:$("form").serialize()+"&prev_company="+prev_comp+"",success:function(response){
+        {async:false, type:"POST",url:"/commit",data:$("form").serialize()+"&prev_company="+prev_comp+"",success:function(response){
             //response = JSON && JSON.parse(response) || $.parseJSON(response);
-            alert(response)
+            //alert("1");
         }
       });
       var company_name = document.getElementById("command").value;

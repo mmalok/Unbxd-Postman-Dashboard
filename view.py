@@ -86,20 +86,42 @@ def start():
 #-----------------------------------------------------------------#
 @app.route('/commit', methods=['POST','get'])
 def commit():
-    if "mail" in session:
-        if request.method=='POST':
-            data_dict=request.form.to_dict()
-            print data_dict
-            company=str(request.form['prev_company'])
-            service_obj=services()
-            site_internal_name=service_obj.get_internal_sitename(company)
-            #commit_response=service_obj.send_autosuggest_data(site_internal_name)
+    try:
+        if "mail" in session:
+            if request.method=='POST':
+                data_dict=request.form.to_dict()
+                print data_dict
+                company=str(request.form['prev_company'])
+                service_obj=services()
+                site_internal_name=service_obj.get_internal_sitename(company)
+                commit_response=service_obj.send_autosuggest_data(site_internal_name)
 
-            print(site_internal_name)
-            return '%s' % site_internal_name
-    else:
-        return redirect(url_for("login"))
-
+                try:
+                    print session['gmail']['email']
+                    logger.info("commit"+str(session['gmail']['email'])+":"+site_internal_name+":"+company)
+                except:
+                    logger.info("delete suggestion "+str(session['mail'])+":"+site_internal_name+":"+company)
+                TEXT="this email id "+str(session['gmail']['email'])+"commited in "+site_internal_name+"company"+company
+                print TEXT
+                message = """\From: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, TEXT)
+                print message       
+                #server = smtplib.SMTP(SERVER) 
+                server = smtplib.SMTP("smtp.gmail.com", 587) #or port 465 doesn't seem to work!
+                server.ehlo()
+                server.starttls()
+                server.login(gmail_user, gmail_pwd)
+                server.sendmail(FROM, TO, message)
+                server.quit()
+                server.close()                
+                print(site_internal_name)
+                return "%s" % "commited"
+                print "s"
+        else:
+            return redirect(url_for("login"))
+    except Exception as e:
+        print e
+        return "%s" % e
+        #return redirect(url_for("logout"))
 #-----------------------------------------------------------------#
 #--------------------------SIGN UP GET DATA-----------------------#
 
@@ -564,7 +586,7 @@ def add_suggestion_data():
             #print message
             if message!="":
                 services=handler()
-                return '%s' % services.infield(message)
+                return 'ervices.infield(message)
             else:
                 return render_template("dashboard.html")
         else:
@@ -597,7 +619,7 @@ def add_suggestion_data():
             #print message
             if message!="":
                 services=handler()
-                return '%s' % services.infield(message)
+                return 'ervices.infield(message)
             else:
                 return render_template("dashboard.html")
         else:
@@ -623,7 +645,7 @@ def add_suggestion_data():
             #print message
             if message!="":
                 services=handler()
-                return '%s' % services.infield(message)
+                return 'ervices.infield(message)
             else:
                 return render_template("dashboard.html")
         else:
@@ -657,7 +679,7 @@ def add_suggestion_data():
             #print message
             if message!="":
                 services=handler()
-                return '%s' % services.infield(message)
+                return 'ervices.infield(message)
             else:
                 return render_template("dashboard.html")
         else:
@@ -778,7 +800,7 @@ def get_popular_input_data():
                     api=unbxd.api.PostmanApi(host="feed.unbxdapi.com")
                     products=api.infield.delete(data=handler_data)
                     #print products
-                    return '%s' % products
+                    return 'roducts
                 
                 else:
                     return render_template("dashboard.html")
