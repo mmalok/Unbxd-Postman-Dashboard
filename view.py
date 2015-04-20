@@ -91,7 +91,11 @@ def commit():
             if request.method=='POST':
                 data_dict=request.form.to_dict()
                 print data_dict
-                company=str(request.form['prev_company'])
+                total_data=str(request.form['total_data'])
+                total_data=total_data.split("::")
+                company=str(total_data[0])
+
+                
                 service_obj=services()
                 site_internal_name=service_obj.get_internal_sitename(company)
                 commit_response=service_obj.send_autosuggest_data(site_internal_name)
@@ -101,7 +105,7 @@ def commit():
                     logger.info("commit"+str(session['gmail']['email'])+":"+site_internal_name+":"+company)
                 except:
                     logger.info("delete suggestion "+str(session['mail'])+":"+site_internal_name+":"+company)
-                TEXT="this email id "+str(session['gmail']['email'])+"commited in "+site_internal_name+"company"+company
+                TEXT="following changes made by the user "+str(session['gmail']['email'])+"\n "+total_data[1]+"\n"+"email id "+str(session['gmail']['email'])+" commited in "+site_internal_name+" siteId"+company
                 print TEXT
                 message = """\From: %s\nTo: %s\nSubject: %s\n\n%s""" % (FROM, ", ".join(TO), SUBJECT, TEXT)
                 print message       
@@ -115,7 +119,7 @@ def commit():
                 server.close()                
                 print(site_internal_name)
                 return "%s" % "commited"
-                print "s"
+                
         else:
             return redirect(url_for("login"))
     except Exception as e:
@@ -179,7 +183,7 @@ def dashboard():
                     verify_email_id=verify_email[-9:]
                     if(verify_email_id !='unbxd.com'):
                         logger.warn("pls use yours verified mail")
-                        return redirect(url_for("logout"))
+                        return redirect(url_for("email_logout"))
                     service_obj=services()
                     user_db=service_obj.check(verify_email)
                     if(user_db=='new user'):
@@ -600,7 +604,6 @@ def add_suggestion_data():
     #data_object.save_message(processed_text)
 
     return render_template("dashboard.html")
-'''
 #------------------------------------------------------------>
 #----------------------delete popular searchable  ----------->
 @app.route('/delete_popular_searchable_field')
@@ -610,7 +613,7 @@ def delete_popular_searchable_field():
             return render_template("delete_popular_product_searchable_field.html")
     else:
         return redirect(url_for('login'))
-'''
+
 @app.route('/add_suggestion_data', methods=['POST','get'])
 def add_suggestion_data():
     try:
@@ -822,9 +825,12 @@ def read_only_data():
     try:
         if "mail" in session:                                       
             try:
+                print "read_only_data"
                 service_obj=services()
-                data=service_obj.read_data("alok")
-                data=str(data).split(" ")
+                data=service_obj.read_data()
+                print "data"
+                #print (data)
+                data=(data).split(" ")
                 outer=[]
                 for entry in data[0:-1]:
                     inner=[]
@@ -832,6 +838,7 @@ def read_only_data():
                     inner.append(entry[0])
                     inner.append(entry[1])
                     outer.append(inner)
+                print outer
                 return outer
                 
             except Exception as e:
@@ -857,6 +864,16 @@ def logout():
     session.pop('gmail', None)
     glob['company']=[]
     return redirect(url_for('login'))
+@app.route('/email_logout', methods=['POST','get'])
+def email_logout():
+    logger.critical("read ,write,delete,mail,gmail session clear")
+    session.pop('read',None)
+    session.pop('write', None)
+    session.pop('delete',None)
+    session.pop('mail', None)
+    session.pop('gmail', None)
+    glob['company']=[]
+    return render_template("box/login_message.html")
 
 #------------------------------------------------------------>
 #----------------------get index files----------------------->
@@ -1129,7 +1146,7 @@ def gmail_profile():
 @google.authorized_handler
 def authorized(resp):
     try:
-        print resp
+        #print resp
         access_token = resp['access_token']
         session['mail'] = access_token, ''
         return redirect(url_for('dashboard'))
@@ -1194,7 +1211,7 @@ def users_data():
     if "admin" in session:
         service_obj=services()
         user_data=service_obj.user_data()
-        print user_data
+        #print user_data
         return "%s" % str(user_data)
     else:
         return redirect(url_for("admin"))

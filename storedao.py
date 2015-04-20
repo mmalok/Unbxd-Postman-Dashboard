@@ -27,15 +27,27 @@ class store_dao:
 					return "valid"
 		return "invalid"
      
-	def get_readonly_data(self,msg):
-		print "storedao"
-		data=""
-		for record in site_request.select():
-			site_id=str(record.site_id)
-			site_name=str(record.site_name)
-			data=data+site_id+"_"+site_name+" "
-			#data.append(final_data)
-		return data
+	def get_readonly_data(self):
+		try:
+			print "get_readonly_data"
+			field_data=""
+			print field_data
+			for record in site_request.select():
+				site_id=str(record.site_id)
+				site_name=(record.site_name)
+				field_data=field_data+site_id+"_"+site_name+" "
+				#print site_name
+
+				#print data
+				#data.append(final_data)
+			#print "alokkumar"
+			#print site_name
+			#print field_data
+			return field_data
+		except Exception as e:
+			print e
+
+
 	def validate_admin(self,email,password):
 		#print "checkuser-->storedao"
 		for record in login_Admin_Data.select():

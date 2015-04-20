@@ -90,17 +90,41 @@ function save_suggestion()
     //alert(Metric)
     if(Metrics.indexOf("Field")>-1)
     {
+      var infield_data="\t \t \t siteId =>"+"'"+company+"'"+" field =>"+"'"+Display_Added+"'"
+      var prev_infield_data=localStorage.getItem("infield")
+      infield_data=infield_data+"\t \t \t \n"+prev_infield_data+"\t \t \t \n"
+      //alert(infield_data)
+      localStorage.setItem("infield",infield_data)
         window.location=window.location.origin+"/add_in_field"+"?company="+company+"&fields="+Display_Added
     }
     else if(Metrics.indexOf("Popular")>-1)
     {
+        //local storage for popular
+        //var popular_data="popular"+company+":"+Display_Added
         condition=document.getElementById("condition").value
         field=document.getElementById("field_command").value
+        var popular_product_data="\t \t \t siteId "+"'"+company+"'"+" field=>"+"'"+field+"'"+""+" condition=>"+condition+"\n"
+        var prev_popular_data=localStorage.getItem("popular")
+        popular_data=prev_popular_data+"\t \t \t \n"+popular_product_data+"\t \t \t \n"
+        //alert(popular_data)
+        localStorage.setItem("popular",popular_data);
+        //alert(popular_data)
+        //localStorage.setItem("popular","")
         if(field.indexOf("insert")!=0)
+        //var popular_data="popular"+company+":"+Display_Added+":"+field+":"+condition
+        //localStorage.setItem("popular",popular_data);
         window.location=window.location.origin+"/add_popular"+"?company="+company+"&fields="+field+"&condition="+condition
     }
     else
-    {
+    { 
+        var suggestion_data="\t \t \t siteId=>"+"'"+company+"'"+" field=>"+"'"+Display_Added+"'"
+        var prev_suggestion_data=localStorage.getItem("suggestion")
+        suggestion_data=prev_suggestion_data+"\t \t \t \n"+suggestion_data+"\t \t \t \n"
+        localStorage.setItem("suggestion",suggestion_data);
+        //alert(suggestion_data)
+        //local storage for add suggestion
+        //var suggestion_data="suggestion"+company+":"+Display_Added
+        //localStorage.setItem("popular",popular_data);
         window.location=window.location.origin+"/add_suggestion_data"+"?company="+company+"&data="+Display_Added
     }
     

@@ -13,10 +13,9 @@ class services:
 		store_dao_object = store_dao()
 		return store_dao_object.validate_user(email,password)
 
-	def read_data(self,msg):
-		print "services"
+	def read_data(self):
 		store_dao_object=store_dao()
-		return store_dao_object.get_readonly_data(msg)
+		return store_dao_object.get_readonly_data()
 	def validate_admin(self,email,password):
 		#print("services-->validate_user")
 		store_dao_object = store_dao()

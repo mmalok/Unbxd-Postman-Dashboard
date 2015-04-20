@@ -36,10 +36,17 @@
         <style>
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
-.modal-background {
-    background-color: green;
+.modalcontext {
+    margin-top: 4000px;
    
    
+}
+.modal{
+  background:rgba(0,0,0,0.6);
+  height:1200px;
+}
+.modal-dialog{
+  margin:400px auto;
 }
 
 div.table-title {
@@ -159,6 +166,57 @@ td.text-right {
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <body style="min-height: 1767px;" class="skin-blue wysihtml5-supported  pace-done" >
+{%block alert%}                
+                    
+{%endblock%}
+<div id="alert_commit" name="alert_commit" style="display:none;">
+              <div class="example-modal">
+                <div class="modal modal-info" style="display:block">
+                  <div class="modal-dialog" >
+                    <div class="modal-content" style="display: block;" >
+                                
+                      <div class="modal-header" style="background-color: #367fa9">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_commit()"><span aria-hidden="true" ><b style="color:white">x</b></span></button>
+                        <h4 class="modal-title" style="color:white">COMMIT</h4>
+                      </div>
+                      <div class="modal-body" style="background-color: #367fa9">
+                        <p style="color:white"><b>Do you want to commit ur previous changes??</b></p>
+                      </div>
+                    <div class="modal-footer" style="background-color: #367fa9">
+                      <button type="button" class="btn btn-default" id="commit_button" data-dismiss="modal" onclick="commit_alert()" >commit</button>
+                      <!--button type="button" class="btn btn-primary">Save changes</button-->
+                    </div>
+                  
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+            </div>
+          </div>
+
+          <div id="alert_delete" name="alert_delete" style="display:none;">
+              <div class="example-modal">
+                <div class="modal modal-info" style="display:block">
+                  <div class="modal-dialog" >
+                    <div class="modal-content" style="display: block;" >
+                                
+                      <div class="modal-header" style="background-color: #367fa9">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_alert()"><span aria-hidden="true" ><b style="color:white">x</b></span></button>
+                        <h4 class="modal-title" style="color:white">DELETE</h4>
+                      </div>
+                      <div class="modal-body" style="background-color: #367fa9">
+                        <p style="color:white"><b>Are you sure you wants to delete??</b></p>
+                      </div>
+                    <div class="modal-footer" style="background-color: #367fa9">
+                      <button type="button" class="btn btn-default" id="del_button" data-dismiss="modal" onclick="delete_alert()" >delete</button>
+                      <!--button type="button" class="btn btn-primary">Save changes</button-->
+                    </div>
+                  
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+            </div>
+          </div>
+
     <div class="pace  pace-inactive">
         <div data-progress="99" data-progress-text="100%" style="width: 100%;" class="pace-progress">
             <div class="pace-progress-inner">
@@ -281,65 +339,15 @@ td.text-right {
                         </div>
                     </div>
                 </div>
-                <div id="alert_commit" name="alert_commit" style="display:none;">
-              <div class="example-modal">
-                <div class="modal modal-info" style="display:block">
-                  <div class="modal-dialog" >
-                    <div class="modal-content" style="display: block;" >
-                                
-                      <div class="modal-header" style="background-color: #367fa9">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_commit()"><span aria-hidden="true" ><b style="color:white">x</b></span></button>
-                        <h4 class="modal-title" style="color:white">COMMIT</h4>
-                      </div>
-                      <div class="modal-body" style="background-color: #367fa9">
-                        <p style="color:white"><b>Do you want to commit ur previous changes??</b></p>
-                      </div>
-                    <div class="modal-footer" style="background-color: #367fa9">
-                      <button type="button" class="btn btn-default" id="commit_button" data-dismiss="modal" onclick="commit_alert()" >commit</button>
-                      <!--button type="button" class="btn btn-primary">Save changes</button-->
-                    </div>
-                  
-                  </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-              </div><!-- /.modal -->
-            </div>
-          </div>
                 {%if session['write'] !='NO'%}
                 {%block add%}
                 {%endblock%}
                 {%endif%}
-            <div id="alert_delete" name="alert_delete" style="display:none;">
-              <div class="example-modal">
-                <div class="modal modal-info" style="display:block">
-                  <div class="modal-dialog" >
-                    <div class="modal-content" style="display: block;" >
-                                
-                      <div class="modal-header" style="background-color: #367fa9">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_alert()"><span aria-hidden="true" ><b style="color:white">x</b></span></button>
-                        <h4 class="modal-title" style="color:white">DELETE</h4>
-                      </div>
-                      <div class="modal-body" style="background-color: #367fa9">
-                        <p style="color:white"><b>Are you sure you wants to delete??</b></p>
-                      </div>
-                    <div class="modal-footer" style="background-color: #367fa9">
-                      <button type="button" class="btn btn-default" id="del_button" data-dismiss="modal" onclick="delete_alert()" >delete</button>
-                      <!--button type="button" class="btn btn-primary">Save changes</button-->
-                    </div>
-                  
-                  </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-              </div><!-- /.modal -->
-            </div>
-          </div>
                 {%block content%}
                 {%endblock%}
                 
                 <!-- Small boxes (Stat box) -->
                 <!-- Small boxes (Stat box) -->
-
-                    {%block alert%}                
-                    
-                    {%endblock%}
               
             </section>
         </aside>
@@ -423,12 +431,15 @@ function Company_Changed() {
     }
     function delete_alert()
     {
+     var prev_del=localStorage.getItem("delete")
+      var delete_data=prev_del+"\t \t \t \n"+globId.function+","+globId.data
+      localStorage.setItem("delete",delete_data);
       //alert(globId.data);
       //alert(globId.function);
       //globId.commit="commit";
       //alert(globId.commit)
       localStorage.setItem("commit", "commit");
-      var commits = localStorage.getItem("commit");
+      //var commits = localStorage.getItem("commit");
             //alert(commits);
       //cookievalue= escape("commit");
       //alert(commit)
@@ -441,11 +452,21 @@ function Company_Changed() {
       localStorage.setItem("commit", null);
       //alert(localStorage.getItem("commit"))
       //alert("2")
+      var delete_part=localStorage.getItem("delete")
       var prev_comp=localStorage.getItem("prev_company")
+      var local_popular=localStorage.getItem("popular");
+      var local_field=localStorage.getItem("infield");
+      var local_suggestion=localStorage.getItem("suggestion");
+      total_data=prev_comp+"::"+"popular:\n "+local_popular+" \nsuggestion:\n "+local_suggestion+" \nfield:\n "+local_field+" \ndelete:\n "+delete_part
+      //alert(total_data)
+      localStorage.setItem("popular","")
+      localStorage.setItem("infield","")
+      localStorage.setItem("suggestion","")
+      localStorage.setItem("delete","")
       //alert(localStorage.getItem("prev_company"))
       //$("#alert_commit").css("display","none")
       $.ajax(
-        {async:false, type:"POST",url:"/commit",data:$("form").serialize()+"&prev_company="+prev_comp+"",success:function(response){
+        {async:false, type:"POST",url:"/commit",data:$("form").serialize()+"&total_data="+total_data+"",success:function(response){
             //response = JSON && JSON.parse(response) || $.parseJSON(response);
             //alert("1");
         }
