@@ -1,5 +1,6 @@
 import unbxd.api 
 import logging
+import time,threading
 import json
 from flask import Flask,session, redirect, url_for, escape,g
 from flask import request
@@ -8,6 +9,7 @@ from flask_oauth import OAuth
 from response_handler import *
 from exception_handler import *
 from services import *
+from taskservices import *
 from data_handler import *
 from flask.ext.mail import Mail,Message
 import os
@@ -55,7 +57,11 @@ app.config.update(MAIL_SERVER='smtp.gmail.com',
 '''
 @app.before_request
 def load_company():
-    g.company=glob['company']
+    if(len(glob['company'])>1):
+        g.company=glob['company']
+    else:
+        glob['company']=read_only_data()
+        g.company=glob['company']
 REDIRECT_URI = '/oauth2callback'
 oauth = OAuth()
 
@@ -124,30 +130,33 @@ def commit():
             return redirect(url_for("login"))
     except Exception as e:
         print e
-        return "%s" % e
+        return redirect(url_for("logout"))
         #return redirect(url_for("logout"))
 #-----------------------------------------------------------------#
 #--------------------------SIGN UP GET DATA-----------------------#
 
 @app.route('/signup_data', methods=['POST','get'])
 def signup_data():
-    if "mail" in session:
+    try:
+        if "mail" in session:
+            return redirect(url_for("simple_login"))
+            #print"login"
+        elif request.method=='POST':
+            data_dict=request.form.to_dict()
+            #print data_dict
+            user_name=str(request.form['mail'])
+            password=str(request.form['password'])
+            service_obj=services()
+            sign_done=service_obj.insert(user_name,password)
+            session['mail'] = request.form['mail']
+            session['gmail']='NO'
+            logger.info("mail in session and gmail no")
+            glob['company']=read_only_data()
+            logger.info("sign in done")
+            return '%s' % sign_done
         return redirect(url_for("simple_login"))
-        #print"login"
-    elif request.method=='POST':
-        data_dict=request.form.to_dict()
-        #print data_dict
-        user_name=str(request.form['mail'])
-        password=str(request.form['password'])
-        service_obj=services()
-        sign_done=service_obj.insert(user_name,password)
-        session['mail'] = request.form['mail']
-        session['gmail']='NO'
-        logger.info("mail in session and gmail no")
-        glob['company']=read_only_data()
-        logger.info("sign in done")
-        return '%s' % sign_done
-    return redirect(url_for("simple_login"))
+    except:
+        return redirect(url_for("logout"))
 #-----------------------------------------------------------------#
 #-----------------------------------------------------------------#
 #-------------------------LOG IN FOR GOOGLE--------------------------#
@@ -733,52 +742,55 @@ def login():
         return render_template("login.html")
 @app.route('/login_data', methods=['POST','get'])
 def login_data():
-    print session
-    if "mail" in session:
-        #print"login"
-        return redirect(url_for("dashboard"))
-    elif request.method=='POST':
-        data_dict=request.form.to_dict()
-        print data_dict
-        user_name=str(request.form['mail'])
-        password=str(request.form['password'])
-        #print user_name,password
-        #email_check=login_handler().email()
-        service_obj=services()
-        temp=service_obj.validate_user(user_name,password)
-        print temp 
-        if(str(temp)=='valid'):
+    try:
+        print session
+        if "mail" in session:
+            #print"login"
+            return redirect(url_for("dashboard"))
+        elif request.method=='POST':
+            data_dict=request.form.to_dict()
+            print data_dict
+            user_name=str(request.form['mail'])
+            password=str(request.form['password'])
+            #print user_name,password
+            #email_check=login_handler().email()
             service_obj=services()
-            permissions=service_obj.session_permission(user_name)
-            print permissions
-            #logger.info(session['mail'])
-            print type(permissions[2])
-            if(permissions[1]):
+            temp=service_obj.validate_user(user_name,password)
+            print temp 
+            if(str(temp)=='valid'):
+                service_obj=services()
+                permissions=service_obj.session_permission(user_name)
+                print permissions
                 #logger.info(session['mail'])
-                logger.info("read permission")
-                session['write']='YES'
-            else:
-                #logger.info(session['mail'])
-                logger.info("no read permission")
-                session['write']='NO'
-            if(permissions[2]):
-                #logger.info(session['mail'])
-                logger.info("delete permission")
-                print permissions[2]
-                session['delete']='YES'
-            else:
-                session['delete']='NO'
+                print type(permissions[2])
+                if(permissions[1]):
+                    #logger.info(session['mail'])
+                    logger.info("read permission")
+                    session['write']='YES'
+                else:
+                    #logger.info(session['mail'])
+                    logger.info("no read permission")
+                    session['write']='NO'
+                if(permissions[2]):
+                    #logger.info(session['mail'])
+                    logger.info("delete permission")
+                    print permissions[2]
+                    session['delete']='YES'
+                else:
+                    session['delete']='NO'
 
-            session['mail'] = request.form['mail']
-            session['gmail']= 'NO'
-            glob['company']=read_only_data()
-            print session
-            return '%s' % temp
+                session['mail'] = request.form['mail']
+                session['gmail']= 'NO'
+                glob['company']=read_only_data()
+                print session
+                return '%s' % temp
+            else:
+                return redirect(url_for("login"))
+            #return render_template("dashboard.html")
         else:
             return redirect(url_for("login"))
-        #return render_template("dashboard.html")
-    else:
-        return redirect(url_for("login"))
+    except:
+        return redirect(url_for("logout"))
 #------------------------------------------------------------->
 #---------------------get popular data------------------------>        
 @app.route('/get_popular_input_data', methods=['POST','get'])
@@ -821,6 +833,7 @@ def get_popular_input_data():
     #return render_template("dashboard.html")
 #------------------------------------------------------------>  
 #-------------------------read_only_data--------------------->
+
 def read_only_data():
     try:
         if "mail" in session:                                       
@@ -829,25 +842,37 @@ def read_only_data():
                 service_obj=services()
                 data=service_obj.read_data()
                 print "data"
-                #print (data)
+                    #print data
+                    #print (data)
                 data=(data).split(" ")
+                    #print data
                 outer=[]
-                for entry in data[0:-1]:
+                for entry in data:
+                        #print entry
                     inner=[]
                     entry=entry.split("_")
-                    inner.append(entry[0])
-                    inner.append(entry[1])
-                    outer.append(inner)
-                print outer
+                    if(len(entry)>1):
+                        inner.append(entry[0])
+                        inner.append(entry[1])
+                        outer.append(inner)
+                    else:
+                        print entry
+                    #print outer
+                #print outer
+                    
+                
+                #threading.Timer(5,read_only_data).start()
                 return outer
                 
             except Exception as e:
+                print e
                 logger.debug(e)
                 return e
         else:        
-            return redirect(url_for('logout'))
-    except:
-        return redirect(url_for("logout"))
+            return glob['company']
+    except Exception as e:
+        print e
+        return glob['company']
     #data_object = DAO.DataDAO()
     #data_object.save_message(processed_text)
 
@@ -1116,7 +1141,7 @@ def google_login():
         from urllib2 import Request, urlopen, URLError
 
         headers = {'Authorization': 'OAuth '+access_token}
-        req = Request('https://www.googleapis.com/oauth2/v1/userinfo',
+        req = Request('https://www.googleapis.com/auth/plus.login',
                       None, headers)
         try:
             res = urlopen(req)
@@ -1136,6 +1161,7 @@ def google_login():
 def gmail_profile():
     try:
         callback=url_for('authorized', _external=True)
+        print callback
         return google.authorize(callback=callback)
     except:
         return redirect(url_for("logout"))
@@ -1146,7 +1172,9 @@ def gmail_profile():
 @google.authorized_handler
 def authorized(resp):
     try:
-        #print resp
+        print "$$$$$$$$$$$"
+        print resp
+        print "$$$$$$$$$$"
         access_token = resp['access_token']
         session['mail'] = access_token, ''
         return redirect(url_for('dashboard'))
@@ -1242,3 +1270,129 @@ def update_user():
 def admin_logout():
     session.pop('admin',None)
     return redirect(url_for('admin'))
+#-------------SHARATH CODE------------------------------------------>
+@app.route('/status')
+def status():
+    try:
+        if "mail" in session:
+            logger.info("scheduler status")
+            #call url for status and pass the value in render_template
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.status()
+            response=eval(response)
+            print response['status']
+            print response
+            status_response=response['status']
+            return render_template("box/status.html",response=status_response);
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+
+@app.route('/add_task')
+def add_task():
+    try:
+        if "mail" in session:
+            logger.info("task added")
+            #call url for status and pass the value in render_template
+            status_response="successs"
+            return render_template("box/add_task.html");
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/update_task')
+def update_task():
+    try:
+        if "mail" in session:
+            logger.info("update task")
+            #call url for status and pass the value in render_template
+            status_response="successs"
+            return render_template("box/update_task.html");
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/add_taskSch')
+def add_taskSch():
+    try:
+        if "mail" in session:
+            #logger.info("task added")
+            #call url for status and pass the value in render_template
+            #status_response="successs"
+            #http://127.0.0.1:5000/add_taskSch?task_command=&day=1&time=&flag=0&week=-1
+            task_command = str(request.args.get('task_command'))
+            day = str(request.args.get('day'))
+            time = str(request.args.get('time'))
+            flag = str(request.args.get('flag'))
+            week = str(request.args.get('week'))
+            name = str(request.args.get('name'))
+            tempo=task_command+"#"+name+"#"+week+"#"+day+"#"+time+"#"+flag
+            taskservice_obj=taskschservices()
+            task_response=taskservice_obj.add_task(tempo)
+            response=eval(task_response)
+            #print response['status']
+            #print response
+            status_response=tempo
+            return render_template("box/status.html",response=tempo);
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/manager_status')
+def manager_status():
+    try:
+        if "mail" in session:
+            #logger.info("update task")
+            #call url for status and pass the value in render_template
+            status_response="successs"
+            return render_template("box/statuS.html");
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/specific_task')
+def specific_task():
+    try:
+        if "mail" in session:
+            #logger.info("update task")
+            #call url for status and pass the value in render_template
+            status_response="successs"
+            return render_template("box/statuS.html");
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/all_task')
+def all_task():
+    try:
+        if "mail" in session:
+            #logger.info("update task")
+            #call url for status and pass the value in render_template
+            status_response="successs"
+            return render_template("box/statuS.html");
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/running_task')
+def running_task():
+    try:
+        if "mail" in session:
+            #print a
+            #logger.info("update task")
+            #call url for status and pass the value in render_template
+            status_response="successs"
+            return render_template("box/running_task.html");
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))

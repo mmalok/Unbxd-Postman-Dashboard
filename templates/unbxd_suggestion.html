@@ -22,6 +22,7 @@
         <link href="dashboard_files/AdminLTE.css" rel="stylesheet" type="text/css">
         
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="dashboard_files/bootstrap-clockpicker.min.css">
 
 
 
@@ -305,7 +306,48 @@ td.text-right {
                             </a>
                         </ul>
                     </li>
+                    <!-- sharath part -->
+                    <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>Task Scheduler</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu menu-open" style="display: block;">
+                <li><a href="status"><i class="fa fa-circle-o"></i> Status</a></li>
+                <li><a href="add_task"><i class="fa fa-circle-o"></i> AddTask</a></li>
+                <li><a href="update_task"><i class="fa fa-circle-o"></i> UpdateTask</a></li>
+              </ul>
+            </li>
+
+
+
+            <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>Task Manager</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu menu-open" style="display: block;">
+                <li class="treeview active">
+                  <a href="#">
+                    <i class="fa fa-share"></i>
+                    <span>Status</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu menu-open" style="display: none;">
+                        <li><a href="manager_status"><i class="fa fa-circle-o"></i> Manager</a></li>
+                        <li><a href="specific_task"><i class="fa fa-circle-o"></i> Specific task</a></li>
+                        <li><a href="all_task"><i class="fa fa-circle-o"></i> All task</a></li>
+                  </ul>
+                </li> 
+                <li><a href="running_task"><i class="fa fa-circle-o"></i> Running task</a></li>           
+              </ul>
+            </li>
                 </ul>
+            
+                </ul>
+            
             </section>
         <!-- /.sidebar -->
         </aside>
@@ -318,8 +360,9 @@ td.text-right {
                 </h1>
             </section>
             <!-- Main content -->
+            
             <section class="content">
-                <div class="box box-solid box-primary ">
+                <div class="box box-solid box-primary " id="dashboard_title">
                     <div class="box-header with-border">
                         <h3 class="box-title">
                             <div id="cur_param">
@@ -328,6 +371,7 @@ td.text-right {
                                     {%endblock%}
                             </div>
                         </h3>
+                        {%block test%}
                         <div class="box-tools pull-right">
                             <form >
                                 <select name="command" class="form-control" id="command" onchange="Company_Changed()">
@@ -337,8 +381,12 @@ td.text-right {
                                 </select>
                             </form>
                         </div>
+                                    {%endblock%}
                     </div>
                 </div>
+
+                {%block add_task%}
+                {%endblock%}
                 {%if session['write'] !='NO'%}
                 {%block add%}
                 {%endblock%}
@@ -407,6 +455,7 @@ function Company_Changed() {
     function Metric(clicked_id)
     {
       var company=document.getElementById("command").value;
+      //alert(company)
       if(company.localeCompare("insert")==0)
         window.location = window.location.origin + '/metric_type'+ '?data='+clicked_id
       else

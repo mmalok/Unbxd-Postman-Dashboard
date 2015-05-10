@@ -1,0 +1,104 @@
+{% extends "box/simple_login.html" %}
+{%block alert%}
+{%endblock%}
+{%block paramName%}
+                                        Task Scheduler
+                                    {%endblock%}
+{%block image%}
+<img src="{{session['gmail'].picture}}" class="img-circle">
+{%endblock%}
+{%block add_task%}
+ <div class="row">
+<div class="col-md-5">
+	<div class="box box-solid box-primary ">
+	    <div class="box-header with-border">
+	         <h3 class="box-title">ADD TASK</h3>
+	         <div class="box-tools pull-right">
+	            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+
+
+	          </div><!-- /.box-tools -->
+
+	    </div><!-- /.box-header -->
+	    <div class="box-body" style="display: block;">
+	    	<form role="form">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label >Command</label>
+                      <input type="text" class="form-control"  placeholder="Enter command" id="task_command" >
+                    </div>
+                    <div class="form-group">
+                      <label >Task name</label>
+                      <input type="text" class="form-control"  placeholder="Enter task name" id="task_name" >
+                    </div>
+                  <!-- /.box-body -->
+                  <div class="form-group">
+                      <label >Week</label>
+                      <select id="week" class="form-control">
+                            <option value="-1" >Week:-1</option>
+                            <option value="1" >Week:1</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label >Day</label>
+                      <select id="day" class="form-control">
+                            <option value="1" >Day-1</option>
+                            <option value="2" >Day-2</option>
+                            <option value="3" >Day-3</option>
+                            <option value="4" >Day-4</option>
+                            <option value="5" >Day-5</option>
+                            <option value="6" >Day-6</option>
+                            <option value="7" >Day-7</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label >Flag</label>
+                      <select id="flag" class="form-control">
+                            <option value="0" >Flag-0</option>
+                            <option value="1" >Flag-1</option>
+                      </select>
+                  </div>
+                  
+                  <div class="input-group clockpicker">
+                  <label >Time</label>
+                  		
+    					<input type="text" id="time" class="form-control" ></input>
+    					<span class="input-group-addon" style="height:5px" >
+        				<span class="glyphicon glyphicon-time" style="height:5px"></span>
+    					</span>
+    					
+    					
+				   </div>
+				<script type="text/javascript" src="dashboard_files/bootstrap-clockpicker.min.js"></script>
+				<script type="text/javascript">
+    				$('.clockpicker').clockpicker();
+				</script>
+
+                  <div class="box-footer pull-right">
+                    <input type="button" class="btn btn-primary" value="Submit" onclick="task_submit()"></input>
+                  </div>
+                  </br>
+                    </br>
+            </div>
+                </form>
+	          
+	    </div><!-- /.box-body -->
+	</div>
+</div> 
+<script>
+function task_submit(){
+	var day = document.getElementById("day").value;
+	//alert(day)
+	var task_command = document.getElementById("task_command").value;
+	//alert(task_command)
+	var time = document.getElementById("time").value;
+	//alert(time)
+	var flag = document.getElementById("flag").value;
+	//alert(flag)
+	var week = document.getElementById("week").value;
+	var name = document.getElementById("task_name").value;
+	//alert(week)
+	window.location = window.location.origin + '/add_taskSch' + '?task_command='+task_command+'&day='+day+'&time='+time+'&flag='+flag+'&week='+week+'&name='+name
+}
+</script>
+{%endblock%}              

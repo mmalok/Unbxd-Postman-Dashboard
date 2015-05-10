@@ -179,9 +179,12 @@ class OAuthRemoteApp(object):
                  request_token_params=None,
                  access_token_params=None,
                  access_token_method='GET'):
+        #print "1"
+        #print oauth
         self.oauth = oauth
         #: the `base_url` all URLs are joined with.
         self.base_url = base_url
+        #print self.base_url
         self.name = name
         self.request_token_url = request_token_url
         self.access_token_url = access_token_url
@@ -290,7 +293,11 @@ class OAuthRemoteApp(object):
 
     def generate_request_token(self, callback=None):
         if callback is not None:
+            #print request.url
+            print "2"
             callback = urljoin(request.url, callback)
+            print "2"
+            print callback
         resp, content = self._client.request_new_token(
             self.expand_url(self.request_token_url), callback,
                 self.request_token_params)
@@ -331,17 +338,25 @@ class OAuthRemoteApp(object):
             token = self.generate_request_token(callback)[0]
             url = '%s?oauth_token=%s' % (self.expand_url(self.authorize_url),
                                          url_quote(token))
+            #print "uuuurrrrrllllllll"+str(url)
         else:
             assert callback is not None, 'Callback is required OAuth2'
             # This is for things like facebook's oauth.  Since we need the
             # callback for the access_token_url we need to keep it in the
             # session.
+            #callback="http://sirius.unbxdapi.com/oauth2callback"
             params = dict(self.request_token_params)
             params['redirect_uri'] = callback
             params['client_id'] = self.consumer_key
             params['response_type'] = 'code'
             session[self.name + '_oauthredir'] = callback
             url = add_query(self.expand_url(self.authorize_url), params)
+            print "###############"
+            print url
+            print params['redirect_uri']
+            print session[self.name+'_oauthredir']
+            print session
+            print "###############"
 
         return redirect(url)
 
@@ -428,6 +443,8 @@ class OAuthRemoteApp(object):
                 data = self.handle_oauth1_response()
             elif 'code' in request.args:
                 data = self.handle_oauth2_response()
+                print "alok"
+                print data
             else:
                 data = self.handle_unknown_response()
             self.free_request_token()
