@@ -21,4 +21,38 @@ class taskschdao:
 			print req.text
 			return req.text
 		except:
+			return '{"status":"connection refused"}'
+	def task_manager(self):
+		try:
+			req=requests.get("http://sol-serv-a-d1-1.cloudapp.net:8000/ping?name=manager")
+			return req.text
+		except:
+			return '{"status":"connection refused"}'
+	def task_all(self):
+		try:
+			req=requests.get("http://sol-serv-a-d1-1.cloudapp.net:8000/ping?name=all")
+			return req.text
+		except:
+			return '{"status":"connection refused"}'
+	def running_task_all(self):
+		try:
+			req=requests.get("http://sol-serv-a-d1-1.cloudapp.net:8000/tasks?owner=all")
+			return req.text
+		except:
+			return '{"status":"connection refused"}'
+	def specific_task(self,name):
+		try:
+			url='http://sol-serv-a-d1-1.cloudapp.net:8000/ping?name='+name
+			print url
+			req=requests.get(url)
+			return req.text
+		except:
+			return '{"status":"connection refused"}'		
+	def running_specific_task(self,name):
+		try:
+			url='http://sol-serv-a-d1-1.cloudapp.net:8000/tasks?owner='+name
+			print url
+			req=requests.get(url)
+			return req.text
+		except:
 			return '{"status":"connection refused"}'		

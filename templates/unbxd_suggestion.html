@@ -336,12 +336,23 @@ td.text-right {
                     <i class="fa fa-angle-left pull-right"></i>
                   </a>
                   <ul class="treeview-menu menu-open" style="display: none;">
-                        <li><a href="manager_status"><i class="fa fa-circle-o"></i> Manager</a></li>
-                        <li><a href="specific_task"><i class="fa fa-circle-o"></i> Specific task</a></li>
-                        <li><a href="all_task"><i class="fa fa-circle-o"></i> All task</a></li>
+                        <li><a href="task_manager"><i class="fa fa-circle-o"></i> Manager</a></li>
+                        <li><a href="task_specific"><i class="fa fa-circle-o"></i> Specific Agents</a></li>
+                        <li><a href="task_all"><i class="fa fa-circle-o"></i> All agents</a></li>
                   </ul>
-                </li> 
-                <li><a href="running_task"><i class="fa fa-circle-o"></i> Running task</a></li>           
+
+              <ul class="treeview-menu menu-open" style="display: block;">
+                <li class="treeview active">
+                  <a href="#">
+                    <i class="fa fa-share"></i>
+                    <span>Running Task</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu menu-open" style="display: none;">
+                        <li><a href="running_task_all"><i class="fa fa-circle-o"></i> All Agents</a></li>
+                        <li><a href="running_task_specific"><i class="fa fa-circle-o"></i> Specific Agents</a></li>
+                  </ul>
+                
               </ul>
             </li>
                 </ul>
@@ -576,6 +587,16 @@ function logout()
     }
 
 }
+</script>
+<script type="text/javascript">
+  function task_status(){
+    var task_name=document.getElementById('tasks_name').value
+    window.location = window.location.origin + '/specific_task' + '?name='+task_name
+  }
+  function running_task_status(){
+    var running_task_name=document.getElementById('running_tasks_name').value
+    window.location = window.location.origin + '/running_specific_task' + '?name='+running_task_name
+  }
 </script>
 
 </body>

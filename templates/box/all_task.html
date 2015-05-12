@@ -1,0 +1,55 @@
+{% extends "box/simple_login.html" %}
+{%block alert%}
+{%endblock%}
+{%block paramName%}
+                                        Task Scheduler
+                                    {%endblock%}
+{%block image%}
+<img src="{{session['gmail'].picture}}" class="img-circle">
+{%endblock%}
+{%block add_task%}
+ <div class="row">
+  
+  <div class="col-md-6">
+<div class="box box-solid box-primary ">
+    <div class="box-header with-border">
+          <h3 class="box-title">ALL TASK</h3>
+          <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div><!-- /.box-tools -->
+        </div><!-- /.box-header -->
+        <div class="box-body" style="display: block;">
+<table class="table-fill" >
+<thead>
+<tr>
+	<th class="text-left" width="40%">
+		AGENT NAME
+	</th>
+	<th class="text-left" width="40%">
+		STATUS
+	</th>
+</tr>
+</thead>
+<tbody class="table-hover">
+<div id="button'+id+'">
+	
+	{%set id=1%}
+	{%for text in response_text%}
+		
+		<tr>
+				
+		{% for data in text%}
+			<td class="text-left" width="40%">
+				<b>'{{data}}'</b>
+			</td>
+			
+		{%endfor%}
+		</tr>
+	{%endfor%}
+</tbody></table>
+   </div><!-- /.box-body -->
+      </div>
+      </div>
+      </div>
+
+{%endblock%}              

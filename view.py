@@ -1343,54 +1343,122 @@ def add_taskSch():
     except Exception as e:
         print e
         return redirect(url_for("logout"))
-@app.route('/manager_status')
-def manager_status():
+@app.route('/task_manager')
+def task_manager():
     try:
         if "mail" in session:
             #logger.info("update task")
             #call url for status and pass the value in render_template
-            status_response="successs"
-            return render_template("box/statuS.html");
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.task_manager()
+            response=eval(response)
+            print response['status']
+            print response
+            status_response=response['status']
+            return render_template("box/task_status.html",message=status_response,header="Manager Status");
         else:
             return redirect(url_for('logout'))
     except Exception as e:
         print e
         return redirect(url_for("logout"))
+@app.route('/task_specific')
+def task_specific():
+    try:
+        if "mail" in session:
+            #logger.info("update task")
+            #call url for status and pass the value in render_template
+            response=['a','b','c','d']
+            status_response="successs"
+            return render_template("box/task_specific.html",response_text=response);
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/task_all')
+def task_all():
+    try:
+        if "mail" in session:
+            #call url for status and pass the value in render_template
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.task_all()
+            response=eval(response)
+            status_response=response['status']
+            status_response="successs"
+            response_text=[["a","b"],["c","d"]]
+            return render_template("box/all_task.html",response_text=response_text);
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+
 @app.route('/specific_task')
 def specific_task():
     try:
         if "mail" in session:
             #logger.info("update task")
             #call url for status and pass the value in render_template
-            status_response="successs"
-            return render_template("box/statuS.html");
+            name = str(request.args.get('name'))
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.specific_task(name)
+            response=eval(response)
+            print response['status']
+            print response
+            status_response=response['status']
+            return render_template("box/task_status.html",message=status_response,header="Task Status");
         else:
             return redirect(url_for('logout'))
     except Exception as e:
         print e
         return redirect(url_for("logout"))
-@app.route('/all_task')
-def all_task():
+@app.route('/running_task_all')
+def running_task_all():
     try:
         if "mail" in session:
-            #logger.info("update task")
             #call url for status and pass the value in render_template
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.running_task_all()
+            response=eval(response)
+            status_response=response['status']
             status_response="successs"
-            return render_template("box/statuS.html");
+            response_text=[["a","b"],["c","d"]]
+            return render_template("box/all_task.html",response_text=response_text);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
         print e
         return redirect(url_for("logout"))
-@app.route('/running_task')
-def running_task():
+
+@app.route('/running_task_specific')
+def running_task_specific():
     try:
         if "mail" in session:
             #print a
             #logger.info("update task")
             #call url for status and pass the value in render_template
+            response=['a','b','c','d']
             status_response="successs"
-            return render_template("box/running_task.html");
+            return render_template("box/running_task_specific.html",response_text=response);
+        else:
+            return redirect(url_for('logout'))
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+@app.route('/running_specific_task')
+def running_specific_task():
+    try:
+        if "mail" in session:
+            #logger.info("update task")
+            #call url for status and pass the value in render_template
+            name = str(request.args.get('name'))
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.running_specific_task(name)
+            response=eval(response)
+            print response['status']
+            print response
+            status_response=response['status']
+            return render_template("box/task_status.html",message=status_response,header="Task Status");
         else:
             return redirect(url_for('logout'))
     except Exception as e:
