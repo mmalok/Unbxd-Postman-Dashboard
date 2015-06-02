@@ -1411,11 +1411,12 @@ def task_all():
             except exception as e:
                 print e
                 return render_template("box/task_status.html",message="No Task",header="All Task");
+            print response
             inarray=[]
             outarray=[]
             for item in response:
                 inarray.append(item)
-                inarray.append(response['item'])
+                inarray.append(response[item])
                 outarray.append(inarray)
                 inarray=[]
             #status_response=response['status']
@@ -1460,23 +1461,27 @@ def running_task_all():
             #    return render_template("box/task_status.html",message="No running task",header="All Running Task");
             try:
                 response=eval(response)
+                print "check"
+                print response
             except Exception as e:
                 print e
                 return render_template("box/task_status.html",message="Check Internet Connection",header="Internet");
-            try:
-                if response['ta1']=="":
-                    return render_template("box/task_status.html",message="No running task",header="All Running Task");
-            except:
-                return render_template("box/task_status.html",message="Check Internet Connection",header="Internet");
+            
             inarray=[]
             outarray=[]
             for item in response:
-                inarray.append(str(item))
-                inarray.append(str(item['Task Id']))
-                inarray.append(str(item['Task Name']))
-                inarray.append(str(item['Value']))
-                outarray.append(inarray)
-                inarray=[]
+                try:
+                    inarray.append(str(item))
+                    inarray.append(str(item['Task Id']))
+                    inarray.append(str(item['Task Name']))
+                    inarray.append(str(item['Value']))
+                    outarray.append(inarray)
+                    inarray=[]
+                except:
+                    inarray=[]
+                    outarray=[]
+                    inarray.append(str(item))
+                    outarray.append(inarray)
             print outarray
             #status_response=response['status']
             #status_response="successs"
@@ -1503,18 +1508,14 @@ def running_task_specific():
             #if len(response)==0:
             #    return render_template("box/task_status.html",message="No running task",header="All Running Task");
             response=eval(response)
-            try:
-                if response['ta1']=="":
-                    return render_template("box/task_status.html",message="No running task",header="All Running Task");
-            except:
-                return render_template("box/task_status.html",message="Check Internet Connection",header="Internet");
+            print response
             all_task=[]
             for item in response:
                 all_task.append(str(item))
             print all_task
             #response=['alok','b','c','d']
             #status_response="successs"
-            return render_template("box/running_task_specific.html",response_text=all_tasks);
+            return render_template("box/running_task_specific.html",response_text=all_task);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
@@ -1530,10 +1531,25 @@ def running_specific_task():
             taskservice_obj=taskschservices()
             response=taskservice_obj.running_specific_task(name)
             response=eval(response)
-            print response['status']
             print response
-            status_response=response['status']
-            return render_template("box/task_status.html",message=status_response,header="Task Status");
+            #print response['status']
+            inarray=[]
+            outarray=[]
+            for item in response:
+                try:
+                    inarray.append(str(item))
+                    inarray.append(str(item['Task Id']))
+                    inarray.append(str(item['Task Name']))
+                    inarray.append(str(item['Value']))
+                    outarray.append(inarray)
+                    inarray=[]
+                except:
+                    inarray=[]
+                    inarray.append(str(item))
+                    outarray.append(inarray)
+            print outarray
+            print response
+            return render_template("box/all_running_task.html",response_text=outarray);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
@@ -1555,11 +1571,89 @@ def upload():
             print type(data_dict)
             print data_dict['day']
             task_command = str(data_dict['task_command'])
+            day = str(data_dict['day'])
+            time = str(data_dict['time'])
+            flag = str(data_dict['flag'])
+            week = str(data_dict['week'])
+            name = str(data_dict['task_name'])
+            #tempo=task_command+"#"+name+"#"+week+"#"+day+"#"+time+"#"+flag
+            #print tempo
+            time=time.split(":")
+            #print request.form[]
+            file=request.files.getlist("file[]")
+            #file=file[1]
+            print file
+            count=0
+            files=''
+            for item in file:
+                if item and allowed_file(item.filename):
+                    print "1"
+                    # Make the filename safe, remove unsupported chars
+                    filename = secure_filename(item.filename)
+                    # Move the file form the temporal folder to
+                    # the upload folder we setup
+                    print filename
+                    item.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    # Redirect the user to the uploaded_file route, which
+                    # will basicaly show on the browser the uploaded file
+            #return redirect(url_for('uploaded_file',filename=filename))
+                    url="http://sol-serv-a-d1-1.cloudapp.net:8001/addTask"
+                    count=count+1
+                    oldWd = os.getcwd()
+                    print os.path.join(app.config['UPLOAD_FOLDER'])
+                    os.chdir("./"+os.path.join(app.config['UPLOAD_FOLDER']))
+                    
+                    files=files+'\''+'file'+str(count)+'\''+': open('+'\''+filename+'\''+','+'\''+'r+'+'\''+'),'
+                    
+                    #files = {'file1': open('report.xls', 'rb'), 'file2': open('otherthing.txt', 'rb')}
+                    #r = requests.post(url, files=files)
+            files=files[:-1]
+            print files
+            files='{'+files+'}'
+            print files
+            files=eval(files)
+            print files
+            os.chdir(oldWd)
+            print "alok"
+            task_data = {"cmd": task_command, "name": name, "hour": int(time[0]), "minute": int(time[1]), "second": "10", "week": week, "day": day, "r":flag}
+            print task_data
+            req=requests.post(url,files=files,data=task_data)
+            for item_files in file:
+                try:
+                    os.remove(os.path.join('uploads/', filename))
+                except Exception as e:
+                    print e
+            return render_template("box/task_status.html",message=req.text,header="Uploaded Task Code");
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+def allowed_file(filename):
+    return '.' in filename
+@app.route('/update_upload', methods=['POST','get'])
+def update_upload():
+    try:
+        if "mail" in session:
+            print "a"
+            # Get the name of the uploaded file
+            #print request
+            #print request.files['file']
+            #file = request.files['file[]']
+            # Check if the file is one of the allowed types/extensions
+            data_dict=request.form.to_dict()
+            print type(data_dict)
+            print data_dict['day']
+            task_command = str(data_dict['task_command'])
             day = int(data_dict['day'])
             time = str(data_dict['time'])
             flag = int(data_dict['flag'])
             week = int(data_dict['week'])
             name = str(data_dict['task_name'])
+            task_id=str(data_dict['task_id'])
             #tempo=task_command+"#"+name+"#"+week+"#"+day+"#"+time+"#"+flag
             #print tempo
             time=time.split(":")
@@ -1605,11 +1699,4 @@ def upload():
     except Exception as e:
         print e
         return redirect(url_for("logout"))
-
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
-def allowed_file(filename):
-    return '.' in filename
 
