@@ -2,7 +2,7 @@
 {%block alert%}
 {%endblock%}
 {%block paramName%}
-                                        Task Scheduler
+                                    Task Scheduler
                                     {%endblock%}
 {%block image%}
 <img src="{{session['gmail'].picture}}" class="img-circle">
@@ -21,27 +21,30 @@
 
 	    </div><!-- /.box-header -->
 	    <div class="box-body" style="display: block;">
-	    	<form role="form">
+	    	<form action="upload" method="post" enctype="multipart/form-data">
+              
                   <div class="box-body">
+                
                     <div class="form-group">
                       <label >Command</label>
-                      <input type="text" class="form-control"  placeholder="Enter command" id="task_command" >
+                      <input type="text" class="form-control"  placeholder="Enter command" id="task_command" name="task_command">
                     </div>
+              
                     <div class="form-group">
                       <label >Task name</label>
-                      <input type="text" class="form-control"  placeholder="Enter task name" id="task_name" >
+                      <input type="text" class="form-control"  placeholder="Enter task name" name="task_name" >
                     </div>
                   <!-- /.box-body -->
                   <div class="form-group">
                       <label >Week</label>
-                      <select id="week" class="form-control">
+                      <select name="week" class="form-control">
                             <option value="-1" >Week:-1</option>
                             <option value="1" >Week:1</option>
                       </select>
                   </div>
                   <div class="form-group">
                       <label >Day</label>
-                      <select id="day" class="form-control">
+                      <select name="day" class="form-control">
                             <option value="1" >Day-1</option>
                             <option value="2" >Day-2</option>
                             <option value="3" >Day-3</option>
@@ -53,7 +56,7 @@
                   </div>
                   <div class="form-group">
                       <label >Flag</label>
-                      <select id="flag" class="form-control">
+                      <select name="flag" class="form-control">
                             <option value="0" >Flag-0</option>
                             <option value="1" >Flag-1</option>
                       </select>
@@ -62,7 +65,7 @@
                   <div class="input-group clockpicker">
                   <label >Time</label>
                   		
-    					<input type="text" id="time" class="form-control" ></input>
+    					<input type="text" name="time" class="form-control" ></input>
     					<span class="input-group-addon" style="height:5px" >
         				<span class="glyphicon glyphicon-time" style="height:5px"></span>
     					</span>
@@ -75,8 +78,15 @@
 				</script>
 
                   <div class="box-footer pull-right">
-                    <input type="button" class="btn btn-primary" value="Submit" onclick="task_submit()"></input>
+                    <input type="submit" class="btn btn-primary" value="Submit"></input>
                   </div>
+                  <div class="form-group">
+                    
+        				<input type="file" name="file[]" multiple name="file"><br /><br />
+        				<!--input type="submit" value="Upload" -->
+      				
+                  </div>
+
                   </br>
                     </br>
             </div>
@@ -88,7 +98,7 @@
 <script>
 function task_submit(){
 	var day = document.getElementById("day").value;
-	//alert(day)
+	alert(day)
 	var task_command = document.getElementById("task_command").value;
 	//alert(task_command)
 	var time = document.getElementById("time").value;

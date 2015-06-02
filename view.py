@@ -2,7 +2,8 @@ import unbxd.api
 import logging
 import time,threading
 import json
-from flask import Flask,session, redirect, url_for, escape,g
+from dao.model import read_mysql_connect
+from flask import Flask,session, redirect, url_for, escape,g,send_from_directory
 from flask import request
 from flask import render_template
 from flask_oauth import OAuth
@@ -14,6 +15,7 @@ from data_handler import *
 from flask.ext.mail import Mail,Message
 import os
 import smtplib
+from werkzeug import secure_filename
 glob={}
 glob['company']=[]
 app = Flask(__name__)
@@ -23,6 +25,8 @@ TO=['autosuggest.unbxd@gmail.com']
 FROM = 'autosuggest.unbxd@gmail.com'
 SUBJECT="COMMIT IN AUTOSUGGEST"
 
+
+app.config['UPLOAD_FOLDER'] = 'uploads/'
 
 
 #-----------------logging------------------->
@@ -57,11 +61,14 @@ app.config.update(MAIL_SERVER='smtp.gmail.com',
 '''
 @app.before_request
 def load_company():
-    if(len(glob['company'])>1):
-        g.company=glob['company']
-    else:
-        glob['company']=read_only_data()
-        g.company=glob['company']
+    try:
+        if(len(glob['company'])>1):
+            g.company=glob['company']
+        else:
+            glob['company']=read_only_data()
+            g.company=glob['company']
+    except:
+        return redirect(url_for("logout"))
 REDIRECT_URI = '/oauth2callback'
 oauth = OAuth()
 
@@ -865,6 +872,7 @@ def read_only_data():
                 return outer
                 
             except Exception as e:
+                read_mysql_connect()
                 print e
                 logger.debug(e)
                 return e
@@ -872,6 +880,7 @@ def read_only_data():
             return glob['company']
     except Exception as e:
         print e
+       # read_mysql_connect()
         return glob['company']
     #data_object = DAO.DataDAO()
     #data_object.save_message(processed_text)
@@ -1275,6 +1284,8 @@ def admin_logout():
 def status():
     try:
         if "mail" in session:
+            #alok()
+            #a.alok()
             logger.info("scheduler status")
             #call url for status and pass the value in render_template
             taskservice_obj=taskschservices()
@@ -1331,6 +1342,10 @@ def add_taskSch():
             week = str(request.args.get('week'))
             name = str(request.args.get('name'))
             tempo=task_command+"#"+name+"#"+week+"#"+day+"#"+time+"#"+flag
+            file=request.files.getlist("file[]")
+            print file
+            #file=request.files['file']
+            print file
             taskservice_obj=taskschservices()
             task_response=taskservice_obj.add_task(tempo)
             response=eval(task_response)
@@ -1367,9 +1382,18 @@ def task_specific():
         if "mail" in session:
             #logger.info("update task")
             #call url for status and pass the value in render_template
-            response=['a','b','c','d']
-            status_response="successs"
-            return render_template("box/task_specific.html",response_text=response);
+            #response=['a','b','c','d']
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.task_all()
+            try:
+                response=eval(response)
+            except exception as e:
+                print e
+                return render_template("box/task_status.html",message="No Task",header="All Task");
+            inarray=[]
+            for item in response:
+                inarray.append(str(item))
+            return render_template("box/task_specific.html",response_text=inarray);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
@@ -1382,11 +1406,22 @@ def task_all():
             #call url for status and pass the value in render_template
             taskservice_obj=taskschservices()
             response=taskservice_obj.task_all()
-            response=eval(response)
-            status_response=response['status']
-            status_response="successs"
-            response_text=[["a","b"],["c","d"]]
-            return render_template("box/all_task.html",response_text=response_text);
+            try:
+                response=eval(response)
+            except exception as e:
+                print e
+                return render_template("box/task_status.html",message="No Task",header="All Task");
+            inarray=[]
+            outarray=[]
+            for item in response:
+                inarray.append(item)
+                inarray.append(response['item'])
+                outarray.append(inarray)
+                inarray=[]
+            #status_response=response['status']
+            #status_response="successs"
+            #response_text=[["a","b"],["c","d"]]
+            return render_template("box/all_task.html",response_text=outarray);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
@@ -1419,11 +1454,35 @@ def running_task_all():
             #call url for status and pass the value in render_template
             taskservice_obj=taskschservices()
             response=taskservice_obj.running_task_all()
-            response=eval(response)
-            status_response=response['status']
-            status_response="successs"
-            response_text=[["a","b"],["c","d"]]
-            return render_template("box/all_task.html",response_text=response_text);
+            print "response running task"
+            print response
+            #if len(response)==0:
+            #    return render_template("box/task_status.html",message="No running task",header="All Running Task");
+            try:
+                response=eval(response)
+            except Exception as e:
+                print e
+                return render_template("box/task_status.html",message="Check Internet Connection",header="Internet");
+            try:
+                if response['ta1']=="":
+                    return render_template("box/task_status.html",message="No running task",header="All Running Task");
+            except:
+                return render_template("box/task_status.html",message="Check Internet Connection",header="Internet");
+            inarray=[]
+            outarray=[]
+            for item in response:
+                inarray.append(str(item))
+                inarray.append(str(item['Task Id']))
+                inarray.append(str(item['Task Name']))
+                inarray.append(str(item['Value']))
+                outarray.append(inarray)
+                inarray=[]
+            print outarray
+            #status_response=response['status']
+            #status_response="successs"
+            #print response
+            #response_text=[["a","b"],["c","d"]]
+            return render_template("box/all_running_task.html",response_text=outarray);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
@@ -1437,9 +1496,25 @@ def running_task_specific():
             #print a
             #logger.info("update task")
             #call url for status and pass the value in render_template
-            response=['a','b','c','d']
-            status_response="successs"
-            return render_template("box/running_task_specific.html",response_text=response);
+            taskservice_obj=taskschservices()
+            response=taskservice_obj.running_task_all()
+            print "response running task"
+            print response
+            #if len(response)==0:
+            #    return render_template("box/task_status.html",message="No running task",header="All Running Task");
+            response=eval(response)
+            try:
+                if response['ta1']=="":
+                    return render_template("box/task_status.html",message="No running task",header="All Running Task");
+            except:
+                return render_template("box/task_status.html",message="Check Internet Connection",header="Internet");
+            all_task=[]
+            for item in response:
+                all_task.append(str(item))
+            print all_task
+            #response=['alok','b','c','d']
+            #status_response="successs"
+            return render_template("box/running_task_specific.html",response_text=all_tasks);
         else:
             return redirect(url_for('logout'))
     except Exception as e:
@@ -1464,3 +1539,77 @@ def running_specific_task():
     except Exception as e:
         print e
         return redirect(url_for("logout"))
+
+#---------------file uploads--------------------------->
+@app.route('/upload', methods=['POST','get'])
+def upload():
+    try:
+        if "mail" in session:
+            print "a"
+            # Get the name of the uploaded file
+            #print request
+            #print request.files['file']
+            #file = request.files['file[]']
+            # Check if the file is one of the allowed types/extensions
+            data_dict=request.form.to_dict()
+            print type(data_dict)
+            print data_dict['day']
+            task_command = str(data_dict['task_command'])
+            day = int(data_dict['day'])
+            time = str(data_dict['time'])
+            flag = int(data_dict['flag'])
+            week = int(data_dict['week'])
+            name = str(data_dict['task_name'])
+            #tempo=task_command+"#"+name+"#"+week+"#"+day+"#"+time+"#"+flag
+            #print tempo
+            time=time.split(":")
+            #print request.form[]
+            file=request.files.getlist("file[]")
+            #file=file[1]
+            print file
+            count=0
+            files=''
+            for item in file:
+                if item and allowed_file(item.filename):
+                    print "1"
+                    # Make the filename safe, remove unsupported chars
+                    filename = secure_filename(item.filename)
+                    # Move the file form the temporal folder to
+                    # the upload folder we setup
+                    print filename
+                    item.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    # Redirect the user to the uploaded_file route, which
+                    # will basicaly show on the browser the uploaded file
+            #return redirect(url_for('uploaded_file',filename=filename))
+                    url="http://sol-serv-a-d1-1.cloudapp.net:8001/addTask"
+                    count=count+1
+                    files=files+'\''+'file'+str(count)+'\''+': open('+'\''+'uploads\\'+filename+'\''+','+'\''+'r+'+'\''+'),'
+                    
+                    #files = {'file1': open('report.xls', 'rb'), 'file2': open('otherthing.txt', 'rb')}
+                    #r = requests.post(url, files=files)
+            files=files[:-1]
+            print files
+            files='{'+files+'}'
+            print files
+            files=eval(files)
+            print files
+
+            task_data = {"cmd": task_command, "name": name, "hour": int(time[0]), "minute": int(time[1]), "second": "10", "week": week, "day": day, "r":flag}
+            req=requests.post(url,files=files,data=task_data)
+            for item_files in file:
+                try:
+                    os.remove(os.path.join('uploads/', filename))
+                except Exception as e:
+                    print e
+            return render_template("box/task_status.html",message=req.text,header="Uploaded Task Code");
+    except Exception as e:
+        print e
+        return redirect(url_for("logout"))
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+def allowed_file(filename):
+    return '.' in filename
+

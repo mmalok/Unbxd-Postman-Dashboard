@@ -37,6 +37,7 @@ class taskschdao:
 	def running_task_all(self):
 		try:
 			req=requests.get("http://sol-serv-a-d1-1.cloudapp.net:8000/tasks?owner=all")
+			print req.text
 			return req.text
 		except:
 			return '{"status":"connection refused"}'

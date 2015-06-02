@@ -276,7 +276,7 @@ td.text-right {
                             <i class="fa fa-dashboard"></i> <span>HOME</span>
                         </a>
                     </li>
-                    <li class="treeview" style="display: block;">
+                    <!--li class="treeview" style="display: block;">
                         <a href="#">
                             <i class="fa fa-folder"></i> 
                             <span>AUTOsuggest</span>
@@ -285,28 +285,52 @@ td.text-right {
                         <ul style="display: block;" class="treeview-menu">
                             <a href="#">
                             <li onclick="Metric(this.id)" id="Popular_Product" style="margin-left: 30px;"><i class="fa fa-circle-o">
-                                <!--i class="fa fa-angle-circle-ot"></i-->
+                                
                                 Popular Product
                             </i>
                             </li>
                             <a href="#">
                             </li>
                             <li style="margin-left: 30px;" onclick="Metric(this.id)" id="In_Field"><i class="fa fa-circle-o">
-                                <!--i class="fa fa-angle-double-right"></i-->
+                                
                                 In Field
                                 </i>
                             </li>
                             </a>
                             <a href='#'>
                             <li style="margin-left: 30px;" onclick="Metric(this.id)" id="Suggestion"><i class="fa fa-circle-o">
-                                <!--i class="fa fa-angle-double-right"></i-->
+                                
                                 Suggestion
                                 </i>
                             </li>
                             </a>
                         </ul>
-                    </li>
+                    </li-->
                     <!-- sharath part -->
+                    <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>AUTOsuggest</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu menu-open" style="display: block;">
+                <li onclick="Metric(this.id)" id="Popular_Product"><a href="#"><i class="fa fa-circle-o"></i> Popular Product</a></li>
+                <li onclick="Metric(this.id)" id="In_Field"><a href="#"><i class="fa fa-circle-o"></i> In Field</a></li>
+                <li onclick="Metric(this.id)" id="Suggestion"><a href="#"><i class="fa fa-circle-o"></i> Suggestion</a></li>
+              </ul>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+
                     <li class="treeview active">
               <a href="#">
                 <i class="fa fa-laptop"></i>
@@ -509,6 +533,7 @@ function Company_Changed() {
     }
     function commit_alert()
     {
+      $("#alert_commit").css("display","none")
       localStorage.setItem("commit", null);
       //alert(localStorage.getItem("commit"))
       //alert("2")
@@ -517,6 +542,7 @@ function Company_Changed() {
       var local_popular=localStorage.getItem("popular");
       var local_field=localStorage.getItem("infield");
       var local_suggestion=localStorage.getItem("suggestion");
+
       total_data=prev_comp+"::"+"popular:\n "+local_popular+" \nsuggestion:\n "+local_suggestion+" \nfield:\n "+local_field+" \ndelete:\n "+delete_part
       //alert(total_data)
       localStorage.setItem("popular","")
@@ -526,7 +552,7 @@ function Company_Changed() {
       //alert(localStorage.getItem("prev_company"))
       //$("#alert_commit").css("display","none")
       $.ajax(
-        {async:false, type:"POST",url:"/commit",data:$("form").serialize()+"&total_data="+total_data+"",success:function(response){
+        { type:"POST",url:"/commit",data:$("form").serialize()+"&total_data="+total_data+"",success:function(response){
             //response = JSON && JSON.parse(response) || $.parseJSON(response);
             //alert("1");
         }
